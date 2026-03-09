@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-09T20:29:05Z"
-last_activity: 2026-03-09 — Completed 02-01 with a typed domain registry, shared `/domains/[slug]/` routes, and baseline supporting-work pages for all five v1 domains
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-09T20:42:53Z"
+last_activity: 2026-03-09 — Completed 02-02 with sharper domain boundaries, curated supporting-work evidence, and domain-page readability polish
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # Project State
@@ -26,33 +26,33 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 ## Current Position
 
 Phase: 2 of 6 (Domain Hubs & Supporting Work)
-Plan: 2 of 3 (02-02 next)
-Status: 02-01 complete; ready for 02-02
-Last activity: 2026-03-09 — Completed 02-01 with a typed domain registry, shared `/domains/[slug]/` routes, and baseline supporting-work pages for all five v1 domains
+Plan: 3 of 3 (02-03 next)
+Status: 02-02 complete; ready for 02-03
+Last activity: 2026-03-09 — Completed 02-02 with sharper domain boundaries, curated supporting-work evidence, and domain-page readability polish
 
-Progress: [███████░░░] 67%
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 6 min
-- Total execution time: 0.4 hours
+- Total execution time: 0.5 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3 | 18 min | 6 min |
-| 2 | 1 | 5 min | 5 min |
+| 2 | 2 | 12 min | 6 min |
 | 3 | 0 | - | - |
 | 4 | 0 | - | - |
 | 5 | 0 | - | - |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (3 min), 01-02 (6 min), 01-03 (9 min), 02-01 (5 min)
-- Trend: Phase 2 now has a stable typed domain registry, shared domain routes, and baseline supporting-work pages, so the next work can focus on copy clarity, polish, and stronger artifact validation
+- Last 5 plans: 01-01 (3 min), 01-02 (6 min), 01-03 (9 min), 02-01 (5 min), 02-02 (7 min)
+- Trend: Phase 2 now has clear domain boundaries, curated supporting evidence, and shared layout hooks, so `02-03` can validate the built artifacts directly in `dist`
 
 *Updated after each plan completion*
 
@@ -83,6 +83,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Keep the five domain hubs in one typed registry with one module per domain so future homepage and validation work use the same source of truth.
 - [Phase 02]: Render every domain through one shared text-first template with inline proof links and stable `data-*` markers so later validation can inspect built HTML instead of source.
 - [Phase 02]: Use related-domain links for overlap instead of duplicating full supporting-work entries across multiple domain pages.
+- [Phase 02]: Make each scope line explicitly contrast neighboring domains so visitors can tell the hubs apart from the opening section alone.
+- [Phase 02]: Keep supporting-work proof links inline but on their own short line so visitors scan the work before deciding to click out.
+- [Phase 02]: Handle cross-domain overlap with brief linked notes inside supporting items instead of duplicating full entries.
 
 ### Roadmap Evolution
 
@@ -95,11 +98,11 @@ None right now.
 
 ### Blockers/Concerns
 
-- Domain structure is now locked, but `02-02` should tighten copy density and domain boundary clarity before Phase 3 reuses this content.
+- `02-03` should validate the built domain artifacts directly in `dist` and carry these structural checks into CI.
 - Flagship highlights and deeper role/decision proof remain intentionally deferred to Phase 4.
 
 ## Session Continuity
 
-Last session: 2026-03-09T20:29:05Z
-Stopped at: Completed 02-01-PLAN.md
-Resume file: .planning/phases/02-domain-hubs-supporting-work/02-02-PLAN.md
+Last session: 2026-03-09T20:42:53Z
+Stopped at: Completed 02-02-PLAN.md
+Resume file: .planning/phases/02-domain-hubs-supporting-work/02-03-PLAN.md

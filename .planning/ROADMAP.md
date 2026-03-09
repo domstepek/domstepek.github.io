@@ -44,11 +44,11 @@ Plans:
   2. Each domain page opens with a short thesis that makes the boundary of that domain clear.
   3. Each domain page includes a curated supporting-work list for non-flagship examples, with enough context to scan quickly.
   4. Each domain page provides obvious navigation back home and outward to relevant proof artifacts.
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] `02-01` Bootstrap typed domain data and shared `/domains/[slug]/` routes
-- [ ] `02-02` Refine thesis clarity, supporting-work curation, and domain-page polish
+- [x] `02-02` Refine thesis clarity, supporting-work curation, and domain-page polish
 - [ ] `02-03` Add dist-first domain validation and CI release gates
 
 ### Phase 3: Homepage Positioning
@@ -112,7 +112,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Publishing Foundation | 3/3 | Complete | 2026-03-09 |
-| 2. Domain Hubs & Supporting Work | 1/3 | In Progress | - |
+| 2. Domain Hubs & Supporting Work | 2/3 | In Progress | - |
 | 3. Homepage Positioning | 0/TBD | Not started | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
 | 5. Personal Context & Notes | 0/TBD | Not started | - |
