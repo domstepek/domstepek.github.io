@@ -1,19 +1,17 @@
 ---
 import BaseLayout from "../components/layout/BaseLayout.astro";
-import { siteConfig } from "../data/site";
-import { assetPath, canonicalUrl, homePath } from "../lib/paths";
-
-const socialImagePath = assetPath(siteConfig.defaultSocialImage);
-const pageCanonicalUrl = canonicalUrl(homePath);
+import { homePath } from "../lib/paths";
 ---
 
 <BaseLayout canonicalPath={homePath}>
-  <h1>{siteConfig.name}</h1>
-  <p>publishing foundation in progress.</p>
-  <p>{siteConfig.defaultDescription}</p>
-  <ul>
-    <li><a href={homePath}>base-aware home path</a></li>
-    <li>default social asset path: <code>{socialImagePath}</code></li>
-    <li>canonical url: <code>{pageCanonicalUrl}</code></li>
-  </ul>
+  <p>dom personal site</p>
+  <h1>systems, products, and tooling.</h1>
+  <p>
+    this first pass is intentionally spare. it exists to prove the shared shell, readable type,
+    metadata, and static routing before the deeper domain pages land.
+  </p>
+  <p>
+    for now, the homepage stays small on purpose: one heading, a little context, and enough
+    structure to make the foundation trustworthy.
+  </p>
 </BaseLayout>
