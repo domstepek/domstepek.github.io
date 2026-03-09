@@ -1,17 +1,14 @@
 ---
+import HomePage from "../components/home/HomePage.astro";
 import BaseLayout from "../components/layout/BaseLayout.astro";
+import { homePage } from "../data/home";
 import { homePath } from "../lib/paths";
 ---
 
-<BaseLayout canonicalPath={homePath}>
-  <p>dom personal site</p>
-  <h1>systems, products, and tooling.</h1>
-  <p>
-    this first pass is intentionally spare. it exists to prove the shared shell, readable type,
-    metadata, and static routing before the deeper domain pages land.
-  </p>
-  <p>
-    for now, the homepage stays small on purpose: one heading, a little context, and enough
-    structure to make the foundation trustworthy.
-  </p>
+<BaseLayout
+  title={homePage.seo.title}
+  description={homePage.seo.description}
+  canonicalPath={homePath}
+>
+  <HomePage />
 </BaseLayout>
