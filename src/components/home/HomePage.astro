@@ -16,11 +16,11 @@ const isExternalHttpLink = (href: string) => href.startsWith("https://");
     <p class="home-page__eyebrow">{homePage.eyebrow}</p>
     <h1>{homePage.title}</h1>
     <p class="home-page__lead">{homePage.lead}</p>
-    <p>{homePage.domainIntro}</p>
   </section>
 
   <nav class="home-page__section" aria-labelledby="home-domain-nav-title" data-home-domain-nav>
-    <h2 id="home-domain-nav-title">start with a domain</h2>
+    <h2 id="home-domain-nav-title">pick a domain</h2>
+    <p>{homePage.domainIntro}</p>
     <ul class="home-page__domain-list">
       {
         homeDomains.map((domain) => (

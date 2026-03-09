@@ -25,13 +25,13 @@ export interface HomePageData {
 }
 
 export const homePage = {
-  eyebrow: "dom stepek",
+  eyebrow: "dom stepek / systems, products, and tooling",
   title:
-    "i build analytics platforms, infrastructure, ai / ml tooling, product systems, and developer experience rails.",
+    "i work across analytics, infrastructure, ai / ml, product, and developer experience.",
   lead:
-    "most of the work lives where analytics, platform, product, ai / ml, and developer tooling overlap, so this site is organized by the kind of problem being solved instead of by a flat project list.",
+    "the projects here sit where data, platform, workflow, and internal tooling overlap. this homepage is a quick route into the five areas where that work shows up most often.",
   domainIntro:
-    "start with the domain that matches the problem you care about. each page goes deeper without turning the homepage into a generic gallery.",
+    "pick the domain that matches the problem. the links below are the main route through the site, not a side gallery.",
   contactHeading: "contact",
   contactLinks: [
     {
@@ -53,7 +53,7 @@ export const homePage = {
   freshness: {
     label: "currently",
     value:
-      "tightening this site into a clearer map of the systems, products, and tooling i keep coming back to.",
+      "refining the homepage so the five domains read like a quick map instead of a project list.",
     note: "last updated march 2026.",
   },
   seo: {
