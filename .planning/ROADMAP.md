@@ -96,7 +96,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Publishing Foundation | 0/TBD | Not started | - |
+| 1. Publishing Foundation | 1/3 | In Progress | - |
 | 2. Domain Hubs & Supporting Work | 0/TBD | Not started | - |
 | 3. Homepage Positioning | 0/TBD | Not started | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
