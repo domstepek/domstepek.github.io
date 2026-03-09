@@ -5,17 +5,17 @@ const developerExperience: DomainEntry = {
   order: 5,
   title: "developer experience",
   summary:
-    "developer tooling, shared UI systems, and automation that save teams from paying the same tax twice.",
+    "tooling, automation, and shared systems that make engineers faster, safer, and less likely to reinvent the same thing.",
   seoDescription:
-    "Domain page for developer tooling, design systems, and automation Dom builds for teams.",
+    "developer experience domain page for team tooling, design systems, and qa automation Dom builds.",
   thesis:
-    "i invest in developer experience when a team is paying the same setup, testing, or UI tax over and over.",
+    "i invest in developer experience when the team keeps burning time on the same setup, regression, or ui tax.",
   scope:
-    "if the main win is making engineers faster, safer, or more consistent, it belongs here.",
+    "if the primary user win is for engineers shipping or maintaining software, it belongs here; if the main outcome is customer or operator workflow value, that belongs in product.",
   belongsHere: [
-    "shared tooling that removes repeat setup, hand edits, or deployment friction",
-    "quality systems that catch breakage before it becomes somebody else's afternoon",
-    "reusable UI and workflow primitives that keep teams from rebuilding the same thing in parallel",
+    "shared tooling that replaces repeated setup, config edits, and release chores",
+    "quality systems that catch regressions before they become somebody else's fire drill",
+    "reusable ui or workflow primitives that keep teams from rebuilding the same patterns",
   ],
   supportingWork: [
     {

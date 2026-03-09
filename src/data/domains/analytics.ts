@@ -5,17 +5,17 @@ const analytics: DomainEntry = {
   order: 1,
   title: "analytics",
   summary:
-    "analytics platforms, reporting surfaces, and measurement systems that help teams steer with real data.",
+    "reporting surfaces, measurement workflows, and data tools that help teams trust what they are looking at.",
   seoDescription:
-    "Domain page for analytics platforms, reporting workflows, and measurement systems Dom builds.",
+    "analytics domain page for reporting surfaces, measurement workflows, and data tools Dom builds.",
   thesis:
-    "i build analytics systems when a team needs data they can actually steer by, not another dashboard graveyard.",
+    "i build analytics systems when the real bottleneck is understanding the business, not collecting one more table.",
   scope:
-    "if the main job is helping people inspect, compare, or act on data at scale, it belongs here.",
+    "if the job is helping people inspect, compare, or trust the data itself, it belongs here; if the hard part is shipping the platform or model behavior, it belongs somewhere else.",
   belongsHere: [
-    "portal-style products that turn warehouse data into something operators can actually use",
-    "measurement and reporting layers that make trends visible before a team is stuck reacting",
-    "analytics surfaces where query depth matters just as much as polish",
+    "reporting products that turn warehouse or event data into daily operator workflows",
+    "measurement layers that make trends, exceptions, and drill-down paths obvious before a team is flying blind",
+    "data-heavy interfaces where query depth, filters, and clarity matter as much as frontend polish",
   ],
   supportingWork: [
     {

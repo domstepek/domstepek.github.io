@@ -5,17 +5,17 @@ const aiMl: DomainEntry = {
   order: 3,
   title: "ai / ml",
   summary:
-    "applied model work, retrieval flows, and agent-shaped tooling that earn their keep in real workflows.",
+    "applied ai / ml systems where retrieval, model behavior, or agent orchestration changes what the workflow can do.",
   seoDescription:
-    "Domain page for applied AI and ML tooling, retrieval flows, and agent-based systems Dom builds.",
+    "ai / ml domain page for retrieval flows, model-assisted tooling, and agent systems Dom builds.",
   thesis:
-    "i use ai / ml where it removes drudge work or sharpens decisions, not where it just adds theater.",
+    "i use ai / ml when model behavior meaningfully changes the workflow, not when a chatbot veneer is the whole pitch.",
   scope:
-    "if the core value comes from model behavior or orchestration around model behavior, it belongs here.",
+    "if the hard part is prompt orchestration, retrieval quality, or model-driven actions, it belongs here; if it would still be the same product without the model, it probably belongs somewhere else.",
   belongsHere: [
-    "retrieval, classification, and generation flows tied to concrete product or ops tasks",
-    "agent-style actions where the interesting part is orchestration across tools and context",
-    "ml-assisted features that still leave room for override, review, and practical debugging",
+    "retrieval and generation flows tied to concrete operator or analyst tasks",
+    "agent-style systems where tool use, context passing, and guardrails matter more than demo flash",
+    "ml-assisted features that need review loops, fallbacks, and practical debugging",
   ],
   supportingWork: [
     {

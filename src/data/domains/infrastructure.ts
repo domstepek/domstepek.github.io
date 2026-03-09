@@ -5,17 +5,17 @@ const infrastructure: DomainEntry = {
   order: 2,
   title: "infrastructure",
   summary:
-    "platform, deployment, and runtime systems that make product work calmer, safer, and easier to ship.",
+    "platform foundations, deploy rails, and edge systems that make services easier to ship and safer to run.",
   seoDescription:
-    "Domain page for infrastructure, deployment, auth-edge, and runtime platform systems Dom builds.",
+    "infrastructure domain page for deploy rails, kubernetes foundations, and edge systems Dom builds.",
   thesis:
-    "i do infrastructure work when the fastest product move is to make the platform more predictable.",
+    "i do infrastructure work when the product problem is really a reliability, delivery, or platform problem in disguise.",
   scope:
-    "if the hard part is provisioning, securing, routing, or reliably delivering the system, it belongs here.",
+    "if the hard part is provisioning, deploying, routing, or securing the system, it belongs here; if the main user win is inside the workflow itself, that is product.",
   belongsHere: [
-    "cluster foundations, deployment pipelines, and GitOps rails behind product teams",
-    "shared edge services that solve auth, caching, or routing once instead of five times",
-    "operational plumbing that turns infrastructure from a blocker into a multiplier",
+    "cluster, network, and GitOps foundations that keep teams from hand-building every environment",
+    "shared edge services for auth, caching, routing, and delivery policies",
+    "operational systems that remove release anxiety and reduce platform drift",
   ],
   supportingWork: [
     {

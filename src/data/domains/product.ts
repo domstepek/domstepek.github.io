@@ -5,17 +5,17 @@ const product: DomainEntry = {
   order: 4,
   title: "product",
   summary:
-    "workflow-heavy product systems that turn messy operational processes into software people can actually use.",
+    "internal and operational products that turn messy human processes into software people can use under pressure.",
   seoDescription:
-    "Domain page for business workflows, internal products, and operational software Dom builds.",
+    "product domain page for workflow-heavy internal software and operational systems Dom builds.",
   thesis:
-    "i like product work where the interface has to carry real operational weight, not just look polished.",
+    "i like product work when the software has to hold together a messy real-world process, not just present a clean screen.",
   scope:
-    "if the main challenge is turning a messy team process into a usable product flow, it belongs here.",
+    "if the main challenge is shaping states, decisions, and handoffs into a usable workflow, it belongs here; if the audience is mainly engineers improving their own tooling, that is developer experience.",
   belongsHere: [
-    "internal products people return to every day because the workflow actually matters",
-    "operational tools where structure, speed, and edge cases all show up at once",
-    "business software that needs product judgment as much as technical correctness",
+    "operator-facing products that carry real daily process, approvals, and exceptions",
+    "business applications where workflow design matters as much as data modeling",
+    "systems that need product judgment around speed, clarity, and edge cases, not just api coverage",
   ],
   supportingWork: [
     {
