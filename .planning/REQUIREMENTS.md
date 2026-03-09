@@ -29,8 +29,8 @@
 ### Quality
 
 - [x] **QUAL-01**: Visitor can access the site as a statically deployed GitHub Pages site
-- [ ] **QUAL-02**: Visitor can read and navigate the site comfortably on mobile and desktop layouts
-- [ ] **QUAL-03**: Visitor can use the site with accessible structure, strong contrast, and readable typography
+- [x] **QUAL-02**: Visitor can read and navigate the site comfortably on mobile and desktop layouts
+- [x] **QUAL-03**: Visitor can use the site with accessible structure, strong contrast, and readable typography
 - [x] **QUAL-04**: Visitor can share and preview the site with correct core metadata, including page titles, descriptions, Open Graph metadata, favicon, and a working 404 page
 
 ### Profile
@@ -74,8 +74,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | QUAL-01 | Phase 1 - Publishing Foundation | Complete |
-| QUAL-02 | Phase 1 - Publishing Foundation | Pending |
-| QUAL-03 | Phase 1 - Publishing Foundation | Pending |
+| QUAL-02 | Phase 1 - Publishing Foundation | Complete |
+| QUAL-03 | Phase 1 - Publishing Foundation | Complete |
 | QUAL-04 | Phase 1 - Publishing Foundation | Complete |
 | DOMN-01 | Phase 2 - Domain Hubs & Supporting Work | Pending |
 | DOMN-02 | Phase 2 - Domain Hubs & Supporting Work | Pending |
@@ -102,4 +102,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after Phase 01 Plan 01 completion*
+*Last updated: 2026-03-09 after Phase 01 Plan 02 completion*

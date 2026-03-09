@@ -27,7 +27,7 @@ This roadmap builds the site in the order that best supports a domain-first port
   2. Shared layout and CSS provide comfortable reading on both mobile and desktop widths.
   3. Semantic structure, readable typography, obvious link states, and strong contrast are in place across the site shell.
   4. Core sharing and polish are wired up: page titles, descriptions, Open Graph metadata, favicon, and a working `404` page.
-**Plans:** TBD
+**Plans:** 2/3 plans executed
 
 Plans:
 - [ ] TBD (run `$gsd-plan-phase 1` to break down this phase)
@@ -96,7 +96,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Publishing Foundation | 1/3 | In Progress | - |
+| 1. Publishing Foundation | 2/3 | In Progress | - |
 | 2. Domain Hubs & Supporting Work | 0/TBD | Not started | - |
 | 3. Homepage Positioning | 0/TBD | Not started | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
