@@ -1,0 +1,84 @@
+# Requirements: Dom Personal Site
+
+**Defined:** 2026-03-09  
+**Core Value:** Someone should be able to land on the site and quickly understand what kinds of complex systems Dom builds, then explore the domains that matter to them without getting buried in noise.
+
+## v1 Requirements
+
+### Home
+
+- [ ] **HOME-01**: Visitor can understand from the first screen that Dom builds analytics platforms, infrastructure, AI/ML tooling, product systems, and developer experience tooling
+- [ ] **HOME-02**: Visitor can navigate from the homepage to the domain pages for analytics platforms, infrastructure / devops, AI / ML tooling, product engineering, and developer experience
+- [ ] **HOME-03**: Visitor can open Dom's GitHub, LinkedIn, and email links from the homepage
+- [ ] **HOME-04**: Visitor can see a freshness signal on the homepage such as `currently` or `last updated`
+
+### Domains
+
+- [ ] **DOMN-01**: Visitor can open a separate page for each primary domain in v1: analytics platforms, infrastructure / devops, AI / ML tooling, product engineering, and developer experience
+- [ ] **DOMN-02**: Visitor can read a short thesis at the top of each domain page explaining the kinds of problems Dom solves in that area
+- [ ] **DOMN-03**: Visitor can scan a supporting-work list on each domain page for related projects that are not full flagship highlights
+- [ ] **DOMN-04**: Visitor can navigate from each domain page back to the homepage and out to relevant proof artifacts
+
+### Highlights
+
+- [ ] **HIGH-01**: Visitor can read one to two flagship highlights on each domain page
+- [ ] **HIGH-02**: Visitor can understand for each flagship highlight the problem, Dom's role, constraints, decisions, and outcome
+- [ ] **HIGH-03**: Visitor can see the relevant stack or tools used in each flagship highlight
+- [ ] **HIGH-04**: Visitor can view screenshots or diagrams for flagship highlights where visuals improve understanding
+
+### Quality
+
+- [ ] **QUAL-01**: Visitor can access the site as a statically deployed GitHub Pages site
+- [ ] **QUAL-02**: Visitor can read and navigate the site comfortably on mobile and desktop layouts
+- [ ] **QUAL-03**: Visitor can use the site with accessible structure, strong contrast, and readable typography
+- [ ] **QUAL-04**: Visitor can share and preview the site with correct core metadata, including page titles, descriptions, Open Graph metadata, favicon, and a working 404 page
+
+### Profile
+
+- [ ] **PROF-01**: Visitor can read a short `how i work` section that explains how Dom approaches systems, product, and collaboration
+- [ ] **PROF-02**: Visitor can open a resume from the site
+- [ ] **PROF-03**: Visitor can understand what kinds of roles, collaborations, or opportunities Dom is open to
+
+### Notes
+
+- [ ] **NOTE-01**: Visitor can browse a lightweight notes / thinking index with short summaries
+- [ ] **NOTE-02**: Visitor can open an individual note page from the notes index
+
+## v2 Requirements
+
+### Case Studies
+
+- **CASE-01**: Visitor can open a standalone deep-dive page for a flagship project when inline domain-page coverage is no longer enough
+- **CASE-02**: Visitor can navigate between related flagship case studies across domains
+
+### Content Expansion
+
+- **CONT-01**: Visitor can browse a broader archive of supporting work beyond the curated v1 highlights
+- **NOTE-03**: Visitor can browse notes by theme or tag as the writing library grows
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Flat repo-by-repo project gallery | The site is intentionally organized by domains/themes rather than by raw repository list |
+| Standalone page for every project in v1 | Would add too much depth and maintenance cost before the domain pattern is proven |
+| CMS, database, or backend-managed content | GitHub Pages static hosting is the intended deployment model for v1 |
+| Search, client-side filtering, or dynamic comments | The initial content volume does not justify the added complexity |
+| Heavy animation, novelty interaction, or portfolio gimmicks | Conflicts with the minimal text-forward style and casual tone |
+| Auth walls, forms with server handling, or other runtime-dependent features | Outbound links and static pages are sufficient for the first release |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+
+**Coverage:**
+- v1 requirements: 21 total
+- Mapped to phases: 0
+- Unmapped: 21
+
+---
+*Requirements defined: 2026-03-09*
+*Last updated: 2026-03-09 after initial definition*
