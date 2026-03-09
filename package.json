@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro build",
-    "validate:phase1": "node ./scripts/validate-phase1.mjs"
+    "validate:phase1": "node ./scripts/validate-phase1.mjs",
+    "validate:phase2": "node ./scripts/validate-phase2.mjs",
+    "validate:site": "pnpm validate:phase1 && pnpm validate:phase2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
