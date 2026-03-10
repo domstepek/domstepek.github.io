@@ -43,10 +43,15 @@ const analytics: DomainEntry = {
         "became the clearest analytics proof point in the portfolio because the reporting depth was tied to real day-to-day use.",
       ],
       stack: [
-        "typescript",
-        "operator-facing reporting ui",
-        "filters and drill-down paths",
-        "product data workflows",
+        "React",
+        "Redux",
+        "Apollo GraphQL",
+        "D3",
+        "visx",
+        "AWS Amplify",
+        "Vite",
+        "Sentry",
+        "Umami",
       ],
       proofLinks: [
         {
@@ -81,9 +86,8 @@ const analytics: DomainEntry = {
       ],
       stack: [
         "Apache Superset",
-        "aws",
-        "eks",
-        "gitops deployment rail",
+        "AWS",
+        "EKS",
       ],
       proofLinks: [
         {

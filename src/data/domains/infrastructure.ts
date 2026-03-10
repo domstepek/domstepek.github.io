@@ -43,13 +43,12 @@ const infrastructure: DomainEntry = {
         "turned infrastructure changes into reviewable code that matched the broader release workflow.",
       ],
       stack: [
-        "aws cdk",
-        "python",
+        "AWS CDK",
+        "Python",
         "Amazon EKS",
-        "vpc and networking",
-        "karpenter",
-        "external secrets",
-        "argo cd",
+        "Karpenter",
+        "External Secrets",
+        "Argo CD",
       ],
       proofLinks: [
         {
@@ -86,9 +85,7 @@ const infrastructure: DomainEntry = {
         "Helm",
         "ArgoCD",
         "ApplicationSet",
-        "kubernetes",
-        "environment-specific values",
-        "GitOps",
+        "Kubernetes",
       ],
       proofLinks: [
         {

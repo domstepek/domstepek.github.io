@@ -46,8 +46,7 @@ const developerExperience: DomainEntry = {
         "React",
         "TypeScript",
         "Vite",
-        "shared components",
-        "Storybook-style documentation",
+        "Storybook",
       ],
       proofLinks: [
         {
@@ -85,8 +84,7 @@ const developerExperience: DomainEntry = {
         "Cucumber",
         "Gherkin",
         "Jest",
-        "docker-compose",
-        "multi-browser regression testing",
+        "Docker Compose",
       ],
       proofLinks: [
         {

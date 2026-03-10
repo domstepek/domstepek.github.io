@@ -90,10 +90,15 @@ const aiMl: DomainEntry = {
         "served as a small but credible proof point that agent tooling could be grounded in product behavior.",
       ],
       stack: [
-        "Model Context Protocol patterns",
-        "agent actions",
-        "user-driven interactions",
-        "web demo",
+        "React",
+        "Mantine",
+        "Express",
+        "LangChain",
+        "LangGraph",
+        "MCP SDK",
+        "Socket.io",
+        "AWS Bedrock",
+        "Sentry",
       ],
       proofLinks: [
         {
