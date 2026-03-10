@@ -11,11 +11,11 @@ const product: DomainEntry = {
   thesis:
     "i like product work when the software has to hold together a messy real-world process, not just present a clean screen.",
   scope:
-    "if the main challenge is shaping states, decisions, and handoffs into a usable workflow, it belongs here; if the audience is mainly engineers improving their own tooling, that is developer experience.",
+    "this is the workflow-heavy application side — shaping states, decisions, and handoffs into tools operators actually use day to day.",
   belongsHere: [
-    "operator-facing products that carry real daily process, approvals, and exceptions",
-    "business applications where workflow design matters as much as data modeling",
-    "systems that need product judgment around speed, clarity, and edge cases, not just api coverage",
+    "building operator-facing apps that carry real daily process, approvals, and exception handling",
+    "turning messy business workflows into software where the design matters as much as the data model",
+    "shipping systems that need product judgment around speed, clarity, and edge cases — not just api coverage",
   ],
   flagships: [
     {

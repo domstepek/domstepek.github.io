@@ -11,11 +11,11 @@ const infrastructure: DomainEntry = {
   thesis:
     "i do infrastructure work when the product problem is really a reliability, delivery, or platform problem in disguise.",
   scope:
-    "if the hard part is provisioning, deploying, routing, or securing the system, it belongs here; if the main user win is inside the workflow itself, that is product.",
+    "this is the provisioning, deployment, routing, and platform-security layer — everything that keeps services running and shipping reliably.",
   belongsHere: [
-    "cluster, network, and GitOps foundations that keep teams from hand-building every environment",
-    "shared edge services for auth, caching, routing, and delivery policies",
-    "operational systems that remove release anxiety and reduce platform drift",
+    "standing up clusters, networks, and gitops foundations so teams stop hand-building every environment",
+    "running shared edge services like auth proxies, caching layers, and delivery policies",
+    "building operational tooling that removes release anxiety and cuts down platform drift",
   ],
   flagships: [
     {

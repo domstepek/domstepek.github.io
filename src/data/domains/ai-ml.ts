@@ -11,11 +11,11 @@ const aiMl: DomainEntry = {
   thesis:
     "i use ai / ml when model behavior meaningfully changes the workflow, not when a chatbot veneer is the whole pitch.",
   scope:
-    "if the hard part is prompt orchestration, retrieval quality, or model-driven actions, it belongs here; if it would still be the same product without the model, it probably belongs somewhere else.",
+    "this covers prompt orchestration, retrieval pipelines, and model-driven product features — the work where the ai layer is doing something real, not decorative.",
   belongsHere: [
-    "retrieval and generation flows tied to concrete operator or analyst tasks",
-    "agent-style systems where tool use, context passing, and guardrails matter more than demo flash",
-    "ml-assisted features that need review loops, fallbacks, and practical debugging",
+    "wiring retrieval and generation flows into concrete operator or analyst tasks",
+    "building agent-style systems where tool use, context passing, and guardrails matter more than demo flash",
+    "adding ml-assisted features that need review loops, fallbacks, and practical debugging paths",
   ],
   flagships: [
     {

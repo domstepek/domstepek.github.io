@@ -11,10 +11,10 @@ const analytics: DomainEntry = {
   thesis:
     "i build analytics systems when the real bottleneck is understanding the business, not collecting one more table.",
   scope:
-    "if the job is helping people inspect, compare, or trust the data itself, it belongs here; if the hard part is shipping the platform or model behavior, it belongs somewhere else.",
+    "this covers the reporting, measurement, and data-trust side of products — the work where the main challenge is making the numbers useful, not building the platform underneath.",
   belongsHere: [
-    "reporting products that turn warehouse or event data into daily operator workflows",
-    "measurement layers that make trends, exceptions, and drill-down paths obvious before a team is flying blind",
+    "building dashboards and reports that ops teams actually use every morning",
+    "designing measurement layers so trends, exceptions, and drill-downs are obvious before anyone is flying blind",
     "data-heavy interfaces where query depth, filters, and clarity matter as much as frontend polish",
   ],
   flagships: [

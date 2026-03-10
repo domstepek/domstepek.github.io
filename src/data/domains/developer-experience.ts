@@ -11,11 +11,11 @@ const developerExperience: DomainEntry = {
   thesis:
     "i invest in developer experience when the team keeps burning time on the same setup, regression, or ui tax.",
   scope:
-    "if the primary user win is for engineers shipping or maintaining software, it belongs here; if the main outcome is customer or operator workflow value, that belongs in product.",
+    "this is the internal tooling and automation layer — everything aimed at helping engineers ship faster, catch regressions sooner, and stop repeating the same setup work.",
   belongsHere: [
-    "shared tooling that replaces repeated setup, config edits, and release chores",
-    "quality systems that catch regressions before they become somebody else's fire drill",
-    "reusable ui or workflow primitives that keep teams from rebuilding the same patterns",
+    "building shared tooling that replaces repeated setup, config edits, and release chores",
+    "setting up quality systems that catch regressions before they become somebody else's fire drill",
+    "creating reusable ui or workflow primitives so teams stop rebuilding the same patterns from scratch",
   ],
   flagships: [
     {
