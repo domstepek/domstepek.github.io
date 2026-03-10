@@ -46,7 +46,7 @@ result: pass
 
 total: 7
 passed: 6
-issues: 3
+issues: 4
 pending: 0
 skipped: 0
 
@@ -103,4 +103,20 @@ skipped: 0
       issue: "Renders 'what belongs here' section with internal-sounding copy"
   missing:
     - "Rewrite scope/belongsHere as visitor-facing 'what I work on here' descriptions, or remove the section entirely"
+  debug_session: ""
+- truth: "The homepage features a personal avatar/illustration that fits naturally into the dark retro aesthetic"
+  status: failed
+  reason: "User reported: Want to add a personal illustration (cartoon avatar with crab claw) to the homepage, styled to feel natural like snwy.me's anime avatar does on their dark site — no frame or border, just blending into the dark background."
+  severity: minor
+  test: 6
+  root_cause: "No avatar or personal image exists on the homepage. The HomePage.astro component has no image element. Need to add the avatar image to public/images/, add it to home.ts data, and render it in HomePage.astro with styling that integrates it into the dark theme (no white background box, blend naturally)."
+  artifacts:
+    - path: "src/components/home/HomePage.astro"
+      issue: "No avatar/illustration on homepage"
+    - path: "src/data/home.ts"
+      issue: "No avatar image path in homepage data"
+  missing:
+    - "Avatar image file at public/images/avatar.png"
+    - "Avatar image path in src/data/home.ts"
+    - "Image element in HomePage.astro hero section, styled to blend into dark background"
   debug_session: ""
