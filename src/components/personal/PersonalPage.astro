@@ -1,6 +1,6 @@
 ---
 import { personalPage } from "../../data/personal";
-import { homePath, notesPath } from "../../lib/paths";
+import { homePath, notesPath, resumePath } from "../../lib/paths";
 
 const { systems, product, collaboration } = personalPage.howIWork.principles;
 ---
@@ -86,7 +86,9 @@ const { systems, product, collaboration } = personalPage.howIWork.principles;
     <ul class="personal-page__list">
       {personalPage.resume.highlights.map((highlight) => <li>{highlight}</li>)}
     </ul>
-    <p class="personal-page__note">{personalPage.resume.note}</p>
+    <p class="personal-page__note">
+      {personalPage.resume.note} <a href={resumePath}>full resume</a>
+    </p>
   </section>
 
   <p class="personal-page__notes">
