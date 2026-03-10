@@ -1,0 +1,95 @@
+---
+import { personalPage } from "../../data/personal";
+import { homePath, notesPath } from "../../lib/paths";
+
+const { systems, product, collaboration } = personalPage.howIWork.principles;
+---
+
+<div class="personal-page" data-personal-page>
+  <p class="personal-page__back">
+    <a class="personal-page__back-link" href={homePath}>back home</a>
+  </p>
+
+  <section class="personal-page__intro">
+    <h1 class="personal-page__title">{personalPage.title}</h1>
+    <p class="personal-page__lead">{personalPage.lead}</p>
+  </section>
+
+  <section
+    class="personal-page__section"
+    aria-labelledby="personal-how-i-work-heading"
+    data-how-i-work
+  >
+    <h2 class="personal-page__section-title" id="personal-how-i-work-heading">
+      {personalPage.howIWork.title}
+    </h2>
+    <p>{personalPage.howIWork.intro}</p>
+
+    <div class="personal-page__principles">
+      <section class="personal-page__principle" data-how-i-work-systems>
+        <h3>{systems.title}</h3>
+        <p>{systems.body}</p>
+      </section>
+
+      <section class="personal-page__principle" data-how-i-work-product>
+        <h3>{product.title}</h3>
+        <p>{product.body}</p>
+      </section>
+
+      <section class="personal-page__principle" data-how-i-work-collaboration>
+        <h3>{collaboration.title}</h3>
+        <p>{collaboration.body}</p>
+      </section>
+    </div>
+  </section>
+
+  <section class="personal-page__section" aria-labelledby="personal-open-to-heading" data-open-to>
+    <h2 class="personal-page__section-title" id="personal-open-to-heading">
+      {personalPage.openTo.title}
+    </h2>
+    <p>{personalPage.openTo.intro}</p>
+
+    <div class="personal-page__groups">
+      <section class="personal-page__group">
+        <h3 class="personal-page__group-title">role modes</h3>
+        <ul class="personal-page__list">
+          {personalPage.openTo.roles.map((role) => <li>{role}</li>)}
+        </ul>
+      </section>
+
+      <section class="personal-page__group">
+        <h3 class="personal-page__group-title">best-fit problems</h3>
+        <ul class="personal-page__list">
+          {personalPage.openTo.problemSpaces.map((problemSpace) => <li>{problemSpace}</li>)}
+        </ul>
+      </section>
+    </div>
+
+    <section class="personal-page__group">
+      <h3 class="personal-page__group-title">boundaries</h3>
+      <ul class="personal-page__list">
+        {personalPage.openTo.boundaries.map((boundary) => <li>{boundary}</li>)}
+      </ul>
+    </section>
+  </section>
+
+  <section
+    class="personal-page__section"
+    id="resume"
+    aria-labelledby="personal-resume-heading"
+    data-resume-section
+  >
+    <h2 class="personal-page__section-title" id="personal-resume-heading">
+      {personalPage.resume.title}
+    </h2>
+    <p>{personalPage.resume.summary}</p>
+    <ul class="personal-page__list">
+      {personalPage.resume.highlights.map((highlight) => <li>{highlight}</li>)}
+    </ul>
+    <p class="personal-page__note">{personalPage.resume.note}</p>
+  </section>
+
+  <p class="personal-page__notes">
+    {personalPage.notes.intro} <a data-personal-notes-link href={notesPath}>{personalPage.notes.label}</a>.
+  </p>
+</div>

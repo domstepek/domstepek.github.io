@@ -93,10 +93,13 @@ Plans:
   3. The site explicitly states what roles, collaborations, or opportunities Dom is open to.
   4. The notes area provides a lightweight index with short summaries.
   5. Each note listed in the index opens to an individual note page.
-**Plans:** TBD
+**Plans:** 3/3 plans executed
+**Verification:** Automated checks passed; manual sign-off still needed via `05-VERIFICATION.md`
 
 Plans:
-- [ ] TBD (run `$gsd-plan-phase 5` to break down this phase)
+- [x] `05-01` Add dedicated about surface, resume section, and homepage teaser
+- [x] `05-02` Add lightweight notes collection and starter field notes
+- [x] `05-03` Add dist-first Phase 5 validation to the shared site gate
 
 ### Phase 6: Set up custom domain via is-a-dev/register
 
@@ -119,5 +122,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Domain Hubs & Supporting Work | 3/3 | Complete | 2026-03-09 |
 | 3. Homepage Positioning | 3/3 | Complete | 2026-03-09 |
 | 4. Flagship Proof & Visuals | 3/3 | Complete | 2026-03-10 |
-| 5. Personal Context & Notes | 0/TBD | Not started | - |
+| 5. Personal Context & Notes | 3/3 | Verification needed | - |
 | 6. Set up custom domain via is-a-dev/register | 0/TBD | Not started | - |

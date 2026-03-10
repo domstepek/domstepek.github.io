@@ -6,11 +6,19 @@ export interface HomeContactLink {
   href: string;
 }
 
+export interface HomePersonalTeaser {
+  heading: string;
+  body: string;
+  aboutLabel: string;
+  resumeLabel: string;
+}
+
 export interface HomePageData {
   eyebrow: string;
   title: string;
   lead: string;
   domainIntro: string;
+  personalTeaser: HomePersonalTeaser;
   contactHeading: string;
   contactLinks: HomeContactLink[];
   freshness: {
@@ -32,6 +40,13 @@ export const homePage = {
     "the projects here sit where data, platform, workflow, and internal tooling overlap. this homepage is a quick route into the five areas where that work shows up most often.",
   domainIntro:
     "pick the domain that matches the problem. the links below are the main route through the site, not a side gallery.",
+  personalTeaser: {
+    heading: "personal context",
+    body:
+      "if you want the shorter version of how i work, what kinds of teams i fit best, and where the compact resume lives, start here.",
+    aboutLabel: "about",
+    resumeLabel: "resume",
+  },
   contactHeading: "contact",
   contactLinks: [
     {

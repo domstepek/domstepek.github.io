@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import NotesIndexPage from "../../components/notes/NotesIndexPage.astro";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import { notesPath } from "../../lib/paths";
+
+const notes = (await getCollection("notes")).sort(
+  (left, right) => right.data.published.valueOf() - left.data.published.valueOf(),
+);
+---
+
+<BaseLayout
+  title="notes"
+  description="short field notes on system shape, product decisions, and implementation details."
+  canonicalPath={notesPath}
+>
+  <NotesIndexPage notes={notes} />
+</BaseLayout>

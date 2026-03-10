@@ -11,7 +11,8 @@
     "validate:phase2": "node ./scripts/validate-phase2.mjs",
     "validate:phase3": "node ./scripts/validate-phase3.mjs",
     "validate:phase4": "node ./scripts/validate-phase4.mjs",
-    "validate:site": "pnpm validate:phase1 && pnpm validate:phase2 && pnpm validate:phase3 && pnpm validate:phase4"
+    "validate:phase5": "node ./scripts/validate-phase5.mjs",
+    "validate:site": "pnpm validate:phase1 && pnpm validate:phase2 && pnpm validate:phase3 && pnpm validate:phase4 && pnpm validate:phase5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",

@@ -216,6 +216,12 @@ a:hover {
   gap: 1.25rem;
 }
 
+.home-page__personal {
+  gap: 1rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
 .home-page__domain-list,
 .home-page__contact-list {
   list-style: none;
@@ -252,17 +258,25 @@ a:hover {
   gap: 1.5rem;
 }
 
+.home-page__personal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+}
+
 .home-page__contact-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 1rem;
 }
 
+.home-page__personal-links a,
 .home-page__contact-list a,
 .home-page__domain-link {
   display: inline-block;
 }
 
+.home-page__personal-links a:focus-visible,
 .home-page__contact-list a:focus-visible,
 .home-page__domain-link:focus-visible {
   outline-offset: 0.22rem;
@@ -270,6 +284,173 @@ a:hover {
 
 .home-page__freshness-note {
   color: var(--muted);
+}
+
+.personal-page {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.personal-page > * {
+  min-width: 0;
+}
+
+.personal-page__back {
+  margin: 0;
+}
+
+.personal-page__back-link {
+  display: inline-block;
+}
+
+.personal-page__intro,
+.personal-page__section,
+.personal-page__principles,
+.personal-page__groups,
+.personal-page__group,
+.personal-page__principle {
+  display: grid;
+}
+
+.personal-page__intro,
+.personal-page__section {
+  gap: 1rem;
+}
+
+.personal-page__principles,
+.personal-page__groups {
+  gap: 1rem;
+}
+
+.personal-page__group,
+.personal-page__principle {
+  gap: 0.55rem;
+}
+
+.personal-page__title,
+.personal-page__section-title {
+  max-width: min(100%, 18ch);
+}
+
+.personal-page__lead {
+  max-width: 36rem;
+  color: var(--text);
+  font-size: clamp(1.08rem, 1.02rem + 0.35vw, 1.3rem);
+  line-height: 1.65;
+}
+
+.personal-page__group-title,
+.personal-page__note {
+  color: var(--text);
+}
+
+.personal-page__list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.personal-page__list li + li {
+  margin-top: 0;
+}
+
+.personal-page__notes {
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.personal-page__notes a,
+.personal-page__back-link {
+  display: inline-block;
+}
+
+.personal-page__notes a:focus-visible,
+.personal-page__back-link:focus-visible {
+  outline-offset: 0.22rem;
+}
+
+.notes-index,
+.note-page {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.notes-index > *,
+.note-page > * {
+  min-width: 0;
+}
+
+.notes-index__back,
+.note-page__back {
+  margin: 0;
+}
+
+.notes-index__back-link,
+.note-page__back-link {
+  display: inline-block;
+}
+
+.notes-index__intro,
+.note-page__intro,
+.notes-index__item,
+.note-page__body {
+  display: grid;
+}
+
+.notes-index__intro,
+.note-page__intro {
+  gap: 1rem;
+}
+
+.notes-index__list {
+  display: grid;
+  gap: 0;
+  max-width: min(100%, 56rem);
+  border-top: 1px solid var(--border);
+}
+
+.notes-index__item {
+  gap: 0.65rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.notes-index__title,
+.note-page h1 {
+  max-width: min(100%, 18ch);
+}
+
+.notes-index__meta,
+.note-page__meta,
+.note-page__summary {
+  color: var(--text);
+}
+
+.note-page__body {
+  gap: 1rem;
+}
+
+.note-page__body :where(blockquote, pre) {
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.note-page__body blockquote {
+  padding-left: 1rem;
+  border-left: 3px solid var(--border);
+  color: var(--text);
+}
+
+.note-page__body pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--bg-elevated);
+}
+
+.notes-index__back-link:focus-visible,
+.note-page__back-link:focus-visible {
+  outline-offset: 0.22rem;
 }
 
 .domain-page {
@@ -460,6 +641,12 @@ a:hover {
 @media (min-width: 56rem) {
   .home-page__meta {
     grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+
+  .personal-page__principles,
+  .personal-page__groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 2rem;
   }
 

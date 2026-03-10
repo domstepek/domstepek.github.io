@@ -16,7 +16,15 @@ export const routePath = (...segments: string[]) => {
 
 export const homePath = routePath();
 
+export const aboutPath = routePath("about");
+
 export const domainPath = (slug: string) => routePath("domains", slug);
+
+export const notesPath = routePath("notes");
+
+export const notePath = (slug: string) => routePath("notes", slug);
+
+export const resumePath = `${aboutPath}#resume`;
 
 export const assetPath = (asset: string) => {
   const normalizedAsset = trimSlashes(asset);

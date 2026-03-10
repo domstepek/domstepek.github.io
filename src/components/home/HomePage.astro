@@ -1,7 +1,7 @@
 ---
 import { homePage } from "../../data/home";
 import { domains } from "../../data/domains";
-import { domainPath } from "../../lib/paths";
+import { aboutPath, domainPath, resumePath } from "../../lib/paths";
 
 const homeDomains = domains.map((domain) => ({
   ...domain,
@@ -40,6 +40,25 @@ const isExternalHttpLink = (href: string) => href.startsWith("https://");
       }
     </ul>
   </nav>
+
+  <section
+    class="home-page__section home-page__personal"
+    aria-labelledby="home-personal-title"
+    data-home-personal-teaser
+  >
+    <div class="home-page__section-copy">
+      <h2 id="home-personal-title">{homePage.personalTeaser.heading}</h2>
+      <p>{homePage.personalTeaser.body}</p>
+    </div>
+    <div class="home-page__personal-links">
+      <a data-home-personal-link href={aboutPath}>
+        {homePage.personalTeaser.aboutLabel}
+      </a>
+      <a data-home-resume-link href={resumePath}>
+        {homePage.personalTeaser.resumeLabel}
+      </a>
+    </div>
+  </section>
 
   <div class="home-page__meta">
     <section class="home-page__section home-page__contact" aria-labelledby="home-contact-title">

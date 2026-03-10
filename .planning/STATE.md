@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-03-10T01:27:32Z"
-last_activity: 2026-03-10 — Completed Phase 4 with flagship proof across all five domain pages, three local explainers, and a Phase 4 dist-first site gate
+status: verification
+stopped_at: Phase 5 human verification pending
+last_updated: "2026-03-10T03:07:42Z"
+last_activity: 2026-03-10 — Executed all Phase 5 plans for the about page, resume section, notes routes, and Phase 5 validation; automated checks passed and manual sign-off is pending
 progress:
   total_phases: 6
   completed_phases: 4
-  total_plans: 12
-  completed_plans: 12
-  percent: 67
+  total_plans: 15
+  completed_plans: 15
+  percent: 83
 ---
 
 # Project State
@@ -21,23 +21,23 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-03-09)
 
 **Core value:** Someone should be able to land on the site and quickly understand what kinds of complex systems Dom builds, then explore the domains that matter to them without getting buried in noise.
-**Current focus:** Phase 5 - Personal Context & Notes
+**Current focus:** Phase 5 verification - Personal Context & Notes
 
 ## Current Position
 
 Phase: 5 of 6 (Personal Context & Notes)
-Plan: TBD (Phase 5 not yet planned)
-Status: Phase 4 complete; ready to plan Phase 5
-Last activity: 2026-03-10 — Completed Phase 4 with flagship proof across all five domain pages, three local explainers, and a Phase 4 dist-first site gate
+Plan: All 3 Phase 5 plans executed; manual verification pending
+Status: Phase 5 implemented and structurally validated; waiting on browser or human sign-off
+Last activity: 2026-03-10 — Executed the about page, notes system, and Phase 5 validator; automated checks passed and `05-VERIFICATION.md` now tracks remaining manual checks
 
-Progress: [███████░░░] 67%
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 15
 - Average duration: 6 min
-- Total execution time: 1.2 hours
+- Total execution time: 1.4 hours
 
 **By Phase:**
 
@@ -47,16 +47,19 @@ Progress: [███████░░░] 67%
 | 2 | 3 | 18 min | 6 min |
 | 3 | 3 | 13 min | 4 min |
 | 4 | 3 | 16 min | 5 min |
-| 5 | 0 | - | - |
+| 5 | 3 | 14 min | 5 min |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (4 min), 03-03 (4 min), 04-01 (5 min), 04-02 (6 min), 04-03 (5 min)
-- Trend: Phase 4 now deepens every domain page with flagship proof and extends the shared site gate through Phase 4, so Phase 5 can finish personal context and notes on top of a stronger content foundation.
+- Last 5 plans: 04-02 (6 min), 04-03 (5 min), 05-01 (5 min), 05-02 (5 min), 05-03 (4 min)
+- Trend: Phase 5 is now implemented and covered by the shared site gate through Phase 5; the remaining work is manual sign-off on hierarchy, readability, and interaction feel before Phase 6 planning.
 
 *Updated after each plan completion*
 | Phase 03 P02 | 4 min | 3 tasks | 12 files |
 | Phase 03 P03 | 4 min | 2 tasks | 6 files |
+| Phase 05 P01 | 5 min | 3 tasks | 8 files |
+| Phase 05 P02 | 5 min | 3 tasks | 9 files |
+| Phase 05 P03 | 4 min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -103,6 +106,10 @@ Recent decisions affecting current work:
 - [Phase 04]: Keep flagship proof inline on the existing shared domain page pattern instead of introducing standalone case-study routes. — This deepens the domain hubs without undoing the Phase 2 information architecture.
 - [Phase 04]: Promote flagship stories from the existing supporting-work shortlist and keep visuals limited to local explainers where they materially help. — This keeps the site text-forward while making the proof layer more concrete.
 - [Phase 04]: Extend `validate:site` with a dist-first Phase 4 validator that checks built domain artifacts, story structure, and optional visual output. — This keeps flagship regressions inside the same release gate as the earlier phases.
+- [Phase 05]: Keep the main personal layer on a dedicated `/about/` page, with the homepage only adding a light teaser plus a direct resume anchor entry point. — This preserves the domain-first homepage while still making the personal layer easy to find.
+- [Phase 05]: Treat the about page's `resume` section as the canonical v1 resume surface instead of depending on a separate PDF. — This keeps resume access repo-owned, one-click reachable, and compatible with the site's text-forward style.
+- [Phase 05]: Build notes with Astro content collections and plain Markdown, then render them through a simple reverse-chronological index and thin note-detail routes. — This adds repeatable note content without turning v1 into a blog platform.
+- [Phase 05]: Extend `validate:site` with a dist-first Phase 5 validator that follows rendered note links and checks the homepage teaser, about page, notes index, and note detail pages from built output. — This keeps Phase 5 regressions inside the same site-level release gate as the earlier phases.
 
 ### Roadmap Evolution
 
@@ -111,15 +118,19 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None right now.
+Manual verification for Phase 5 remains:
+
+- Confirm the homepage still reads as a domain map first, with the personal teaser clearly secondary.
+- Confirm the about page feels scannable and lands clearly on the resume section from the homepage resume link.
+- Confirm the notes entry point is easy to find from `/about/` and the note pages remain readable on mobile and desktop widths.
 
 ### Blockers/Concerns
 
-- Phase 5 is the next target, but it does not have a plan breakdown yet.
-- `how i work`, resume and `open to` framing, and the notes area remain the next intentional gap after flagship proof completion.
+- Phase 5 is implemented, but the remaining manual/browser checks in `05-VERIFICATION.md` still need sign-off before the phase should be marked complete.
+- Phase 6 should not start until the Phase 5 hierarchy, readability, and interaction checks are approved.
 
 ## Session Continuity
 
-Last session: 2026-03-10T01:27:32Z
-Stopped at: Completed 04-03-PLAN.md
-Resume file: None
+Last session: 2026-03-10T01:52:00Z
+Stopped at: Phase 5 human verification pending
+Resume file: .planning/phases/05-personal-context-notes/05-VERIFICATION.md
