@@ -47,7 +47,7 @@ export interface ResumePageData {
 export const resumePage: ResumePageData = {
   name: "Jean-Dominique Stepek",
   headline:
-    "Full-Stack & Platform Engineer | Analytics, Infrastructure, Product, Internal Tooling",
+    "Full-Stack Engineer | Product, Analytics & AI, Developer Experience",
   contact: {
     phone: "(916) 342-9303",
     email: "domstepek@gmail.com",
@@ -59,7 +59,7 @@ export const resumePage: ResumePageData = {
     { label: "Languages", items: "TypeScript, Python, SQL, GraphQL" },
     {
       label: "Frontend",
-      items: "React, Next.js, Vite, Redux, Mantine, Tailwind CSS",
+      items: "React, Next.js, Vite, Legend State, Mantine, Tailwind CSS",
     },
     { label: "Backend", items: "Node.js, Express, Apollo GraphQL, Prisma" },
     {
@@ -69,11 +69,11 @@ export const resumePage: ResumePageData = {
     {
       label: "Infrastructure",
       items:
-        "AWS (CDK, EKS, Bedrock, Cognito), Kubernetes, Helm, ArgoCD, Jenkins, Docker",
+        "AWS (CDK, Bedrock, Cognito, Lambda), Docker, Jenkins, GitHub Actions",
     },
     {
       label: "AI / ML",
-      items: "AWS Bedrock, Agent Harnesses (e.g. Claude Code), GSD",
+      items: "AWS Bedrock, RAG Retrieval, MCP Tools, Agent Harnesses",
     },
   ],
   experience: [
@@ -86,7 +86,7 @@ export const resumePage: ResumePageData = {
           title: "Collection Curator",
           bullets: [
             {
-              text: "Shaped the reporting workflow for an operator-facing analytics portal — filters, drill-downs, and follow-up actions in one surface — replacing scattered tools and ad hoc data pulls.",
+              text: "Shaped the reporting workflow for an operator-facing analytics portal — filters, drill-downs, real-time collaboration via Legend State sync engine, and follow-up actions in one surface — replacing scattered tools and ad hoc data pulls.",
             },
             {
               text: "Built a configurable table interface for seasonal collection curation with custom column types (multiselects, dates, tags), enabling analysts to filter and organize product data without ad hoc spreadsheet work.",
@@ -98,10 +98,10 @@ export const resumePage: ResumePageData = {
               text: "Created an internal GenAI chatbot using AWS Bedrock and RAG retrieval for answering platform-related user queries — cutting support tickets by 50%.",
             },
             {
-              text: "Built an MCP server and agent layer for the analytics platform, giving stakeholders a working example of model-driven tool use that made the tradeoffs between user-driven and agent-driven actions concrete.",
+              text: "Architected the production API backend pairing Express/Apollo with a reverse-proxied FastAPI service for AI workloads, using Prisma, Redis pub/sub, and Cognito-backed auth.",
             },
             {
-              text: "Stood up the shared EKS platform foundation with AWS CDK — networking, cluster primitives, ArgoCD, and environment-specific config — so service deployments became repeatable GitOps operations instead of manual buildouts.",
+              text: "Wrote MCP tool definitions for the analytics platform and built a demo surface showing user-driven vs agent-driven actions for stakeholder evaluation.",
             },
           ],
         },
@@ -141,7 +141,7 @@ export const resumePage: ResumePageData = {
               text: "Co-founded and built a social analytics platform tracking community engagement patterns across social media APIs, with unified customer profiles and proprietary metrics.",
             },
             {
-              text: "Built data ingestion pipelines from social media APIs to DGraph using Go and AWS Lambda, and owned infrastructure: Dockerized services, CI/CD with AWS CodePipeline, EC2 and Lambda compute.",
+              text: "Contributed to data ingestion pipelines from social media APIs to DGraph using Go and AWS Lambda, and owned infrastructure: Dockerized services, CI/CD with AWS CodePipeline, EC2 and Lambda compute.",
             },
           ],
         },
@@ -163,6 +163,6 @@ export const resumePage: ResumePageData = {
   seo: {
     title: "resume",
     description:
-      "resume for Jean-Dominique Stepek — full-stack and platform engineer across analytics, infrastructure, product, and internal tooling.",
+      "resume for Jean-Dominique Stepek — full-stack engineer across product, analytics & ai, and developer experience.",
   },
 };

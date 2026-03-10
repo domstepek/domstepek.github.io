@@ -2,27 +2,59 @@ import type { DomainEntry } from "./types";
 
 const developerExperience: DomainEntry = {
   slug: "developer-experience",
-  order: 5,
+  order: 3,
   title: "developer experience",
   summary:
     "shared tooling and automation that help engineers ship faster and repeat less setup.",
   seoDescription:
-    "developer experience domain page for team tooling, design systems, and qa automation Dom builds.",
+    "developer experience domain page for monorepo tooling, design systems, and team automation Dom builds.",
   thesis:
     "i invest in developer experience when the team keeps burning time on the same setup, regression, or ui tax.",
   scope:
     "this is the internal tooling and automation layer — everything aimed at helping engineers ship faster, catch regressions sooner, and stop repeating the same setup work.",
   belongsHere: [
     "building shared tooling that replaces repeated setup, config edits, and release chores",
-    "setting up quality systems that catch regressions before they become somebody else's fire drill",
     "creating reusable ui or workflow primitives so teams stop rebuilding the same patterns from scratch",
+    "setting up project foundations that make the next app easier to start and maintain",
   ],
   flagships: [
+    {
+      slug: "monorepo-template",
+      title: "monorepo template",
+      summary:
+        "a turborepo-based monorepo foundation with shared configs, ci pipelines, and deployment conventions so new projects start from a proven baseline instead of from scratch.",
+      problem:
+        "every new project started with the same setup chores — linting, typescript config, ci pipelines, deploy scripts — and each team solved them slightly differently, creating drift.",
+      role:
+        "i built the monorepo template as the shared starting point for new projects, encoding the conventions the team had already agreed on into a reusable foundation.",
+      constraints: [
+        "the template had to support multiple apps and packages without becoming tightly coupled to any single project's needs.",
+        "ci and deploy conventions needed to work out of the box so new projects did not reinvent the release process.",
+        "the foundation had to stay maintainable by the team, not just by the person who set it up.",
+      ],
+      decisions: [
+        "used Turborepo for workspace orchestration so builds, linting, and testing could run across packages with dependency-aware caching.",
+        "encoded shared configs (tsconfig, eslint, prettier) as workspace packages so conventions stayed consistent without copy-pasting.",
+        "included ci pipeline templates and deploy conventions so new projects inherited a working release path from day one.",
+      ],
+      outcomes: [
+        "new projects started from a proven baseline instead of reinventing setup, cutting initial scaffolding time significantly.",
+        "team conventions for linting, builds, and deploys stayed consistent across projects because they came from the same source.",
+        "reduced the drift that happened when every project solved the same tooling problems independently.",
+      ],
+      stack: [
+        "Turborepo",
+        "TypeScript",
+        "ESLint",
+        "Prettier",
+        "GitHub Actions",
+      ],
+    },
     {
       slug: "global-design-system",
       title: "global design system",
       summary:
-        "a shared react component library and storybook-backed baseline that gave multiple product surfaces one reusable ui system instead of repeated one-off components.",
+        "a shared react component library and storybook-backed baseline that gave two product surfaces one reusable ui system instead of repeated one-off components.",
       problem:
         "teams were paying the same ui tax across products, rebuilding patterns and styling decisions that should have been shared once and reused.",
       role:
@@ -39,7 +71,7 @@ const developerExperience: DomainEntry = {
       ],
       outcomes: [
         "product teams got a shared ui baseline instead of repeated component drift.",
-        "consistent interface work across four separate apps stopped requiring each team to solve the same component problems.",
+        "consistent interface work across two apps stopped requiring each team to solve the same component problems.",
         "turned ui reuse into something maintainable rather than a folder of copied snippets.",
       ],
       stack: [
@@ -55,50 +87,6 @@ const developerExperience: DomainEntry = {
         },
       ],
     },
-    {
-      slug: "web-portal-qa-bdd",
-      title: "web portal qa bdd",
-      summary:
-        "a webdriverio and cucumber suite for high-risk portal flows plus api checks, so regression coverage stopped depending on expensive manual re-testing.",
-      problem:
-        "the portal had important paths that were too risky and too repetitive to keep verifying by hand every time something changed.",
-      role:
-        "i helped define an automated regression layer around the flows worth protecting most, pairing browser behavior with targeted api checks.",
-      constraints: [
-        "the suite had to cover real user journeys without becoming impossible to run outside a single local machine.",
-        "different environments and browsers mattered, so the test harness needed to stay configurable.",
-        "reporting and ci usefulness were part of the value; test code alone would not solve the regression tax.",
-      ],
-      decisions: [
-        "used WebdriverIO plus Cucumber so important flows could be expressed as behavior-focused tests instead of scattered scripts.",
-        "kept smoke, tagged, api, and dockerized execution paths so the suite could serve local debugging and repeatable ci runs.",
-        "focused first on high-risk flows where manual regression cost was already obvious.",
-      ],
-      outcomes: [
-        "portal regressions surfaced before release day instead of after.",
-        "the repetitive manual checking that ate time on high-risk workflows mostly went away.",
-        "created reusable qa tooling that supported both browser and api confidence on the same project.",
-      ],
-      stack: [
-        "WebdriverIO",
-        "Cucumber",
-        "Gherkin",
-        "Jest",
-        "Docker Compose",
-      ],
-      proofLinks: [
-        {
-          label: "repo",
-          href: "https://github.com/tpr-datalabs/web-portal-qa-bdd",
-        },
-      ],
-      visual: {
-        src: "highlights/developer-experience/web-portal-qa-bdd/regression-flow.svg",
-        alt: "a regression flow showing tagged test runs feeding browser checks and api checks, then producing reports for release confidence.",
-        caption:
-          "the useful part was giving the team repeatable ways to run the same high-risk checks locally, in docker, or in ci.",
-      },
-    },
   ],
   supportingWork: [
     {
@@ -111,8 +99,6 @@ const developerExperience: DomainEntry = {
           href: "https://github.com/tpr-datalabs/product-team-cli",
         },
       ],
-      overlapNote: "the environment and release work connects to",
-      relatedDomains: ["infrastructure"],
     },
     {
       title: "product migration scripts",
@@ -124,11 +110,53 @@ const developerExperience: DomainEntry = {
           href: "https://github.com/tpr-datalabs/product-migration-scripts",
         },
       ],
-      overlapNote: "the destination data lives in",
-      relatedDomains: ["analytics"],
+    },
+    {
+      title: "cdk-eks contributions",
+      context:
+        "contributed AWS permissions and access patterns to the shared EKS platform foundation — the core CDK stacks and cluster setup were led by another engineer.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/cdk-eks",
+        },
+      ],
+    },
+    {
+      title: "stargazer applications",
+      context:
+        "tweaked Helm chart templates and environment values in the GitOps repo for service deployments on the shared EKS cluster — the ArgoCD and ApplicationSet setup was led by another engineer.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/stargazer-applications",
+        },
+      ],
+    },
+    {
+      title: "private cdn",
+      context:
+        "an internal CDN and proxy layer for caching assets and controlling delivery paths in one place.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/private_cdn",
+        },
+      ],
+    },
+    {
+      title: "sso reverse proxy",
+      context:
+        "a reusable auth sidecar that put SSO in front of ECS and EKS services without rebuilding the same edge logic per app.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/sso-reverse-proxy",
+        },
+      ],
     },
   ],
-  relatedDomains: ["infrastructure", "product"],
+  relatedDomains: ["product", "analytics-ai"],
 };
 
 export default developerExperience;

@@ -2,7 +2,7 @@ import type { DomainEntry } from "./types";
 
 const product: DomainEntry = {
   slug: "product",
-  order: 4,
+  order: 1,
   title: "product",
   summary:
     "workflow-heavy software that turns messy operational processes into usable tools.",
@@ -22,24 +22,27 @@ const product: DomainEntry = {
       slug: "sample-tracking",
       title: "sample tracking",
       summary:
-        "the operational app for tracking sample shipments, statuses, exports, and recurring reporting so the workflow lived in software instead of scattered updates.",
+        "the operational app for tracking sample shipments, statuses, exports, and recurring reporting — with automated regression testing so the workflow lived in software instead of scattered updates.",
       problem:
         "teams needed one place to see where samples were, what had changed, and what still needed follow-up without piecing it together from status pings and spreadsheet cleanup.",
       role:
-        "i shaped the product workflow around shipment state, reporting, and exception handling so the app supported the real operational process instead of only recording rows.",
+        "i shaped the product workflow around shipment state, reporting, and exception handling so the app supported the real operational process instead of only recording rows. also set up automated bdd regression testing around high-risk portal flows.",
       constraints: [
         "the workflow had to cover shipments, status changes, exports, and recurring reporting in one product surface.",
         "operators needed something clearer than a raw tracker because the value came from handoffs and follow-up, not just storage.",
         "the app had to stay useful as a daily tool, which meant the reporting and operational views had to support each other.",
+        "high-risk flows needed automated regression coverage so releases stopped depending on expensive manual re-testing.",
       ],
       decisions: [
         "treated tracking, exports, and subscription-style reporting as one connected workflow instead of separate utilities.",
         "designed around day-to-day operator questions and exceptions rather than a schema-first admin panel.",
         "kept the product shaped like an operational tool, with reporting nearby but not taking over the primary workflow.",
+        "paired WebdriverIO and Cucumber bdd tests with targeted api checks around the flows worth protecting most.",
       ],
       outcomes: [
         "sample movement and status tracking lived in one operational home instead of scattered across update threads.",
         "reconciling exports, shipment context, and recurring updates across separate tools stopped being a daily chore.",
+        "portal regressions surfaced before release day instead of after, removing the repetitive manual checking tax.",
         "showed the kind of workflow-heavy product work i like most: software that holds a messy real process together.",
       ],
       stack: [
@@ -53,72 +56,105 @@ const product: DomainEntry = {
         "Redis",
         "BullMQ",
         "Sentry",
+        "WebdriverIO",
+        "Cucumber",
       ],
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/sample_tracking",
         },
-      ],
-    },
-    {
-      slug: "pricing-app",
-      title: "pricing app",
-      summary:
-        "a dedicated pricing workflow with its own frontend and backend so quote logic stopped living in ad hoc spreadsheets and one-off calculations.",
-      problem:
-        "pricing logic was too important to keep spread across sheets and manual judgment, but the workflow still needed to stay understandable to the people using it.",
-      role:
-        "i helped turn the pricing process into software with clearer states, inputs, and outputs so quoting became something the product could carry instead of a fragile side process.",
-      constraints: [
-        "the workflow had to encode pricing logic without turning the product into a black box no one trusted.",
-        "frontend and backend pieces needed to move together because the core value lived in the full quote flow, not only in formulas.",
-        "the team needed a dedicated tool, but it still had to fit the broader product and deployment conventions.",
-      ],
-      decisions: [
-        "gave pricing its own application boundary instead of tucking the workflow into a generic admin screen.",
-        "kept the experience centered on quote inputs, logic, and outputs rather than forcing people back into spreadsheets for edge cases.",
-        "treated backend rules and frontend workflow as one product surface so the business logic stayed inspectable.",
-      ],
-      outcomes: [
-        "pricing moved out of ad hoc spreadsheets and into a dedicated product workflow.",
-        "quote logic became easier to repeat and reason about across the team.",
-        "created a clearer handoff between pricing decisions and the rest of the operational process.",
-      ],
-      stack: [
-        "React",
-        "Vite",
-        "Express",
-        "Apollo GraphQL",
-        "Prisma",
-        "PostgreSQL",
-        "Snowflake",
-        "Redis",
-        "BullMQ",
-        "Sentry",
-        "Umami",
-      ],
-      proofLinks: [
         {
-          label: "repo",
-          href: "https://github.com/tpr-datalabs/pricing-app",
+          label: "qa repo",
+          href: "https://github.com/tpr-datalabs/web-portal-qa-bdd",
         },
       ],
     },
-  ],
-  supportingWork: [
     {
-      title: "supply forecast",
-      context:
-        "forecasting and planning tooling where the hard part was coordinating operational decisions across teams.",
+      slug: "supply-chain",
+      title: "supply chain forecasting",
+      summary:
+        "a predictive analytics platform for inventory planning where the hard part was coordinating forecasting decisions across teams and fiscal seasons.",
+      problem:
+        "inventory planners needed a way to adjust forecasts against fiscal season targets and receipt predictions without falling back to spreadsheet workflows that couldn't keep up with the pace of decisions.",
+      role:
+        "i spearheaded full-stack development of the forecasting interface and backend, designing the experience around fiscal season targets and receipt predictions so planners could work directly in the tool.",
+      constraints: [
+        "the interface had to make forecast adjustments feel natural alongside fiscal targets and receipt data.",
+        "the backend needed to coordinate across Snowflake, GraphQL, and real-time state without becoming a black box.",
+        "the tool had to replace spreadsheet workflows entirely — partial adoption would not have solved the coordination problem.",
+      ],
+      decisions: [
+        "designed the forecasting interface around fiscal season structure so planners saw targets and predictions together.",
+        "used GraphQL and Snowflake to keep forecast data queryable and auditable across the planning cycle.",
+        "built the full stack as one product surface so forecast inputs, model outputs, and team decisions stayed connected.",
+      ],
+      outcomes: [
+        "reduced inventory waste by $30M/year by enabling planners to act on forecast data directly instead of through spreadsheet intermediaries.",
+        "inventory planners could adjust forecasts without falling back to spreadsheet workflows.",
+        "showed how product work and data work overlap when the interface has to carry real operational decisions.",
+      ],
+      stack: [
+        "React",
+        "TypeScript",
+        "Apollo GraphQL",
+        "Snowflake",
+        "Vite",
+        "Sentry",
+      ],
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/supply-chain",
         },
       ],
-      overlapNote: "the model and reporting side of that work sits close to",
-      relatedDomains: ["analytics"],
+    },
+    {
+      slug: "charla",
+      title: "charla.cc",
+      summary:
+        "a social analytics platform i co-founded for tracking community engagement patterns across social media APIs, with unified customer profiles and proprietary metrics.",
+      problem:
+        "brands had no unified way to understand community engagement across social platforms — data was siloed, metrics were inconsistent, and the feedback loop between content and audience behavior was slow.",
+      role:
+        "co-founded the company and built the platform end-to-end: frontend, api layer, social media integrations, and infrastructure.",
+      constraints: [
+        "the platform had to unify data from multiple social media APIs with different rate limits, schemas, and auth models.",
+        "infrastructure had to stay lean — two co-founders, no dedicated ops team.",
+        "the product needed proprietary engagement metrics that went beyond what any single platform's analytics offered.",
+      ],
+      decisions: [
+        "built unified customer profiles across platforms so engagement patterns could be compared and tracked over time.",
+        "used Go and AWS Lambda for data ingestion from social APIs to DGraph, keeping the pipeline lightweight and scalable.",
+        "owned the full infrastructure: Dockerized services, CI/CD with AWS CodePipeline, EC2 and Lambda compute.",
+      ],
+      outcomes: [
+        "shipped a working social analytics product with unified cross-platform engagement tracking.",
+        "the co-founder experience shaped how i think about product scope, infrastructure tradeoffs, and shipping under real constraints.",
+        "built the full stack from zero with a small team — the closest thing to greenfield product ownership in my experience.",
+      ],
+      stack: [
+        "React",
+        "Go",
+        "DGraph",
+        "AWS Lambda",
+        "AWS CodePipeline",
+        "EC2",
+        "Docker",
+      ],
+    },
+  ],
+  supportingWork: [
+    {
+      title: "pricing app",
+      context:
+        "helped set up the infrastructure and deployment for a dedicated pricing workflow app — the product and backend logic were led by other engineers, but i contributed the initial project scaffolding and deploy path.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/pricing-app",
+        },
+      ],
     },
     {
       title: "cms",
@@ -132,7 +168,7 @@ const product: DomainEntry = {
       ],
     },
   ],
-  relatedDomains: ["analytics", "ai-ml"],
+  relatedDomains: ["analytics-ai", "developer-experience"],
 };
 
 export default product;

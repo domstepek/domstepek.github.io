@@ -240,7 +240,6 @@ a:hover::after {
 .home-page__personal {
   gap: 1rem;
   padding-top: 0.25rem;
-  border-top: 1px solid var(--border);
 }
 
 .home-page__domain-list,

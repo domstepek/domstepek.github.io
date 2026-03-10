@@ -1,8 +1,6 @@
 export type DomainSlug =
-  | "analytics"
-  | "infrastructure"
-  | "ai-ml"
   | "product"
+  | "analytics-ai"
   | "developer-experience";
 
 export interface ProofLink {

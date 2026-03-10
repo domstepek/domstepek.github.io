@@ -1,15 +1,11 @@
-import aiMl from "./ai-ml";
-import analytics from "./analytics";
+import analyticsAi from "./analytics-ai";
 import developerExperience from "./developer-experience";
-import infrastructure from "./infrastructure";
 import product from "./product";
 import type { DomainEntry, DomainSlug } from "./types";
 
 export const domains: DomainEntry[] = [
-  analytics,
-  infrastructure,
-  aiMl,
   product,
+  analyticsAi,
   developerExperience,
 ].sort((left, right) => left.order - right.order);
 

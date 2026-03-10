@@ -15,7 +15,7 @@ export const siteConfig = {
   name: "dom",
   defaultTitle: "dom | systems, products, and tooling",
   defaultDescription:
-    "dom builds analytics platforms, infrastructure, ai/ml tooling, product systems, and developer experience tooling.",
+    "dom builds product systems, analytics & ai tooling, and developer experience infrastructure.",
   siteUrl: resolveSiteUrl(import.meta.env.PUBLIC_SITE_URL),
   basePath: normalizeBasePath(import.meta.env.PUBLIC_BASE_PATH ?? DEFAULT_BASE_PATH),
   defaultSocialImage: "og-default.png",

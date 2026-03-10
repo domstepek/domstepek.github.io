@@ -37,7 +37,7 @@ export const homePage = {
   avatar: "/images/avatar.png",
   eyebrow: "dom stepek / systems, products, and tooling",
   title:
-    "i work across analytics, infrastructure, ai / ml, product, and developer experience.",
+    "i work across product, analytics & ai, and developer experience.",
   lead:
     "most of what i build sits where data, platform, workflow, and internal tooling overlap — the kind of work that only makes sense when you see the full loop.",
   domainIntro:
@@ -76,6 +76,6 @@ export const homePage = {
   seo: {
     title: "systems, products, and tooling",
     description:
-      "homepage for dom's work across analytics platforms, infrastructure, ai / ml tooling, product systems, and developer experience.",
+      "homepage for dom's work across product systems, analytics & ai tooling, and developer experience.",
   },
 } satisfies HomePageData;

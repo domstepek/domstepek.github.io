@@ -66,11 +66,11 @@ export const personalPage = {
   openTo: {
     title: "open to",
     intro:
-      "i'm open to full-time roles plus the right contract or fractional work when the problem is meaningful and the team wants someone who can move between product, platform, and implementation.",
+      "i'm looking for full-time roles where i can own product problems end-to-end and work across the stack to ship them.",
     roles: [
-      "staff or senior product engineering roles",
-      "platform or infrastructure-heavy work with real product context",
-      "contract or fractional work where the system shape matters more than ticket volume",
+      "senior full-stack or product engineering roles",
+      "roles where product work touches deployment, data, or platform concerns",
+      "founding or early-team roles where scope is wide and ownership is real",
     ],
     problemSpaces: [
       "internal tools and operational systems",
@@ -85,14 +85,13 @@ export const personalPage = {
   resume: {
     title: "resume",
     summary:
-      "short version: i've spent most of my time building internal platforms, operational tools, data-heavy products, and the glue between product intent and real delivery constraints.",
+      "short version: i've spent most of my time building operational tools, data-heavy products, and the glue between product intent and real delivery constraints.",
     highlights: [
-      "analytics platforms, reporting workflows, and internal product surfaces",
-      "platform, infrastructure, and deployment-heavy systems",
-      "ai / ml-adjacent tools where workflow, quality, and operability matter",
-      "developer tooling, validation, and team-facing enablement work",
+      "product surfaces, operational tools, and workflow-heavy internal software",
+      "analytics platforms, ai-assisted tooling, and data-driven interfaces",
+      "developer tooling, shared systems, and team-facing enablement work",
     ],
-    note: "each domain page has the full project walkthroughs if you want more depth.",
+    note: "the domain pages have full project walkthroughs with stack details, decisions, and outcomes.",
   },
   notes: {
     intro:
