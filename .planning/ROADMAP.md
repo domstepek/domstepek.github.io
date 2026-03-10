@@ -15,7 +15,7 @@ This roadmap builds the site in the order that best supports a domain-first port
 - [x] **Phase 3: Homepage Positioning** - Build the landing page that frames Dom's work and routes visitors into the domain pages.
 - [x] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
 - [x] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
-- [ ] **Phase 6: Set up custom domain via is-a-dev/register** - Configure a custom domain handoff and registration path for the published site.
+- [x] **Phase 6: Set up custom domain via is-a-dev/register** - Configure a custom domain handoff and registration path for the published site. (completed 2026-03-10)
 
 ## Phase Details
 
@@ -114,7 +114,7 @@ Plans:
   5. Phase 6 CNAME validator is part of the `validate:site` chain.
   6. is-a-dev domain registration file is ready in the user's fork for PR submission.
   7. All Phase 1-6 validators pass under the new config.
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] `06-01` Update site config defaults, CNAME, and CI workflow for custom domain
@@ -132,4 +132,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Homepage Positioning | 3/3 | Complete | 2026-03-09 |
 | 4. Flagship Proof & Visuals | 3/3 | Complete | 2026-03-10 |
 | 5. Personal Context & Notes | 3/3 | Complete | 2026-03-09 |
-| 6. Set up custom domain via is-a-dev/register | 1/2 | In Progress|  |
+| 6. Set up custom domain via is-a-dev/register | 2/2 | Complete   | 2026-03-10 |

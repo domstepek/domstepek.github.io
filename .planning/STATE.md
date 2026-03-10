@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-03-10T03:56:07.007Z"
-last_activity: 2026-03-10 — Phase 6 Plan 01 complete; site config transitioned to custom domain
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-10T04:15:00.000Z"
+last_activity: 2026-03-10 — Phase 6 Plan 02 complete; all phases finished, domain registration PR submitted
 progress:
   total_phases: 6
   completed_phases: 5
   total_plans: 17
-  completed_plans: 16
-  percent: 94
+  completed_plans: 17
+  percent: 100
 ---
 
 # Project State
@@ -26,18 +26,18 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 ## Current Position
 
 Phase: 6 of 6 (Set up custom domain via is-a-dev/register)
-Plan: 1 of 2 complete (Phase 6)
-Status: Executing Phase 6 plans
-Last activity: 2026-03-10 — Phase 6 Plan 01 complete; site config transitioned to custom domain
+Plan: 2 of 2 complete (Phase 6)
+Status: Phase 6 complete — all plans executed
+Last activity: 2026-03-10 — Phase 6 Plan 02 complete; CNAME validator in site gate, domain registration PR submitted
 
-Progress: [█████████░] 94%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
+- Total plans completed: 17
 - Average duration: 5 min
-- Total execution time: 1.4 hours
+- Total execution time: 1.5 hours
 
 **By Phase:**
 
@@ -48,11 +48,11 @@ Progress: [█████████░] 94%
 | 3 | 3 | 13 min | 4 min |
 | 4 | 3 | 16 min | 5 min |
 | 5 | 3 | 14 min | 5 min |
-| 6 | 1 | 1 min | 1 min |
+| 6 | 2 | 4 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (5 min), 05-01 (5 min), 05-02 (5 min), 05-03 (4 min), 06-01 (1 min)
-- Trend: Phase 6 config transition executing; site defaults now point to custom domain.
+- Last 5 plans: 05-01 (5 min), 05-02 (5 min), 05-03 (4 min), 06-01 (1 min), 06-02 (3 min)
+- Trend: All phases complete. Domain registration PR pending is-a-dev review.
 
 *Updated after each plan completion*
 | Phase 03 P02 | 4 min | 3 tasks | 12 files |
@@ -61,6 +61,7 @@ Progress: [█████████░] 94%
 | Phase 05 P02 | 5 min | 3 tasks | 9 files |
 | Phase 05 P03 | 4 min | 2 tasks | 3 files |
 | Phase 06 P01 | 1 min | 2 tasks | 4 files |
+| Phase 06 P02 | 3 min | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -114,6 +115,7 @@ Recent decisions affecting current work:
 - [Phase 06]: Changed DEFAULT_SITE_URL and DEFAULT_BASE_PATH in both astro.config.mjs and src/data/site.ts to point to jean-dominique-stepek.is-a.dev with root base path. — This is the core config transition that makes all canonical URLs, OG tags, and internal routes use the new custom domain.
 - [Phase 06]: Updated site description to visitor-facing casual lowercase voice matching existing site tone. — The old description was repo-style; the new one describes what Dom builds.
 - [Phase 06]: Replaced CI dynamic format() fallbacks with static custom domain strings while preserving vars.* override mechanism. — This ensures CI builds default to the custom domain without losing the ability to override via repository variables.
+- [Phase 06]: Recorded Task 2 as manually completed with corrected GitHub username (domstepek, not jstepek) and CNAME target (domstepek.github.io). — Plan originally had wrong username; user completed domain registration manually with correct values.
 
 ### Roadmap Evolution
 
@@ -130,6 +132,6 @@ None right now.
 
 ## Session Continuity
 
-Last session: 2026-03-10T03:55:32Z
-Stopped at: Completed 06-01-PLAN.md
-Resume file: .planning/phases/06-set-up-custom-domain-via-is-a-dev-register/06-01-SUMMARY.md
+Last session: 2026-03-10T04:15:00Z
+Stopped at: Completed 06-02-PLAN.md
+Resume file: .planning/phases/06-set-up-custom-domain-via-is-a-dev-register/06-02-SUMMARY.md
