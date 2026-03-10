@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 6 context gathered
-last_updated: "2026-03-10T03:31:57.990Z"
-last_activity: 2026-03-09 — Phase 5 verified complete; all automated and browser checks passed
+status: executing
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-10T03:56:07.007Z"
+last_activity: 2026-03-10 — Phase 6 Plan 01 complete; site config transitioned to custom domain
 progress:
   total_phases: 6
   completed_phases: 5
-  total_plans: 15
-  completed_plans: 15
-  percent: 83
+  total_plans: 17
+  completed_plans: 16
+  percent: 94
 ---
 
 # Project State
@@ -26,17 +26,17 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 ## Current Position
 
 Phase: 6 of 6 (Set up custom domain via is-a-dev/register)
-Plan: TBD (Phase 6 not yet planned)
-Status: Phase 5 complete; ready to plan Phase 6
-Last activity: 2026-03-09 — Phase 5 verified complete; all automated and browser checks passed
+Plan: 1 of 2 complete (Phase 6)
+Status: Executing Phase 6 plans
+Last activity: 2026-03-10 — Phase 6 Plan 01 complete; site config transitioned to custom domain
 
-Progress: [████████░░] 83%
+Progress: [█████████░] 94%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: 6 min
+- Total plans completed: 16
+- Average duration: 5 min
 - Total execution time: 1.4 hours
 
 **By Phase:**
@@ -48,11 +48,11 @@ Progress: [████████░░] 83%
 | 3 | 3 | 13 min | 4 min |
 | 4 | 3 | 16 min | 5 min |
 | 5 | 3 | 14 min | 5 min |
-| 6 | 0 | - | - |
+| 6 | 1 | 1 min | 1 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02 (6 min), 04-03 (5 min), 05-01 (5 min), 05-02 (5 min), 05-03 (4 min)
-- Trend: Phase 5 is now implemented and covered by the shared site gate through Phase 5; the remaining work is manual sign-off on hierarchy, readability, and interaction feel before Phase 6 planning.
+- Last 5 plans: 04-03 (5 min), 05-01 (5 min), 05-02 (5 min), 05-03 (4 min), 06-01 (1 min)
+- Trend: Phase 6 config transition executing; site defaults now point to custom domain.
 
 *Updated after each plan completion*
 | Phase 03 P02 | 4 min | 3 tasks | 12 files |
@@ -60,6 +60,7 @@ Progress: [████████░░] 83%
 | Phase 05 P01 | 5 min | 3 tasks | 8 files |
 | Phase 05 P02 | 5 min | 3 tasks | 9 files |
 | Phase 05 P03 | 4 min | 2 tasks | 3 files |
+| Phase 06 P01 | 1 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,9 @@ Recent decisions affecting current work:
 - [Phase 05]: Treat the about page's `resume` section as the canonical v1 resume surface instead of depending on a separate PDF. — This keeps resume access repo-owned, one-click reachable, and compatible with the site's text-forward style.
 - [Phase 05]: Build notes with Astro content collections and plain Markdown, then render them through a simple reverse-chronological index and thin note-detail routes. — This adds repeatable note content without turning v1 into a blog platform.
 - [Phase 05]: Extend `validate:site` with a dist-first Phase 5 validator that follows rendered note links and checks the homepage teaser, about page, notes index, and note detail pages from built output. — This keeps Phase 5 regressions inside the same site-level release gate as the earlier phases.
+- [Phase 06]: Changed DEFAULT_SITE_URL and DEFAULT_BASE_PATH in both astro.config.mjs and src/data/site.ts to point to jean-dominique-stepek.is-a.dev with root base path. — This is the core config transition that makes all canonical URLs, OG tags, and internal routes use the new custom domain.
+- [Phase 06]: Updated site description to visitor-facing casual lowercase voice matching existing site tone. — The old description was repo-style; the new one describes what Dom builds.
+- [Phase 06]: Replaced CI dynamic format() fallbacks with static custom domain strings while preserving vars.* override mechanism. — This ensures CI builds default to the custom domain without losing the ability to override via repository variables.
 
 ### Roadmap Evolution
 
@@ -122,10 +126,10 @@ None right now.
 
 ### Blockers/Concerns
 
-- Phase 6 is the final phase and does not have a plan breakdown yet.
+None right now.
 
 ## Session Continuity
 
-Last session: 2026-03-10T03:31:57.985Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-set-up-custom-domain-via-is-a-dev-register/06-CONTEXT.md
+Last session: 2026-03-10T03:55:32Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: .planning/phases/06-set-up-custom-domain-via-is-a-dev-register/06-01-SUMMARY.md

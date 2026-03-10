@@ -114,7 +114,7 @@ Plans:
   5. Phase 6 CNAME validator is part of the `validate:site` chain.
   6. is-a-dev domain registration file is ready in the user's fork for PR submission.
   7. All Phase 1-6 validators pass under the new config.
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] `06-01` Update site config defaults, CNAME, and CI workflow for custom domain
@@ -132,4 +132,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Homepage Positioning | 3/3 | Complete | 2026-03-09 |
 | 4. Flagship Proof & Visuals | 3/3 | Complete | 2026-03-10 |
 | 5. Personal Context & Notes | 3/3 | Complete | 2026-03-09 |
-| 6. Set up custom domain via is-a-dev/register | 0/2 | Not started | - |
+| 6. Set up custom domain via is-a-dev/register | 1/2 | In Progress|  |
