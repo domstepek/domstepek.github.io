@@ -10,6 +10,26 @@ export interface ProofLink {
   href: string;
 }
 
+export interface FlagshipVisual {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface FlagshipHighlight {
+  slug: string;
+  title: string;
+  summary: string;
+  problem: string;
+  role: string;
+  constraints: string[];
+  decisions: string[];
+  outcomes: string[];
+  stack: string[];
+  proofLinks?: ProofLink[];
+  visual?: FlagshipVisual;
+}
+
 export interface SupportingWorkItem {
   title: string;
   context: string;
@@ -27,6 +47,7 @@ export interface DomainEntry {
   thesis: string;
   scope: string;
   belongsHere: string[];
+  flagships?: FlagshipHighlight[];
   supportingWork: SupportingWorkItem[];
   relatedDomains?: DomainSlug[];
 }

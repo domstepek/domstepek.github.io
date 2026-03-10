@@ -21,10 +21,10 @@
 
 ### Highlights
 
-- [ ] **HIGH-01**: Visitor can read one to two flagship highlights on each domain page
-- [ ] **HIGH-02**: Visitor can understand for each flagship highlight the problem, Dom's role, constraints, decisions, and outcome
-- [ ] **HIGH-03**: Visitor can see the relevant stack or tools used in each flagship highlight
-- [ ] **HIGH-04**: Visitor can view screenshots or diagrams for flagship highlights where visuals improve understanding
+- [x] **HIGH-01**: Visitor can read one to two flagship highlights on each domain page
+- [x] **HIGH-02**: Visitor can understand for each flagship highlight the problem, Dom's role, constraints, decisions, and outcome
+- [x] **HIGH-03**: Visitor can see the relevant stack or tools used in each flagship highlight
+- [x] **HIGH-04**: Visitor can view screenshots or diagrams for flagship highlights where visuals improve understanding
 
 ### Quality
 
@@ -85,10 +85,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-02 | Phase 3 - Homepage Positioning | Complete |
 | HOME-03 | Phase 3 - Homepage Positioning | Complete |
 | HOME-04 | Phase 3 - Homepage Positioning | Complete |
-| HIGH-01 | Phase 4 - Flagship Proof & Visuals | Pending |
-| HIGH-02 | Phase 4 - Flagship Proof & Visuals | Pending |
-| HIGH-03 | Phase 4 - Flagship Proof & Visuals | Pending |
-| HIGH-04 | Phase 4 - Flagship Proof & Visuals | Pending |
+| HIGH-01 | Phase 4 - Flagship Proof & Visuals | Complete |
+| HIGH-02 | Phase 4 - Flagship Proof & Visuals | Complete |
+| HIGH-03 | Phase 4 - Flagship Proof & Visuals | Complete |
+| HIGH-04 | Phase 4 - Flagship Proof & Visuals | Complete |
 | PROF-01 | Phase 5 - Personal Context & Notes | Pending |
 | PROF-02 | Phase 5 - Personal Context & Notes | Pending |
 | PROF-03 | Phase 5 - Personal Context & Notes | Pending |
@@ -112,6 +112,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 - `pnpm validate:site` now runs Phase 1, Phase 2, and Phase 3 structural release gates after build.
 - The Phase 3 validator checks emitted homepage HTML for the hero marker, the five base-aware domain links, the GitHub/LinkedIn/email contact links, and the freshness marker without relying on remote network availability.
 
+**Phase 4 sign-off:**
+- `pnpm validate:site` now runs Phase 1 through Phase 4 structural release gates after build.
+- The Phase 4 validator checks emitted domain HTML for one flagship-highlights section per domain page, one to two flagship entries per page, required story structure, valid proof-link shape, and optional visual output when present.
+- All five domain pages now ship two flagship stories each, with local diagrams on the stories where a visual materially improves comprehension.
+
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-10 after Phase 03 Plan 03 completion*
+*Last updated: 2026-03-10 after Phase 04 completion*

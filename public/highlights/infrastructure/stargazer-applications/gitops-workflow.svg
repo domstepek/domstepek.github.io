@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
+  <title id="title">gitops deployment flow for stargazer applications</title>
+  <desc id="desc">a diagram showing app code building an image, the stargazer applications repo carrying deployment config, argocd syncing that config, and the shared cluster running the app.</desc>
+  <style>
+    .bg { fill: #fcfaf6; }
+    .box { fill: #f5f2ea; stroke: #c7bfb0; stroke-width: 2; rx: 16; ry: 16; }
+    .accent { fill: #e7edf6; stroke: #1f3a5f; stroke-width: 2; rx: 16; ry: 16; }
+    .line { stroke: #1f3a5f; stroke-width: 3; fill: none; stroke-linecap: round; }
+    .arrow { fill: #1f3a5f; }
+    .label { fill: #171717; font: 600 20px Inter, Arial, sans-serif; }
+    .copy { fill: #4b4b4b; font: 16px Inter, Arial, sans-serif; }
+    .small { fill: #4b4b4b; font: 14px Inter, Arial, sans-serif; }
+  </style>
+  <rect class="bg" width="960" height="260" />
+
+  <text class="label" x="36" y="40">stargazer applications: repeatable gitops release path</text>
+  <text class="small" x="36" y="66">the useful part was connecting app code, deploy config, and cluster sync on one predictable rail.</text>
+
+  <rect class="box" x="36" y="98" width="190" height="116" />
+  <text class="label" x="60" y="134">app repo + ci</text>
+  <text class="copy" x="60" y="160">build image</text>
+  <text class="copy" x="60" y="184">publish tag</text>
+  <text class="copy" x="60" y="208">keep code concerns here</text>
+
+  <rect class="box" x="286" y="98" width="190" height="116" />
+  <text class="label" x="310" y="134">image registry</text>
+  <text class="copy" x="310" y="160">release artifact</text>
+  <text class="copy" x="310" y="184">version teams can point to</text>
+
+  <rect class="accent" x="536" y="98" width="190" height="116" />
+  <text class="label" x="560" y="134">stargazer</text>
+  <text class="label" x="560" y="158">applications</text>
+  <text class="copy" x="560" y="184">helm chart + env values</text>
+  <text class="copy" x="560" y="208">one deploy convention</text>
+
+  <rect class="box" x="784" y="98" width="140" height="116" />
+  <text class="label" x="808" y="134">argocd</text>
+  <text class="copy" x="808" y="160">watch repo</text>
+  <text class="copy" x="808" y="184">sync cluster</text>
+
+  <rect class="box" x="700" y="18" width="224" height="56" />
+  <text class="label" x="722" y="52">shared eks cluster</text>
+  <text class="copy" x="722" y="72">service runs the same way in each env</text>
+
+  <path class="line" d="M226 156 H286" />
+  <polygon class="arrow" points="286,156 272,148 272,164" />
+
+  <path class="line" d="M476 156 H536" />
+  <polygon class="arrow" points="536,156 522,148 522,164" />
+
+  <path class="line" d="M726 156 H784" />
+  <polygon class="arrow" points="784,156 770,148 770,164" />
+
+  <path class="line" d="M854 98 V74 H812" />
+  <polygon class="arrow" points="812,74 826,66 826,82" />
+
+  <path class="line" d="M226 186 C298 228, 444 228, 536 186" />
+  <polygon class="arrow" points="536,186 522,178 522,194" />
+  <text class="small" x="286" y="240">new image tag lands in the same deploy rail instead of a bespoke release script</text>
+</svg>

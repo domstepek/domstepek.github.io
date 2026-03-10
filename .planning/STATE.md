@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-03-10T00:23:50.159Z"
-last_activity: 2026-03-10 — Completed 03-03 with dist-first homepage validation and a shared site gate covering Phases 1 through 3
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-03-10T01:27:32Z"
+last_activity: 2026-03-10 — Completed Phase 4 with flagship proof across all five domain pages, three local explainers, and a Phase 4 dist-first site gate
 progress:
   total_phases: 6
-  completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
-  percent: 100
+  completed_phases: 4
+  total_plans: 12
+  completed_plans: 12
+  percent: 67
 ---
 
 # Project State
@@ -21,23 +21,23 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-03-09)
 
 **Core value:** Someone should be able to land on the site and quickly understand what kinds of complex systems Dom builds, then explore the domains that matter to them without getting buried in noise.
-**Current focus:** Phase 4 - Flagship Proof & Visuals
+**Current focus:** Phase 5 - Personal Context & Notes
 
 ## Current Position
 
-Phase: 4 of 6 (Flagship Proof & Visuals)
-Plan: TBD (Phase 4 not yet planned)
-Status: Phase 3 complete; ready to plan Phase 4
-Last activity: 2026-03-10 — Completed 03-03 with dist-first homepage validation and a shared site gate covering Phases 1 through 3
+Phase: 5 of 6 (Personal Context & Notes)
+Plan: TBD (Phase 5 not yet planned)
+Status: Phase 4 complete; ready to plan Phase 5
+Last activity: 2026-03-10 — Completed Phase 4 with flagship proof across all five domain pages, three local explainers, and a Phase 4 dist-first site gate
 
-Progress: [██████████] 100%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 12
 - Average duration: 6 min
-- Total execution time: 0.9 hours
+- Total execution time: 1.2 hours
 
 **By Phase:**
 
@@ -46,13 +46,13 @@ Progress: [██████████] 100%
 | 1 | 3 | 18 min | 6 min |
 | 2 | 3 | 18 min | 6 min |
 | 3 | 3 | 13 min | 4 min |
-| 4 | 0 | - | - |
+| 4 | 3 | 16 min | 5 min |
 | 5 | 0 | - | - |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (7 min), 02-03 (6 min), 03-01 (5 min), 03-02 (4 min), 03-03 (4 min)
-- Trend: Phase 3 now closes with a dist-first homepage validator wired into the shared site gate, so Phase 4 can deepen proof on top of a fully validated front door.
+- Last 5 plans: 03-02 (4 min), 03-03 (4 min), 04-01 (5 min), 04-02 (6 min), 04-03 (5 min)
+- Trend: Phase 4 now deepens every domain page with flagship proof and extends the shared site gate through Phase 4, so Phase 5 can finish personal context and notes on top of a stronger content foundation.
 
 *Updated after each plan completion*
 | Phase 03 P02 | 4 min | 3 tasks | 12 files |
@@ -100,6 +100,9 @@ Recent decisions affecting current work:
 - [Phase 03]: Validate the homepage from built dist/index.html so the gate matches the artifact GitHub Pages will publish. — Keeps the homepage release check aligned with the emitted HTML instead of the source templates and catches deploy-time regressions before Pages publishes them.
 - [Phase 03]: Derive expected homepage domain hrefs from the emitted canonical URL so the validator stays base-path aware without importing source helpers. — Lets the validator follow the published base path automatically while remaining independent from application runtime code.
 - [Phase 03]: Extend the existing validate:site chain instead of creating a separate homepage CI path. — Preserves one release gate for the site and makes homepage regressions fail the same workflow already guarding Phases 1 and 2.
+- [Phase 04]: Keep flagship proof inline on the existing shared domain page pattern instead of introducing standalone case-study routes. — This deepens the domain hubs without undoing the Phase 2 information architecture.
+- [Phase 04]: Promote flagship stories from the existing supporting-work shortlist and keep visuals limited to local explainers where they materially help. — This keeps the site text-forward while making the proof layer more concrete.
+- [Phase 04]: Extend `validate:site` with a dist-first Phase 4 validator that checks built domain artifacts, story structure, and optional visual output. — This keeps flagship regressions inside the same release gate as the earlier phases.
 
 ### Roadmap Evolution
 
@@ -112,11 +115,11 @@ None right now.
 
 ### Blockers/Concerns
 
-- Phase 4 is the next target, but it does not have a plan breakdown yet.
-- Flagship highlights, visuals, and deeper role/decision proof remain the next intentional gap after homepage completion.
+- Phase 5 is the next target, but it does not have a plan breakdown yet.
+- `how i work`, resume and `open to` framing, and the notes area remain the next intentional gap after flagship proof completion.
 
 ## Session Continuity
 
-Last session: 2026-03-10T00:14:16.582Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-03-10T01:27:32Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None

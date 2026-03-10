@@ -1,18 +1,34 @@
 ---
 import { getDomainBySlug } from "../../data/domains";
 import type { DomainEntry } from "../../data/domains/types";
-import { domainPath, homePath } from "../../lib/paths";
+import { assetPath, domainPath, homePath } from "../../lib/paths";
 
 interface Props {
   domain: DomainEntry;
 }
 
 const { domain } = Astro.props;
-const { title, thesis, scope, belongsHere, supportingWork, relatedDomains = [] } = domain;
+const { title, thesis, scope, belongsHere, flagships = [], supportingWork, relatedDomains = [] } = domain;
+
+const toVisualSrc = (source: string) =>
+  source.startsWith("http://") || source.startsWith("https://")
+    ? source
+    : assetPath(source);
 
 const relatedEntries = relatedDomains
   .map((slug) => getDomainBySlug(slug))
   .filter((entry): entry is DomainEntry => Boolean(entry));
+
+const flagshipItems = flagships.map((flagship) => ({
+  ...flagship,
+  proofLinks: flagship.proofLinks ?? [],
+  visual: flagship.visual
+    ? {
+        ...flagship.visual,
+        src: toVisualSrc(flagship.visual.src),
+      }
+    : undefined,
+}));
 
 const supportingItems = supportingWork.map((item) => ({
   ...item,
@@ -44,6 +60,109 @@ const supportingItems = supportingWork.map((item) => ({
       <strong>scope:</strong> {scope}
     </p>
   </section>
+
+  {flagshipItems.length > 0 && (
+    <section
+      class="domain-page__section flagship-highlights"
+      aria-labelledby="flagship-highlights-heading"
+      data-flagship-highlights
+    >
+      <h2 class="domain-page__section-title" id="flagship-highlights-heading">flagship highlights</h2>
+      {flagshipItems.map((flagship) => (
+        <article class="supporting-work__item flagship" id={`flagship-${flagship.slug}`} data-flagship>
+          <header class="flagship__header">
+            <h3 class="supporting-work__title flagship__title" data-flagship-title>{flagship.title}</h3>
+            <p class="supporting-work__context flagship__summary">{flagship.summary}</p>
+          </header>
+
+          <div class="flagship__facts">
+            <p class="domain-page__scope flagship__line" data-flagship-problem>
+              <strong>problem:</strong> {flagship.problem}
+            </p>
+
+            <p class="domain-page__scope flagship__line" data-flagship-role>
+              <strong>role:</strong> {flagship.role}
+            </p>
+          </div>
+
+          <div class="flagship__grid">
+            <section class="flagship__group" data-flagship-constraints>
+              <p class="flagship__label">
+                <strong>constraints:</strong>
+              </p>
+              <ul class="domain-page__list flagship__list">
+                {flagship.constraints.map((constraint) => (
+                  <li>{constraint}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section class="flagship__group" data-flagship-decisions>
+              <p class="flagship__label">
+                <strong>decisions:</strong>
+              </p>
+              <ul class="domain-page__list flagship__list">
+                {flagship.decisions.map((decision) => (
+                  <li>{decision}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section class="flagship__group" data-flagship-outcomes>
+              <p class="flagship__label">
+                <strong>outcomes:</strong>
+              </p>
+              <ul class="domain-page__list flagship__list">
+                {flagship.outcomes.map((outcome) => (
+                  <li>{outcome}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section class="flagship__group" data-flagship-stack>
+              <p class="flagship__label">
+                <strong>stack:</strong>
+              </p>
+              <ul class="domain-page__list flagship__list">
+                {flagship.stack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </section>
+          </div>
+
+          {flagship.proofLinks.length > 0 && (
+            <p class="supporting-work__links flagship__links" data-flagship-proof-links>
+              <strong>proof:</strong>{" "}
+              {flagship.proofLinks.map((link, index) => (
+                <>
+                  <a data-flagship-proof-link href={link.href}>
+                    {link.label}
+                  </a>
+                  {index < flagship.proofLinks.length - 1 ? ", " : ""}
+                </>
+              ))}
+            </p>
+          )}
+
+          {flagship.visual && (
+            <figure class="flagship__figure" data-flagship-visual>
+              <img
+                class="flagship__image"
+                src={flagship.visual.src}
+                alt={flagship.visual.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              {flagship.visual.caption && (
+                <figcaption class="flagship__caption">{flagship.visual.caption}</figcaption>
+              )}
+            </figure>
+          )}
+        </article>
+      ))}
+    </section>
+  )}
 
   <section class="domain-page__section supporting-work" aria-labelledby="supporting-work-heading" data-supporting-work>
     <h2 class="domain-page__section-title" id="supporting-work-heading">supporting work</h2>

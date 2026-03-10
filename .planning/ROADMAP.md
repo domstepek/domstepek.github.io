@@ -13,7 +13,7 @@ This roadmap builds the site in the order that best supports a domain-first port
 - [x] **Phase 1: Publishing Foundation** - Establish the static site, deploy path, typography baseline, metadata, and accessibility baseline.
 - [x] **Phase 2: Domain Hubs & Supporting Work** - Create the five domain pages and lock the domain-first information architecture.
 - [x] **Phase 3: Homepage Positioning** - Build the landing page that frames Dom's work and routes visitors into the domain pages.
-- [ ] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
+- [x] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
 - [ ] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
 - [ ] **Phase 6: Set up custom domain via is-a-dev/register** - Configure a custom domain handoff and registration path for the published site.
 
@@ -76,10 +76,12 @@ Plans:
   2. Each flagship clearly explains the problem, Dom's role, constraints, decisions, and outcome in a scannable structure.
   3. Each flagship includes the relevant stack or tools used.
   4. Wherever a visual materially improves comprehension, a screenshot or diagram is included and presented clearly.
-**Plans:** TBD
+**Plans:** 3/3 plans executed
 
 Plans:
-- [ ] TBD (run `$gsd-plan-phase 4` to break down this phase)
+- [x] `04-01` Add shared flagship schema, rendering, and an analytics pilot
+- [x] `04-02` Roll out flagship proof, visuals, and shared layout polish across all domains
+- [x] `04-03` Add dist-first flagship validation to the shared site release gate
 
 ### Phase 5: Personal Context & Notes
 **Goal:** Complete v1 with `how i work`, resume and `open to` framing, and lightweight notes.
@@ -116,6 +118,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Publishing Foundation | 3/3 | Complete | 2026-03-09 |
 | 2. Domain Hubs & Supporting Work | 3/3 | Complete | 2026-03-09 |
 | 3. Homepage Positioning | 3/3 | Complete | 2026-03-09 |
-| 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
+| 4. Flagship Proof & Visuals | 3/3 | Complete | 2026-03-10 |
 | 5. Personal Context & Notes | 0/TBD | Not started | - |
 | 6. Set up custom domain via is-a-dev/register | 0/TBD | Not started | - |

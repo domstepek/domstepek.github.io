@@ -332,6 +332,8 @@ a:hover {
 
 .supporting-work {
   gap: clamp(1rem, 2vw, 1.35rem);
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border);
 }
 
 .supporting-work__item {
@@ -379,6 +381,76 @@ a:hover {
   outline-offset: 0.22rem;
 }
 
+.flagship-highlights {
+  gap: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.flagship {
+  gap: 0.9rem;
+  padding-top: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+.flagship__header,
+.flagship__facts,
+.flagship__group {
+  display: grid;
+}
+
+.flagship__header {
+  gap: 0.55rem;
+}
+
+.flagship__summary,
+.flagship__line,
+.flagship__label,
+.flagship__caption {
+  max-width: 40rem;
+}
+
+.flagship__facts {
+  gap: 0.65rem;
+}
+
+.flagship__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.flagship__group {
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.flagship__label {
+  color: var(--text);
+}
+
+.flagship__list {
+  gap: 0.75rem;
+}
+
+.flagship__links {
+  margin-top: 0.1rem;
+}
+
+.flagship__figure {
+  display: grid;
+  gap: 0.65rem;
+  max-width: min(100%, 42rem);
+  margin: 0;
+}
+
+.flagship__image {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--bg-elevated);
+}
+
+.flagship__caption {
+  font-size: 0.95rem;
+}
+
 @media (min-width: 42rem) {
   .home-page__domain-item {
     grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
@@ -388,6 +460,11 @@ a:hover {
 @media (min-width: 56rem) {
   .home-page__meta {
     grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+
+  .flagship__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 2rem;
   }
 }

@@ -17,33 +17,92 @@ const developerExperience: DomainEntry = {
     "quality systems that catch regressions before they become somebody else's fire drill",
     "reusable ui or workflow primitives that keep teams from rebuilding the same patterns",
   ],
-  supportingWork: [
+  flagships: [
     {
+      slug: "global-design-system",
       title: "global design system",
-      context:
-        "the shared component library and Storybook setup that gave multiple product surfaces one reusable ui baseline.",
+      summary:
+        "a shared react component library and storybook-backed baseline that gave multiple product surfaces one reusable ui system instead of repeated one-off components.",
+      problem:
+        "teams were paying the same ui tax across products, rebuilding patterns and styling decisions that should have been shared once and reused.",
+      role:
+        "i helped turn those repeated ui needs into a maintainable shared system so teams could ship product work without re-solving common components every time.",
+      constraints: [
+        "the library had to be reusable across multiple product surfaces, not secretly optimized for one app.",
+        "shared components needed enough consistency to help without locking teams into brittle one-off abstractions.",
+        "documentation and publishing discipline mattered because a design system only helps if teams can actually consume it.",
+      ],
+      decisions: [
+        "kept the system as a dedicated library rather than copying component code between apps.",
+        "focused on reusable exports and a documented publish path so the system could behave like a real product dependency.",
+        "used a standard React and TypeScript library workflow so adoption did not require special tooling.",
+      ],
+      outcomes: [
+        "gave product teams a shared ui baseline instead of repeated component drift.",
+        "made it easier to ship consistent interface work across separate apps.",
+        "turned ui reuse into something maintainable rather than a folder of copied snippets.",
+      ],
+      stack: [
+        "React",
+        "TypeScript",
+        "Vite",
+        "shared components",
+        "Storybook-style documentation",
+      ],
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/global-design-system",
         },
       ],
-      overlapNote: "the components show up across",
-      relatedDomains: ["product"],
     },
     {
+      slug: "web-portal-qa-bdd",
       title: "web portal qa bdd",
-      context:
-        "a WebdriverIO and Cucumber suite for high-risk portal flows and api checks that were too expensive to regression test by hand.",
+      summary:
+        "a webdriverio and cucumber suite for high-risk portal flows plus api checks, so regression coverage stopped depending on expensive manual re-testing.",
+      problem:
+        "the portal had important paths that were too risky and too repetitive to keep verifying by hand every time something changed.",
+      role:
+        "i helped define an automated regression layer around the flows worth protecting most, pairing browser behavior with targeted api checks.",
+      constraints: [
+        "the suite had to cover real user journeys without becoming impossible to run outside a single local machine.",
+        "different environments and browsers mattered, so the test harness needed to stay configurable.",
+        "reporting and ci usefulness were part of the value; test code alone would not solve the regression tax.",
+      ],
+      decisions: [
+        "used WebdriverIO plus Cucumber so important flows could be expressed as behavior-focused tests instead of scattered scripts.",
+        "kept smoke, tagged, api, and dockerized execution paths so the suite could serve local debugging and repeatable ci runs.",
+        "focused first on high-risk flows where manual regression cost was already obvious.",
+      ],
+      outcomes: [
+        "made portal regressions easier to catch before they became release-day surprises.",
+        "reduced the amount of repetitive manual checking needed for high-risk workflows.",
+        "created reusable qa tooling that supported both browser and api confidence on the same project.",
+      ],
+      stack: [
+        "WebdriverIO",
+        "Cucumber",
+        "Gherkin",
+        "Jest",
+        "docker-compose",
+        "multi-browser regression testing",
+      ],
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/web-portal-qa-bdd",
         },
       ],
-      overlapNote: "the tested user journeys live mainly in",
-      relatedDomains: ["analytics", "product"],
+      visual: {
+        src: "highlights/developer-experience/web-portal-qa-bdd/regression-flow.svg",
+        alt: "a regression flow showing tagged test runs feeding browser checks and api checks, then producing reports for release confidence.",
+        caption:
+          "the useful part was giving the team repeatable ways to run the same high-risk checks locally, in docker, or in ci.",
+      },
     },
+  ],
+  supportingWork: [
     {
       title: "product team cli",
       context:
