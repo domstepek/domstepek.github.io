@@ -150,7 +150,11 @@ export const gateCopyExpectations = {
 
 export const unlockTestInputs = {
   invalidPasscode: "totally-wrong-passcode",
-  validPasscode: "correct-session-passcode",
+  get validPasscode() {
+    const v = process.env.GATE_TEST_PASSCODE;
+    if (!v) throw new Error("GATE_TEST_PASSCODE env var is required to run unlock tests");
+    return v;
+  },
 };
 
 export const protectedRouteCarryoverCases = protectedRoutes.map((route, index) => ({

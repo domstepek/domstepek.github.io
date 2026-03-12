@@ -21,6 +21,8 @@ jobs:
     env:
       PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://jean-dominique-stepek.is-a.dev' }}
       PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || '/' }}
+      PUBLIC_GATE_HASH: ${{ vars.PUBLIC_GATE_HASH }}
+      GATE_TEST_PASSCODE: ${{ secrets.GATE_TEST_PASSCODE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
