@@ -49,7 +49,7 @@ This milestone is complete only when all are true:
 
 ## Slices
 
-- [ ] **S01: Public vs Protected Route Boundary** `risk:high` `depends:[]`
+- [x] **S01: Public vs Protected Route Boundary** `risk:high` `depends:[]`
   > After this: the site distinguishes public routes from protected domain routes, and a cold visit to `/domains/*` shows a real gate state instead of full portfolio proof.
 - [ ] **S02: Session Unlock Flow and Gate Messaging** `risk:medium` `depends:[S01]`
   > After this: a visitor can enter the passcode once, see clear contact-for-password messaging when locked, and browse protected domain pages for the current session.

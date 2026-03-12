@@ -3,13 +3,15 @@ import { getDomainBySlug } from "../../data/domains";
 import type { DomainEntry } from "../../data/domains/types";
 import { assetPath, domainPath, homePath } from "../../lib/paths";
 import MermaidDiagram from "../diagrams/MermaidDiagram.astro";
+import DomainGateShell from "./DomainGateShell.astro";
 import ScreenshotGallery from "./ScreenshotGallery.astro";
 
 interface Props {
   domain: DomainEntry;
+  gateState?: "locked" | "open";
 }
 
-const { domain } = Astro.props;
+const { domain, gateState = "open" } = Astro.props;
 const { title, thesis, scope, belongsHere, flagships = [], supportingWork, relatedDomains = [] } = domain;
 
 const toVisualSrc = (source: string) =>
@@ -45,7 +47,10 @@ const supportingItems = supportingWork.map((item) => ({
 }));
 ---
 
-<article class="domain-page" data-domain-page>
+{gateState === "locked" ? (
+  <DomainGateShell domain={domain} />
+) : (
+<article class="domain-page" data-domain-page data-route-visibility="protected" data-gate-state="open">
   <p class="domain-page__back">
     <a class="domain-page__back-link" data-back-home href={homePath}>back home</a>
   </p>
@@ -234,3 +239,4 @@ const supportingItems = supportingWork.map((item) => ({
     </section>
   )}
 </article>
+)}

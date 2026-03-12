@@ -6,7 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "astro build"
+    "build": "astro build",
+    "test": "node --test",
+    "test:route-boundary:static": "node --test tests/route-boundary.static.test.mjs",
+    "test:route-boundary:browser": "node --test tests/route-boundary.browser.test.mjs",
+    "validate:route-boundary": "node scripts/validate-m002-s01.mjs",
+    "validate:m002:s01": "pnpm validate:route-boundary && pnpm test:route-boundary:browser",
+    "validate:site": "pnpm validate:m002:s01"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",

@@ -1,0 +1,69 @@
+---
+import type { DomainEntry } from "../../data/domains/types";
+import { homePath } from "../../lib/paths";
+
+interface Props {
+  domain: DomainEntry;
+}
+
+const { domain } = Astro.props;
+const previewItems = domain.belongsHere.slice(0, 3);
+---
+
+<article
+  class="domain-gate-shell"
+  data-route-visibility="protected"
+  data-gate-state="locked"
+  data-protected-gate
+  data-protected-proof-state="withheld"
+>
+  <p class="domain-gate-shell__back">
+    <a class="domain-gate-shell__back-link" href={homePath}>back home</a>
+  </p>
+
+  <header class="domain-gate-shell__header">
+    <p class="domain-gate-shell__eyebrow">protected case file</p>
+    <h1 class="domain-gate-shell__title">{domain.title}</h1>
+    <p class="domain-gate-shell__summary">
+      This lane holds the real operating proof, but the cold-load view stays locked until the next slice wires the
+      access flow.
+    </p>
+  </header>
+
+  <section class="domain-gate-shell__panel" aria-labelledby="domain-gate-shell-status-heading">
+    <div class="domain-gate-shell__terminal-bar" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="domain-gate-shell__status-row">
+      <p class="domain-gate-shell__label" id="domain-gate-shell-status-heading">status</p>
+      <p class="domain-gate-shell__value">locked boundary / proof withheld</p>
+    </div>
+
+    <p class="domain-gate-shell__thesis">{domain.thesis}</p>
+
+    <div class="domain-gate-shell__grid">
+      <section class="domain-gate-shell__card" aria-labelledby="domain-gate-shell-preview-heading">
+        <p class="domain-gate-shell__label" id="domain-gate-shell-preview-heading">inside this domain</p>
+        <ul class="domain-gate-shell__list">
+          {previewItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
+      <section class="domain-gate-shell__card" aria-labelledby="domain-gate-shell-scope-heading">
+        <p class="domain-gate-shell__label" id="domain-gate-shell-scope-heading">current cold-load policy</p>
+        <ul class="domain-gate-shell__list">
+          <li>detailed case studies stay out of shipped HTML</li>
+          <li>evidence blocks stay out of shipped HTML</li>
+          <li>this shell confirms the route is intentionally gated</li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="domain-gate-shell__footer">
+      Scope preview: <span>{domain.scope}</span>
+    </p>
+  </section>
+</article>

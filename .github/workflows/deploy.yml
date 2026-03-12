@@ -46,6 +46,9 @@ jobs:
       - name: Build production site
         run: pnpm astro build
 
+      - name: Validate site release gate
+        run: pnpm validate:site
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

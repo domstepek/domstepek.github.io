@@ -12,7 +12,7 @@ const home = homePage;
 const isExternalHttpLink = (href: string) => href.startsWith("https://");
 ---
 
-<div class="home-page" data-home-page>
+<div class="home-page" data-home-page data-route-visibility="public" data-gate-state="open">
   <section class="home-page__hero" data-home-hero>
     <img
       src={home.avatar}

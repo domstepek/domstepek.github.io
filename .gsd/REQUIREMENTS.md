@@ -6,17 +6,6 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
-### R101 — Public pages stay directly accessible
-- Class: primary-user-loop
-- Status: active
-- Description: Visitors can open `/`, `/about/`, and `/resume/` without entering a passcode.
-- Why it matters: The site still needs a public top layer for discovery, recruiting, and first-contact flow.
-- Source: user
-- Primary owning slice: M002/S01
-- Supporting slices: M002/S04
-- Validation: mapped
-- Notes: This is the non-negotiable route split for the milestone.
-
 ### R102 — Domain portfolio pages require a passcode before protected proof is shown
 - Class: compliance/security
 - Status: active
@@ -62,6 +51,17 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Notes: The exact treatment should work with the current static rendering and not degrade the public pages.
 
 ## Validated
+
+### R101 — Public pages stay directly accessible
+- Class: primary-user-loop
+- Status: validated
+- Description: Visitors can open `/`, `/about/`, and `/resume/` without entering a passcode.
+- Why it matters: The site still needs a public top layer for discovery, recruiting, and first-contact flow.
+- Source: user
+- Primary owning slice: M002/S01
+- Supporting slices: M002/S04
+- Validation: validated
+- Notes: Proven in S01 by built-artifact checks, real-browser cold-load verification, and the release-gated route-boundary validator.
 
 ### R001 — Public homepage explains Dom’s scope and routes visitors into the site
 - Class: primary-user-loop
@@ -225,7 +225,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 | ID | Class | Status | Primary owner | Supporting | Proof |
 |---|---|---|---|---|---|
-| R101 | primary-user-loop | active | M002/S01 | M002/S04 | mapped |
+| R101 | primary-user-loop | validated | M002/S01 | M002/S04 | validated |
 | R102 | compliance/security | active | M002/S01 | M002/S02, M002/S03, M002/S04 | mapped |
 | R103 | primary-user-loop | active | M002/S02 | M002/S04 | mapped |
 | R104 | continuity | active | M002/S02 | M002/S04 | mapped |
@@ -247,7 +247,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Coverage Summary
 
-- Active requirements: 5
+- Active requirements: 4
 - Mapped to slices: 5
-- Validated: 7
+- Validated: 8
 - Unmapped active requirements: 0
