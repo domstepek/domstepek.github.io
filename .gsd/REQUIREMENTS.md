@@ -6,18 +6,20 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
+(No active requirements remain.)
+
+## Validated
+
 ### R102 - Domain portfolio pages require a passcode before protected proof is shown
 - Class: compliance/security
-- Status: active
+- Status: validated
 - Description: Visitors who open `/domains/*` see a gate state until they enter the correct passcode.
 - Why it matters: The portfolio proof layer should be intentionally access-controlled without taking the whole site private.
 - Source: user
 - Primary owning slice: M002/S01
 - Supporting slices: M002/S02, M002/S03, M002/S04
-- Validation: mapped
-- Notes: Because the site is static on GitHub Pages, this is a lightweight deterrent rather than strong security.
-
-## Validated
+- Validation: validated
+- Notes: Proven by the assembled flow browser test (cold-lock → wrong-passcode error → correct unlock → visual reveal → cross-route carryover), 17 S01–S03 browser tests covering route boundaries, unlock mechanics, session persistence, visual reveal, and gate messaging, 3 dist validators enforcing static HTML contracts, and the full `pnpm validate:site` release gate chaining S01→S02→S03→S04 (20 tests total).
 
 ### R103 — Protected routes explain how to request access
 - Class: primary-user-loop
@@ -226,7 +228,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 | ID | Class | Status | Primary owner | Supporting | Proof |
 |---|---|---|---|---|---|
 | R101 | primary-user-loop | validated | M002/S01 | M002/S04 | validated |
-| R102 | compliance/security | active | M002/S01 | M002/S02, M002/S03, M002/S04 | mapped |
+| R102 | compliance/security | validated | M002/S01 | M002/S02, M002/S03, M002/S04 | validated |
 | R103 | primary-user-loop | validated | M002/S02 | M002/S04 | validated |
 | R104 | continuity | validated | M002/S02 | M002/S04 | validated |
 | R105 | differentiator | validated | M002/S03 | M002/S04 | validated |
@@ -247,7 +249,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Coverage Summary
 
-- Active requirements: 1
-- Mapped to slices: 2
-- Validated: 11
+- Active requirements: 0
+- Mapped to slices: 0
+- Validated: 12
 - Unmapped active requirements: 0

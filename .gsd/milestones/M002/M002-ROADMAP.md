@@ -55,7 +55,7 @@ This milestone is complete only when all are true:
   > After this: a visitor can enter the passcode once, see clear contact-for-password messaging when locked, and browse protected domain pages for the current session.
 - [x] **S03: Protected Visual Reveal** `risk:medium` `depends:[S02]`
   > After this: protected domain visuals stay obscured before unlock and render normally after unlock without changing the public pages.
-- [ ] **S04: Verification and Regression Gate** `risk:low` `depends:[S01,S02,S03]`
+- [x] **S04: Verification and Regression Gate** `risk:low` `depends:[S01,S02,S03]`
   > After this: browser and validation coverage prove the full locked/unlocked flow and protect the public-route boundary from regressions.
 
 ## Boundary Map

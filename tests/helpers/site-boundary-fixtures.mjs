@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import assert from "node:assert/strict";
-import { access, readFile, stat } from "node:fs/promises";
+import { access, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 export const distDir = path.resolve(process.cwd(), "dist");
@@ -165,6 +165,33 @@ export const ensureDistExists = async () => {
 };
 
 export const escapeForRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * Discover notes routes dynamically from the built dist directory.
+ * Returns an array of { route, distPath } objects, one per notes page.
+ */
+export const getNotesRoutes = async () => {
+  const notesDir = path.join(distDir, "notes");
+  let entries;
+  try {
+    entries = await readdir(notesDir, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  const routes = [];
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const indexPath = path.join("notes", entry.name, "index.html");
+      try {
+        await access(path.join(distDir, indexPath));
+        routes.push({ route: `/notes/${entry.name}/`, distPath: indexPath });
+      } catch {
+        // skip directories without index.html
+      }
+    }
+  }
+  return routes;
+};
 
 export const readBuiltHtml = async ({ distPath }) => {
   await ensureDistExists();
