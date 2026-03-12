@@ -1,15 +1,15 @@
 # GSD State
 
 **Active Milestone:** M003 — GPU Shader Background
-**Active Slice:** S01 — Faded Dither Shader Engine (COMPLETE)
-**Phase:** S01 complete — ready for S02 planning
+**Active Slice:** S02 — Site Integration and Cursor Reactivity (COMPLETE)
+**Phase:** S02 complete — S03 next
 
 ## Recent Decisions
-- D027: S01 verification via `/shader-demo/` page with `data-shader-renderer` attribute.
-- D028: Shader console logging contract — `[shader] using <renderer>` on success, warnings on failure.
+- D029: ShaderBackground canvas placement — direct child of `<body>`, before `.site-shell`, z-index -1.
+- D030: `/shader-demo/` passes `disableShader` to avoid double-canvas.
 
 ## Blockers
 - None
 
 ## Next Action
-Plan and execute S02 — Site integration and cursor reactivity.
+Plan and execute S03 — Polish, performance, and regression proof.

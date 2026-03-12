@@ -1,0 +1,44 @@
+---
+/**
+ * Fullscreen fixed canvas that renders the dither shader behind all page content.
+ * Place as the first child of <body> so it sits below every stacking context.
+ *
+ * Observability:
+ *   - `data-shader-renderer` attribute set automatically by initDitherShader
+ *   - Console: `[shader] using <renderer>` on success
+ *   - Console: `[shader] ...` warnings on failure
+ *   - Inspect: document.querySelector('[data-shader-renderer]')
+ */
+---
+
+<canvas id="shader-bg" aria-hidden="true"></canvas>
+
+<style>
+  #shader-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
+
+<script>
+  import { initDitherShader } from "../../lib/shader/dither-shader.js";
+
+  const canvas = document.getElementById("shader-bg") as HTMLCanvasElement;
+  if (canvas) {
+    const instance = await initDitherShader(canvas);
+    if (instance) {
+      (window as any).__shaderInstance = instance;
+
+      document.addEventListener("pointermove", (e: PointerEvent) => {
+        instance.setPointer(
+          e.clientX / window.innerWidth,
+          e.clientY / window.innerHeight,
+        );
+      });
+    }
+  }
+</script>

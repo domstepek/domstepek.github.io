@@ -10,5 +10,17 @@
     "readyPattern": null,
     "readyPort": 4321,
     "pid": 11764
+  },
+  {
+    "id": "8887d55e",
+    "label": "cd /Users/jstepek/Personal\\ Repos/website && pnpm dev",
+    "command": "cd /Users/jstepek/Personal\\ Repos/website && pnpm dev",
+    "cwd": "/Users/jstepek/Personal Repos/website",
+    "startedAt": 1773344053359,
+    "processType": "server",
+    "group": null,
+    "readyPattern": null,
+    "readyPort": 4321,
+    "pid": 40189
   }
 ]

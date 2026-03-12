@@ -55,7 +55,7 @@ This milestone is complete only when all are true:
 - [x] **S01: Faded dither shader engine** `risk:high` `depends:[]`
   > After this: opening `localhost:4321` shows an animated faded dither pattern filling the viewport as a standalone canvas, with soft green-tinted blobs dissolving through an ordered dither grid, running on WebGPU or WebGL2.
 
-- [ ] **S02: Site integration and cursor reactivity** `risk:medium` `depends:[S01]`
+- [x] **S02: Site integration and cursor reactivity** `risk:medium` `depends:[S01]`
   > After this: every page on the site has the dither shader as its background, the pattern responds to cursor movement, individual pages can opt out via a layout prop, and the shader coexists cleanly with the CRT overlay and gate/unlock layers.
 
 - [ ] **S03: Polish, performance, and regression proof** `risk:low` `depends:[S02]`

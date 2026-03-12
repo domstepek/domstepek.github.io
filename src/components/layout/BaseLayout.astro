@@ -2,6 +2,7 @@
 import "../../styles/global.css";
 import { siteConfig } from "../../data/site";
 import { assetPath, canonicalUrl, homePath } from "../../lib/paths";
+import ShaderBackground from "../shader/ShaderBackground.astro";
 
 interface Props {
   title?: string;
@@ -9,6 +10,7 @@ interface Props {
   canonicalPath?: string;
   ogImage?: string;
   noindex?: boolean;
+  disableShader?: boolean;
 }
 
 const {
@@ -17,6 +19,7 @@ const {
   canonicalPath = "/",
   ogImage = siteConfig.defaultSocialImage,
   noindex = false,
+  disableShader = false,
 } = Astro.props;
 
 const title = rawTitle?.trim() ? rawTitle.trim() : siteConfig.defaultTitle;
@@ -52,6 +55,7 @@ const faviconHref = assetPath(siteConfig.defaultFavicon);
     <slot name="head" />
   </head>
   <body>
+    {!disableShader && <ShaderBackground />}
     <a class="skip-link" href="#main-content">skip to content</a>
     <div class="site-shell">
       <header class="site-header">
