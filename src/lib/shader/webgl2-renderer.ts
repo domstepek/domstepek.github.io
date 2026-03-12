@@ -59,13 +59,20 @@ float blob_field(vec2 uv, float t) {
   v += 0.5 + 0.5 * cos(uv.y * 3.1 - mid * 0.9 + sin(uv.x * 2.2 - slow * 0.7));
   v += 0.5 + 0.5 * sin((uv.x + uv.y) * 1.7 + slow * 0.6);
 
+  // Normalize to 0–1, then fade heavily so only sparse dots appear.
+  v = v / 3.0;
+
+  // Remap: push most values toward 0, only peaks survive.
+  // This creates the "faded" look — mostly dark with sparse dither dots.
+  v = smoothstep(0.4, 0.8, v) * 0.15;
+
   // Pointer influence — gentle radial brightening near cursor.
   if (u_pointer.x >= 0.0) {
     float d = distance(uv, u_pointer);
-    v += 0.4 * smoothstep(0.35, 0.0, d);
+    v += 0.15 * smoothstep(0.3, 0.0, d);
   }
 
-  return clamp(v / 3.0, 0.0, 1.0);
+  return clamp(v, 0.0, 1.0);
 }
 
 void main() {
