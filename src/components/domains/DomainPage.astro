@@ -1,5 +1,6 @@
 ---
 import { getDomainBySlug } from "../../data/domains";
+import { buildDomainProofViewModel } from "../../data/domains/domain-view-model";
 import type { DomainEntry } from "../../data/domains/types";
 import { assetPath, domainPath, homePath } from "../../lib/paths";
 import MermaidDiagram from "../diagrams/MermaidDiagram.astro";
@@ -45,10 +46,42 @@ const supportingItems = supportingWork.map((item) => ({
     .map((slug) => getDomainBySlug(slug))
     .filter((entry): entry is DomainEntry => Boolean(entry)),
 }));
+
+/*
+ * When gateState is "locked", build the proof view-model and serialise it
+ * as a JSON blob inside a hidden <script> tag so the browser unlock path
+ * can mount proof without a second network request. The JSON never renders
+ * visible DOM, keeping proof withheld from cold-load inspection.
+ */
+const proofPayload = gateState === "locked"
+  ? JSON.stringify(buildDomainProofViewModel(domain, assetPath, domainPath))
+  : null;
+
+const gateHashEnv = import.meta.env.PUBLIC_GATE_HASH ?? "";
 ---
 
 {gateState === "locked" ? (
   <DomainGateShell domain={domain} />
+  <script
+    type="application/json"
+    id="domain-proof-payload"
+    data-proof-payload
+    set:html={proofPayload}
+  />
+  <script
+    type="application/json"
+    id="domain-gate-config"
+    data-gate-config
+    set:html={JSON.stringify({
+      hash: gateHashEnv,
+      homePath: homePath,
+      storageKey: "portfolio-gate:v1",
+    })}
+  />
+  <script>
+    import { initDomainGate } from "./domain-gate-client";
+    initDomainGate();
+  </script>
 ) : (
 <article class="domain-page" data-domain-page data-route-visibility="protected" data-gate-state="open">
   <p class="domain-page__back">

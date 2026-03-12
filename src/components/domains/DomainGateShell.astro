@@ -1,5 +1,6 @@
 ---
 import type { DomainEntry } from "../../data/domains/types";
+import { homePage } from "../../data/home";
 import { homePath } from "../../lib/paths";
 
 interface Props {
@@ -8,6 +9,9 @@ interface Props {
 
 const { domain } = Astro.props;
 const previewItems = domain.belongsHere.slice(0, 3);
+
+const emailLink = homePage.contactLinks.find((c) => c.key === "email");
+const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
 ---
 
 <article
@@ -25,8 +29,7 @@ const previewItems = domain.belongsHere.slice(0, 3);
     <p class="domain-gate-shell__eyebrow">protected case file</p>
     <h1 class="domain-gate-shell__title">{domain.title}</h1>
     <p class="domain-gate-shell__summary">
-      This lane holds the real operating proof, but the cold-load view stays locked until the next slice wires the
-      access flow.
+      this lane holds the real operating proof — detailed case studies, decisions, and evidence — but it's gated until you have the passcode.
     </p>
   </header>
 
@@ -66,4 +69,69 @@ const previewItems = domain.belongsHere.slice(0, 3);
       Scope preview: <span>{domain.scope}</span>
     </p>
   </section>
+
+  <!-- request access panel -->
+  <section class="domain-gate-shell__panel domain-gate-shell__request-access" data-request-access-panel aria-labelledby="gate-request-heading">
+    <div class="domain-gate-shell__terminal-bar" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p class="domain-gate-shell__label" id="gate-request-heading">request access</p>
+    <p class="domain-gate-shell__request-copy">
+      if you'd like to see the full case studies, reach out directly — i'll send the passcode.
+    </p>
+    <div class="domain-gate-shell__request-links">
+      {emailLink && (
+        <a class="domain-gate-shell__request-link" data-request-access-link="email" href={emailLink.href}>
+          {emailLink.label} ({emailLink.href.replace("mailto:", "")})
+        </a>
+      )}
+      {linkedInLink && (
+        <a class="domain-gate-shell__request-link" data-request-access-link="linkedin" href={linkedInLink.href}>
+          {linkedInLink.label}
+        </a>
+      )}
+    </div>
+  </section>
+
+  <!-- passcode form -->
+  <section class="domain-gate-shell__panel domain-gate-shell__unlock-panel" aria-labelledby="gate-passcode-heading">
+    <div class="domain-gate-shell__terminal-bar" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p class="domain-gate-shell__label" id="gate-passcode-heading">passcode</p>
+
+    <form class="domain-gate-shell__form" data-gate-form autocomplete="off">
+      <div class="domain-gate-shell__form-row">
+        <label for="gate-passcode" class="sr-only">enter passcode</label>
+        <input
+          id="gate-passcode"
+          class="domain-gate-shell__input"
+          data-gate-passcode-input
+          type="password"
+          placeholder="enter passcode"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button
+          class="domain-gate-shell__submit"
+          data-gate-submit
+          type="submit"
+        >
+          unlock
+        </button>
+      </div>
+      <p class="domain-gate-shell__status" data-gate-status="idle">
+        <span class="domain-gate-shell__status-text" data-gate-status-text>ready</span>
+      </p>
+    </form>
+  </section>
+
+  <!-- proof mount point (empty until unlock) -->
+  <div class="domain-gate-shell__proof-mount" data-proof-mount></div>
 </article>

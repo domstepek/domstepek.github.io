@@ -56,6 +56,15 @@ export const protectedBoundarySelectors = {
   lockedGateState: '[data-gate-state="locked"]',
   protectedGate: "[data-protected-gate]",
   protectedProofWithheld: '[data-protected-proof-state="withheld"]',
+  requestAccessPanel: "[data-request-access-panel]",
+  requestAccessEmailLink: '[data-request-access-link="email"]',
+  requestAccessLinkedInLink: '[data-request-access-link="linkedin"]',
+  gateForm: "[data-gate-form]",
+  gatePasscodeInput: "[data-gate-passcode-input]",
+  gateSubmitButton: "[data-gate-submit]",
+  gateStatus: "[data-gate-status]",
+  gateError: '[data-gate-status="error"]',
+  gateUnlocked: '[data-gate-state="open"]',
 };
 
 export const protectedBoundaryHtmlSnippets = {
@@ -63,6 +72,16 @@ export const protectedBoundaryHtmlSnippets = {
   lockedGateState: 'data-gate-state="locked"',
   protectedGate: "data-protected-gate",
   protectedProofWithheld: 'data-protected-proof-state="withheld"',
+};
+
+export const protectedGateUiHtmlSnippets = {
+  requestAccessPanel: "data-request-access-panel",
+  requestAccessEmailLink: 'data-request-access-link="email"',
+  requestAccessLinkedInLink: 'data-request-access-link="linkedin"',
+  gateForm: "data-gate-form",
+  gatePasscodeInput: "data-gate-passcode-input",
+  gateSubmitButton: "data-gate-submit",
+  gateStatus: "data-gate-status",
 };
 
 export const protectedProofSelectors = [
@@ -83,13 +102,49 @@ export const publicGateSelectors = [
   protectedBoundarySelectors.protectedGate,
   protectedBoundarySelectors.lockedGateState,
   '[data-route-visibility="protected"]',
+  protectedBoundarySelectors.requestAccessPanel,
+  protectedBoundarySelectors.gateForm,
 ];
 
 export const publicGateHtmlSnippets = [
   protectedBoundaryHtmlSnippets.protectedGate,
   protectedBoundaryHtmlSnippets.lockedGateState,
   protectedBoundaryHtmlSnippets.routeVisibility,
+  protectedGateUiHtmlSnippets.requestAccessPanel,
+  protectedGateUiHtmlSnippets.gateForm,
 ];
+
+export const requestAccessLinks = {
+  email: {
+    href: "mailto:domstepek@gmail.com",
+    selector: protectedBoundarySelectors.requestAccessEmailLink,
+    htmlSnippet: protectedGateUiHtmlSnippets.requestAccessEmailLink,
+  },
+  linkedin: {
+    href: "https://linkedin.com/in/jean-dominique-stepek",
+    selector: protectedBoundarySelectors.requestAccessLinkedInLink,
+    htmlSnippet: protectedGateUiHtmlSnippets.requestAccessLinkedInLink,
+  },
+};
+
+export const gateCopyExpectations = {
+  requestAccessLead: /request access/i,
+  email: /domstepek@gmail\.com/i,
+  linkedin: /linkedin/i,
+  passcode: /passcode/i,
+};
+
+export const unlockTestInputs = {
+  invalidPasscode: "totally-wrong-passcode",
+  validPasscode: "correct-session-passcode",
+};
+
+export const protectedRouteCarryoverCases = protectedRoutes.map((route, index) => ({
+  route,
+  nextRoute: protectedRoutes[(index + 1) % protectedRoutes.length],
+}));
+
+export const sessionUnlockStorageKey = "portfolio-gate:v1";
 
 export const ensureDistExists = async () => {
   await access(distDir);
@@ -143,6 +198,28 @@ export const getProtectedProofLeakIssues = (route, html) => {
   for (const snippet of protectedProofHtmlSnippets) {
     if (html.includes(snippet)) {
       issues.push(`Protected route ${route.route} leaked proof marker ${snippet} into initial built HTML`);
+    }
+  }
+
+  return issues;
+};
+
+export const getProtectedRequestAccessIssues = (route, html) => {
+  const issues = [];
+
+  for (const [expectationName, pattern] of Object.entries(gateCopyExpectations)) {
+    if (!pattern.test(html)) {
+      issues.push(`Protected route ${route.route} is missing request-access ${expectationName} copy in built HTML`);
+    }
+  }
+
+  for (const [linkName, expectation] of Object.entries(requestAccessLinks)) {
+    if (!html.includes(expectation.htmlSnippet)) {
+      issues.push(`Protected route ${route.route} is missing ${linkName} request-access marker ${expectation.htmlSnippet}`);
+    }
+
+    if (!html.includes(expectation.href)) {
+      issues.push(`Protected route ${route.route} is missing canonical ${linkName} request-access href ${expectation.href}`);
     }
   }
 

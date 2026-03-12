@@ -3,6 +3,7 @@ import {
   assertNoBoundaryIssues,
   getProtectedBoundaryMarkerIssues,
   getProtectedProofLeakIssues,
+  getProtectedRequestAccessIssues,
   getPublicRouteBoundaryIssues,
   protectedRoutes,
   publicRoutes,
@@ -20,6 +21,11 @@ for (const route of protectedRoutes) {
   test(`${route.route} cold HTML exposes protected boundary markers`, async () => {
     const html = await readBuiltHtml(route);
     assertNoBoundaryIssues(getProtectedBoundaryMarkerIssues(route, html));
+  });
+
+  test(`${route.route} cold HTML exposes request-access messaging and gate form markers`, async () => {
+    const html = await readBuiltHtml(route);
+    assertNoBoundaryIssues(getProtectedRequestAccessIssues(route, html));
   });
 
   test(`${route.route} cold HTML withholds protected proof`, async () => {

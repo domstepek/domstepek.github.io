@@ -6,67 +6,72 @@ status: ready
 
 # S02: Session Unlock Flow and Gate Messaging — Context
 
+<!-- Slice-scoped context. Milestone-only sections (acceptance criteria, completion class,
+     milestone sequence) do not belong here — those live in the milestone context. -->
+
 ## Goal
 
-Deliver an in-place passcode unlock flow for protected `/domains/*` routes that preserves session-scoped access, keeps the gate messaging clear and lightweight, and helps visitors know how to request the password when they do not have it.
+Wire the passcode entry flow and contact-for-password messaging into the existing locked gate shell so a visitor can unlock all protected domain pages for the current browser session.
 
 ## Why this Slice
 
-S02 turns the S01 locked boundary into a usable protected-access experience. It unblocks S03 by establishing the real unlock interaction, the session continuity contract, and the locked-state messaging that the later visual-reveal work will rely on.
+S01 shipped the locked shell but it has placeholder copy and no way to actually unlock. S02 makes the gate usable: visitors who don't have the password see how to request it, and visitors who do have it can enter it once and browse freely. This unblocks S03 (visual reveal needs an unlocked state to reveal into) and S04 (verification needs an unlock flow to exercise).
 
 ## Scope
 
 ### In Scope
 
-- Add a working passcode entry flow on protected `/domains/*` routes.
-- Keep unlock behavior in-place so a visitor who enters the correct passcode stays on the current domain page and sees it open there.
-- Persist unlock state for the current browser session across protected route navigation.
-- Show gentle inline error feedback when the wrong passcode is entered, without kicking the visitor out of the current gate view.
-- Make the failed-passcode feedback feel lightweight rather than punitive, including a subtle animation treatment.
-- Prioritize LinkedIn DM as the primary request-access CTA on the gate.
-- Include suggested request wording that asks the visitor to share their reason for requesting access, while making clear the reason can be simple.
-- Keep the gate messaging aligned with the existing lowercase retro-terminal tone.
+- Replace the placeholder locked-shell copy with real gate messaging in the casual lowercase site voice.
+- Show LinkedIn DM link and email address as contact channels for requesting the password.
+- Inline passcode input on the gate page — no modal, no separate page, no expand/collapse.
+- Validate passcode against a build-time public hash (per D018).
+- On wrong passcode: subtle CSS shake animation on the input plus an inline error message.
+- On correct passcode: quick fade/transition from locked shell to full proof view on the same page.
+- Persist unlock in `sessionStorage` with a versioned marker (per D018) — one unlock covers all `/domains/*` routes.
+- Unlock survives same-tab refresh (F5) — `sessionStorage` persists within the tab.
+- Cross-route continuity: navigating from one unlocked domain page to another loads already-unlocked.
+- Mount unlocked proof through the shared client-renderable domain view-model and `renderDomainProof()` already built in S01.
+- Extend `validate:site` with both a dist validator for locked-shell messaging and a browser warm-session unlock test (per D017).
 
 ### Out of Scope
 
-- Changing the protected route scope beyond `/domains/*`.
-- Reworking the public routes or public site information architecture.
-- Treating the gate as strong security or introducing real auth.
-- Final protected-visual blur/reveal behavior; that belongs in S03.
-- Expanding protection to notes in this milestone.
-- Deciding long-term passcode rotation/management policy beyond what is needed to make the slice usable.
+- Changing the homepage domain cards — no lock icons, badges, or hints that domain pages are gated.
+- Protected-visual blur/obscure behavior — that belongs to S03.
+- Rate limiting or lockout on wrong passcode attempts.
+- Any server-side validation or auth.
+- Passcode rotation UI or admin tooling.
+- Protecting routes beyond `/domains/*`.
 
 ## Constraints
 
-- Build on the S01 locked-shell boundary and verification-marker contract rather than replacing it.
-- Unlock state must remain session-scoped, not durable across browser sessions.
-- The unlock flow should feel gentle and polished, not harsh or suspicious.
-- Wrong-passcode handling should stay inline on the gate instead of redirecting elsewhere.
-- LinkedIn DM should be the primary request-access path, with supporting guidance for what to send.
-- The request-access copy should explicitly reassure visitors that a simple reason for requesting access is acceptable.
-- If haptic feedback is used, it should support the same gentle feel and not become gimmicky or disruptive.
+- Gate copy must use the site's existing casual lowercase voice (D003) and retro terminal aesthetic (D005).
+- Gate copy must not include phrases like "flagship highlights" or "supporting proof" — the existing proof-leak tests treat those as evidence of escaped protected content (per S01 forward intelligence).
+- The `DomainPage` gate-state seam from S01 must stay stable — unlock wires through it, not around it (D016).
+- The cold-load HTML contract from S01 (D015 marker vocabulary) must remain intact — S02 adds client-side behavior on top, it does not change what the server ships.
+- Hosting is static GitHub Pages — no runtime server, no edge functions (D004, D009).
 
 ## Integration Points
 
 ### Consumes
 
-- `S01 locked boundary for /domains/*` — provides the protected-route seam and default locked render that this slice augments with passcode entry and unlock behavior.
-- `data-route-visibility`, `data-gate-state`, and locked-shell markers` — existing verification hooks that must continue to distinguish locked and unlocked states.
-- `src/pages/domains/[slug].astro` and shared domain route rendering` — protected route entry path where unlock-in-place behavior must attach.
-- `browser session storage/state` — session-scoped mechanism used to remember access across protected routes.
-- `existing site tone and shared styles/components` — keeps the new gate flow visually and editorially consistent with the shipped site.
+- `src/components/domains/DomainGateShell.astro` — the locked-shell UI that S02 replaces copy in and adds the passcode input to.
+- `src/components/domains/DomainPage.astro` — the gate-state seam that switches between locked and unlocked renders.
+- `src/components/domains/domain-proof-view.ts` — the browser-side `renderDomainProof()` function that produces unlocked proof DOM.
+- `src/data/domains/domain-view-model.ts` — the `buildDomainProofViewModel()` function and `DomainProofViewModel` type used to feed proof rendering.
+- `tests/helpers/site-boundary-fixtures.mjs` — shared route inventories and boundary helpers for extending validators.
+- `scripts/validate-m002-s01.mjs` — existing dist validator to extend or complement.
+- D015 marker contract: `data-route-visibility="protected"`, `data-gate-state="locked"`, `data-protected-gate`, `data-protected-proof-state="withheld"`.
 
 ### Produces
 
-- `passcode entry flow for protected routes` — a real unlock interaction on `/domains/*`.
-- `session-scoped unlock state contract` — one successful unlock grants protected-route access for the current browser session.
-- `inline failure feedback state` — gentle wrong-passcode response with subtle motion/feedback while preserving the gate context.
-- `contact-first gate messaging with LinkedIn DM priority` — clear path for requesting access when the visitor does not have the password.
-- `request template guidance` — suggested outreach copy that asks for the visitor’s reason in a low-friction way.
-- `stable locked/unlocked verification surface` — selectors or markers that later slices and regression checks can use to prove unlock continuity.
+- Passcode entry flow with inline input, shake-on-error, and fade-to-proof on success.
+- Session-scoped unlock state contract via versioned `sessionStorage` marker.
+- Gate landing content with LinkedIn DM link and email address.
+- Unlocked rendering path: client-side proof mount through `DomainPage` seam shared across all protected domain routes.
+- Extended `validate:site` coverage: dist validator for locked-shell messaging plus browser warm-session unlock test.
 
 ## Open Questions
 
-- What exact LinkedIn/email/outbound link mix should appear alongside the primary DM CTA? — Current direction is LinkedIn-first with any secondary options clearly subordinate.
-- Which moments should trigger haptic feedback, if any? — Current direction is to keep it subtle and supportive, likely limited to error/success moments rather than every interaction.
-- How explicit should the request template be on-page? — Current direction is to make it easy to copy/use while keeping the gate concise and not overly scripted.
+- Exact email address and LinkedIn profile URL to display on the gate — need the literal values at implementation time. Current thinking: pull from existing site data or config if available, otherwise hardcode.
+- Exact gate copy wording — confirmed casual/direct tone and contact channels, but the specific sentences are agent's discretion during execution as long as they match the site voice and avoid proof-label phrases.
+- Transition duration for the unlock fade — confirmed "quick" but exact timing (e.g. 200ms vs 400ms) is agent's discretion during execution.

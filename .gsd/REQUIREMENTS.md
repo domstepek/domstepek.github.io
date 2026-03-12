@@ -6,7 +6,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
-### R102 — Domain portfolio pages require a passcode before protected proof is shown
+### R102 - Domain portfolio pages require a passcode before protected proof is shown
 - Class: compliance/security
 - Status: active
 - Description: Visitors who open `/domains/*` see a gate state until they enter the correct passcode.
@@ -16,28 +16,6 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Supporting slices: M002/S02, M002/S03, M002/S04
 - Validation: mapped
 - Notes: Because the site is static on GitHub Pages, this is a lightweight deterrent rather than strong security.
-
-### R103 — Protected routes explain how to request access
-- Class: primary-user-loop
-- Status: active
-- Description: The gate state on protected domain routes tells visitors to DM or email for the password and includes the relevant contact/outbound links.
-- Why it matters: Access control without a clear request path creates dead ends for legitimate viewers.
-- Source: user
-- Primary owning slice: M002/S02
-- Supporting slices: M002/S04
-- Validation: mapped
-- Notes: The copy should match the site’s existing casual lowercase tone.
-
-### R104 — Unlock persists for the current browser session across protected routes
-- Class: continuity
-- Status: active
-- Description: After entering the correct passcode once, visitors can navigate across protected domain routes during the current session without re-entering it on each page.
-- Why it matters: The protected portfolio should still feel usable once access is granted.
-- Source: user
-- Primary owning slice: M002/S02
-- Supporting slices: M002/S04
-- Validation: mapped
-- Notes: Session scope is preferred over a permanent remember-me behavior.
 
 ### R105 — Protected visuals are obscured until unlock and clear after unlock
 - Class: differentiator
@@ -52,7 +30,29 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Validated
 
-### R101 — Public pages stay directly accessible
+### R103 — Protected routes explain how to request access
+- Class: primary-user-loop
+- Status: validated
+- Description: The gate state on protected domain routes tells visitors to DM or email for the password and includes the relevant contact/outbound links.
+- Why it matters: Access control without a clear request path creates dead ends for legitimate viewers.
+- Source: user
+- Primary owning slice: M002/S02
+- Supporting slices: M002/S04
+- Validation: validated
+- Notes: Proven in S02 by static assertions for canonical email/LinkedIn links, browser cold-load tests for request-access panel, and the dist validator enforcing messaging in built HTML.
+
+### R104 — Unlock persists for the current browser session across protected routes
+- Class: continuity
+- Status: validated
+- Description: After entering the correct passcode once, visitors can navigate across protected domain routes during the current session without re-entering it on each page.
+- Why it matters: The protected portfolio should still feel usable once access is granted.
+- Source: user
+- Primary owning slice: M002/S02
+- Supporting slices: M002/S04
+- Validation: validated
+- Notes: Proven in S02 by real browser tests covering correct-passcode unlock, cross-route carryover in the same context (sessionStorage + localStorage bridge), and fresh-context relock.
+
+### R101 - Public pages stay directly accessible
 - Class: primary-user-loop
 - Status: validated
 - Description: Visitors can open `/`, `/about/`, and `/resume/` without entering a passcode.
@@ -63,10 +63,10 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Proven in S01 by built-artifact checks, real-browser cold-load verification, and the release-gated route-boundary validator.
 
-### R001 — Public homepage explains Dom’s scope and routes visitors into the site
+### R001 - Public homepage explains Dom's scope and routes visitors into the site
 - Class: primary-user-loop
 - Status: validated
-- Description: Visitors can understand Dom’s work from the homepage and navigate into the main site surfaces.
+- Description: Visitors can understand Dom's work from the homepage and navigate into the main site surfaces.
 - Why it matters: The homepage is the first-read layer for recruiting and collaborator discovery.
 - Source: user
 - Primary owning slice: M001/S03
@@ -74,7 +74,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Proven in shipped M001 homepage work and dist-first validation.
 
-### R002 — Domain-first portfolio information architecture exists
+### R002 - Domain-first portfolio information architecture exists
 - Class: core-capability
 - Status: validated
 - Description: The site organizes portfolio content by domains rather than a flat project gallery.
@@ -85,7 +85,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Five domain routes are shipped and linked from the homepage.
 
-### R003 — Domain pages provide substantive proof
+### R003 - Domain pages provide substantive proof
 - Class: core-capability
 - Status: validated
 - Description: Domain pages include supporting work plus flagship proof with role, decisions, outcomes, stack, and visuals where useful.
@@ -96,7 +96,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Shipped in M001 with ten flagship stories across five domains.
 
-### R004 — The site ships as a static, deployable, validated web property
+### R004 - The site ships as a static, deployable, validated web property
 - Class: launchability
 - Status: validated
 - Description: The site builds as a static Astro site on GitHub Pages with metadata, 404 handling, custom domain support, and release validation gates.
@@ -107,7 +107,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Proven by build pipeline, GitHub Pages deployment path, and six phase validators.
 
-### R005 — Public personal context is available on the site
+### R005 - Public personal context is available on the site
 - Class: core-capability
 - Status: validated
 - Description: Visitors can read the about surface, understand how Dom works, and access the resume from the site.
@@ -118,7 +118,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: `/about/` and `/resume/` are already public and will stay public in M002.
 
-### R006 — Lightweight notes are available as a public secondary surface
+### R006 - Lightweight notes are available as a public secondary surface
 - Class: differentiator
 - Status: validated
 - Description: Visitors can browse a notes index and open individual note pages.
@@ -129,7 +129,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: Notes remain outside the current M002 protection scope.
 
-### R007 — The site has a distinctive retro terminal visual identity
+### R007 - The site has a distinctive retro terminal visual identity
 - Class: differentiator
 - Status: validated
 - Description: The shipped site uses a dark retro terminal aesthetic with typography and styling consistent across surfaces.
@@ -142,7 +142,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Deferred
 
-### R201 — Standalone flagship case-study pages
+### R201 - Standalone flagship case-study pages
 - Class: differentiator
 - Status: deferred
 - Description: Visitors can open standalone deep-dive pages for flagship projects when inline domain coverage is no longer enough.
@@ -153,7 +153,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: unmapped
 - Notes: Migrated from legacy deferred scope.
 
-### R202 — Cross-domain case-study navigation
+### R202 - Cross-domain case-study navigation
 - Class: differentiator
 - Status: deferred
 - Description: Visitors can navigate between related flagship case studies across domains.
@@ -164,7 +164,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: unmapped
 - Notes: Migrated from legacy deferred scope.
 
-### R203 — Broader supporting-work archive
+### R203 - Broader supporting-work archive
 - Class: core-capability
 - Status: deferred
 - Description: Visitors can browse a broader archive of supporting work beyond the current curated highlights.
@@ -175,7 +175,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: unmapped
 - Notes: Migrated from legacy deferred scope.
 
-### R204 — Notes taxonomy and browsing by tag or theme
+### R204 - Notes taxonomy and browsing by tag or theme
 - Class: differentiator
 - Status: deferred
 - Description: Visitors can browse notes by theme or tag as the writing library grows.
@@ -188,7 +188,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Out of Scope
 
-### R301 — Strong backend or edge authentication for portfolio access
+### R301 - Strong backend or edge authentication for portfolio access
 - Class: anti-feature
 - Status: out-of-scope
 - Description: M002 does not introduce server-backed auth, edge auth, or a hosted identity layer in front of the site.
@@ -199,7 +199,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: n/a
 - Notes: Revisit only if the hosting model changes.
 
-### R302 — Making the whole site private
+### R302 - Making the whole site private
 - Class: anti-feature
 - Status: out-of-scope
 - Description: Home, about, and resume do not move behind the passcode gate.
@@ -210,7 +210,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: n/a
 - Notes: Explicitly confirmed during M002 discussion.
 
-### R303 — Protecting notes in M002
+### R303 - Protecting notes in M002
 - Class: anti-feature
 - Status: out-of-scope
 - Description: `/notes/*` remains outside the protected-route scope for this milestone.
@@ -227,8 +227,8 @@ Use it to track what is actively in scope, what has been validated by completed 
 |---|---|---|---|---|---|
 | R101 | primary-user-loop | validated | M002/S01 | M002/S04 | validated |
 | R102 | compliance/security | active | M002/S01 | M002/S02, M002/S03, M002/S04 | mapped |
-| R103 | primary-user-loop | active | M002/S02 | M002/S04 | mapped |
-| R104 | continuity | active | M002/S02 | M002/S04 | mapped |
+| R103 | primary-user-loop | validated | M002/S02 | M002/S04 | validated |
+| R104 | continuity | validated | M002/S02 | M002/S04 | validated |
 | R105 | differentiator | active | M002/S03 | M002/S04 | mapped |
 | R001 | primary-user-loop | validated | M001/S03 | none | validated |
 | R002 | core-capability | validated | M001/S02 | M001/S03, M001/S04 | validated |
@@ -247,7 +247,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Coverage Summary
 
-- Active requirements: 4
-- Mapped to slices: 5
-- Validated: 8
+- Active requirements: 2
+- Mapped to slices: 3
+- Validated: 10
 - Unmapped active requirements: 0

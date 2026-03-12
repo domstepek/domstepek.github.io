@@ -10,9 +10,11 @@
     "test": "node --test",
     "test:route-boundary:static": "node --test tests/route-boundary.static.test.mjs",
     "test:route-boundary:browser": "node --test tests/route-boundary.browser.test.mjs",
+    "test:route-unlock:browser": "node --test tests/route-unlock.browser.test.mjs",
     "validate:route-boundary": "node scripts/validate-m002-s01.mjs",
     "validate:m002:s01": "pnpm validate:route-boundary && pnpm test:route-boundary:browser",
-    "validate:site": "pnpm validate:m002:s01"
+    "validate:m002:s02": "node scripts/validate-m002-s02.mjs && pnpm test:route-unlock:browser",
+    "validate:site": "pnpm validate:m002:s01 && pnpm validate:m002:s02"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",

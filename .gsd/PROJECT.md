@@ -12,7 +12,7 @@ Someone should be able to land on the site, quickly understand what kinds of com
 
 M001 is shipped. The site runs as a static Astro site on GitHub Pages with a custom domain, a public homepage, public about and resume pages, a lightweight notes area, and five domain-based portfolio pages with flagship proof and supporting work.
 
-M002 is in progress. S01 is shipped: `/`, `/about/`, and `/resume/` remain explicitly public, while cold-load `/domains/*` routes now render a locked retro gate shell with protected proof withheld from initial HTML. The route boundary is enforced by dist validation, browser cold-load tests, and the deploy release gate. The remaining M002 work is the real passcode flow, session unlock persistence, protected-visual reveal behavior, and final milestone regression coverage.
+M002 is in progress. S01 and S02 are shipped: `/`, `/about/`, and `/resume/` remain explicitly public, while cold-load `/domains/*` routes render a locked retro gate shell with request-access messaging (canonical email and LinkedIn links), a passcode form with SHA-256 hash validation, and session-scoped unlock that carries across protected routes via a sessionStorage + localStorage bridge. The route boundary and unlock flow are enforced by dist validators, browser tests, and the deploy release gate. The remaining M002 work is protected-visual blur/reveal behavior (S03) and final milestone regression coverage (S04).
 
 ## Architecture / Key Patterns
 

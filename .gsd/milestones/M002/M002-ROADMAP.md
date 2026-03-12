@@ -51,7 +51,7 @@ This milestone is complete only when all are true:
 
 - [x] **S01: Public vs Protected Route Boundary** `risk:high` `depends:[]`
   > After this: the site distinguishes public routes from protected domain routes, and a cold visit to `/domains/*` shows a real gate state instead of full portfolio proof.
-- [ ] **S02: Session Unlock Flow and Gate Messaging** `risk:medium` `depends:[S01]`
+- [x] **S02: Session Unlock Flow and Gate Messaging** `risk:medium` `depends:[S01]`
   > After this: a visitor can enter the passcode once, see clear contact-for-password messaging when locked, and browse protected domain pages for the current session.
 - [ ] **S03: Protected Visual Reveal** `risk:medium` `depends:[S02]`
   > After this: protected domain visuals stay obscured before unlock and render normally after unlock without changing the public pages.
