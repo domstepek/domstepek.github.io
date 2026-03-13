@@ -3,4 +3,4 @@
 | # | Milestone | Title | Queued | Notes |
 |---|-----------|-------|-------|-------|
 | 1 | M004 | Sentence case audit | 2026-03-12 | Convert all-lowercase copy to sentence case with capitalized "I"; casual tone stays. Revises D003. |
-| 2 | M005 | Next.js migration | 2026-03-13 | Migrate from Astro/GitHub Pages to Next.js App Router on Vercel. Gate upgraded to middleware + HttpOnly cookie. Tailwind CSS + shadcn/ui replaces plain CSS. Playwright replaces Puppeteer. Depends on M004. |
+| 3 | M006 | UI polish — domain pages & typography | 2026-03-13 | Title-case all project titles across domain data files. Move stack tags to directly under project title on proof pages. Fix flagship card readability: list markers (›), section label accents, spacing, card separator. |

@@ -44,3 +44,4 @@ See `.gsd/REQUIREMENTS.md` for the explicit capability contract, requirement sta
 - [x] M003: GPU shader background — Custom faded dither shader (WebGPU + WebGL2 fallback) as ambient cursor-reactive background across all pages with per-page opt-out.
 - [x] M004: Sentence case audit — Convert all visitor-facing copy from all-lowercase to sentence case with standard "I" capitalization, preserving casual tone.
 - [x] M005: Next.js migration — Migrated from Astro/GitHub Pages to Next.js App Router on Vercel, with the portfolio gate upgraded from client-side SHA-256 to server-side HttpOnly cookie auth. 18 Playwright tests, GitHub Actions CI, zero Astro remnants.
+- [ ] M006: UI polish — Domain pages & typography — Title case all project titles, surface stack tags under the project title on domain proof pages, and fix flagship card readability (list markers, section spacing, visual separators).
