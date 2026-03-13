@@ -1,7 +1,49 @@
 {
-  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
-    "types": ["@webgpu/types"]
-  }
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "src/astro-env-compat.d.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/data/domains/**/*.ts",
+    "src/lib/**/*.ts",
+    "src/lib/**/*.tsx",
+    "next.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/content.config.ts",
+    "src/env.d.ts",
+    "src/pages",
+    "src/components",
+    "src/styles",
+    "src/data/site.ts",
+    "src/data/home.ts",
+    "src/data/personal.ts",
+    "src/data/resume.ts"
+  ]
 }

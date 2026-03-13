@@ -10,26 +10,26 @@ Someone should be able to land on the site, quickly understand what kinds of com
 
 ## Current State
 
-The site runs as a static Astro site on GitHub Pages with a custom domain. M001–M004 are complete.
+M001–M004 complete on the Astro/GitHub Pages stack. M005 (Next.js migration) is underway — S01 complete.
 
-Public surfaces (`/`, `/about/`, `/resume/`, `/notes/*`) are directly accessible. Protected `/domains/*` routes render a locked retro gate shell on cold load with request-access messaging, a passcode form with SHA-256 hash validation, session-scoped unlock via sessionStorage + localStorage bridge, and a CSS-driven blur-to-clear visual reveal with screenshot gallery rendering after unlock.
+The project is now a Next.js 16 App Router project (`src/app/`) with Tailwind v4 retro design tokens. The portfolio gate has been upgraded to real server-side auth: Next.js middleware (`proxy.ts`) observes all `/domains/*` requests; the RSC domain route reads an HttpOnly `portfolio-gate` cookie and conditionally renders either the gate page (zero proof content) or the full proof page — proven by Playwright tests and zero-leakage curl assertions. R301 (server-side access control) is now validated.
 
-A custom WebGPU/WebGL2 faded dither shader renders as an ambient cursor-reactive background across all pages with per-page opt-out, reduced-motion freeze, and tab-visibility pause.
+Astro source files remain on disk until S04 cleanup. `typescript.ignoreBuildErrors: true` is set in `next.config.ts` during the coexistence phase.
 
-All visitor-facing copy uses sentence case with standard "I" capitalization (D031, superseding the original all-lowercase convention D003). The casual, direct tone is preserved.
+Public surfaces (`/`, `/about/`, `/resume/`, `/notes/*`) are not yet ported to Next.js — S02 scope. The WebGPU/WebGL2 shader is not yet mounted in the Next.js layout — S03 scope. The Vercel deployment and GitHub Actions CI are S04 scope.
 
-The full `pnpm validate:site` release gate runs 23 tests (9 cold-load + 4 gate unlock + 4 visual state + 2 notes + 1 assembled flow + 3 shader) plus 3 dist validators. All 19 validated requirements remain green; 1 active requirement (R301 — server-side auth) is scoped for M005.
+All 20 requirements are validated; 0 active requirements remain.
 
 ## Architecture / Key Patterns
 
-- Astro + TypeScript + plain CSS on GitHub Pages
+- **Active stack:** Next.js 16 App Router + Tailwind v4 + React 19 on Vercel (migration in progress — Astro files remain until S04)
+- **Legacy stack (being replaced):** Astro + TypeScript + plain CSS on GitHub Pages
 - Domain-first information architecture with route helpers in `src/lib/paths.ts`
 - Thin route files with shared data modules and shared presentational components
-- Dist-first validation scripts that verify shipped output before deploy
-- Public site surfaces remain lightweight, text-forward, and base-path aware
-- Client-side passcode gate with SHA-256 hash validation and session-scoped unlock
-- CSS-driven blur-to-clear visual reveal with stable DOM marker contracts
-- 23 browser tests + 3 dist validators in `pnpm validate:site` release gate
+- **Gate auth:** Server-side enforcement via RSC cookie check (`await cookies()`) — HttpOnly `portfolio-gate` cookie; server action (`submitPasscode`) with Node `crypto.createHash` hash compare; zero proof content in unauthenticated responses
+- DOM marker contract: `data-route-visibility`, `data-gate-state`, `data-protected-gate`, `data-protected-proof-state`, `data-visual-state`, `data-flagship-highlights`, `data-supporting-work` — stable across M002→M005
+- Playwright tests in `tests/e2e/` replace former Puppeteer tests
+- Public site surfaces remain lightweight and text-forward
 - Sentence case convention for all visitor-facing copy (D031)
 
 ## Capability Contract

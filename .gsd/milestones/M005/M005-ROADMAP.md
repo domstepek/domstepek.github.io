@@ -57,7 +57,7 @@ This milestone is complete only when all are true:
 
 ## Slices
 
-- [ ] **S01: Server-side portfolio gate on Next.js** `risk:high` `depends:[]`
+- [x] **S01: Server-side portfolio gate on Next.js** `risk:high` `depends:[]`
   > After this: a visitor can open `/domains/product` unauthenticated and see a server-rendered gate page (zero proof in HTML), enter the passcode, get a cookie, and see the full proof page — proven by Playwright tests against `next dev`
 - [ ] **S02: Public pages and notes pipeline** `risk:medium` `depends:[S01]`
   > After this: a visitor can browse `/`, `/about`, `/resume`, `/notes`, and `/notes/[slug]` with correct content, retro styling, and no gate — all running on Next.js alongside the working gate from S01

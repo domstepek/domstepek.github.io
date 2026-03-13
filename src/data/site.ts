@@ -1,13 +1,4 @@
 const DEFAULT_SITE_URL = "https://jean-dominique-stepek.is-a.dev";
-const DEFAULT_BASE_PATH = "/";
-
-const normalizeBasePath = (value: string | undefined) => {
-  if (!value || value === "/") {
-    return "/";
-  }
-
-  return `/${value.replace(/^\/+|\/+$/g, "")}`;
-};
 
 const resolveSiteUrl = (value: string | undefined) => new URL(value ?? DEFAULT_SITE_URL).origin;
 
@@ -16,8 +7,9 @@ export const siteConfig = {
   defaultTitle: "Dom | Systems, products, and tooling",
   defaultDescription:
     "Dom builds product systems, analytics & AI tooling, and developer experience infrastructure.",
-  siteUrl: resolveSiteUrl(import.meta.env.PUBLIC_SITE_URL),
-  basePath: normalizeBasePath(import.meta.env.PUBLIC_BASE_PATH ?? DEFAULT_BASE_PATH),
+  siteUrl: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
+  // basePath is always "/" on Vercel — no dynamic configuration needed
+  basePath: "/",
   defaultSocialImage: "og-default.png",
   defaultFavicon: "favicon.svg",
 } as const;

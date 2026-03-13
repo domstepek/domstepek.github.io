@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-accent: #5a9e6f;
+  --color-accent-strong: #7bc47f;
+  --color-text-muted: #5c6b5e;
+  --color-bg-elevated: #111411;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+/* ── CSS custom properties (aliases for ported CSS) ── */
+:root {
+  color-scheme: dark;
+  --bg: var(--color-bg);
+  --bg-elevated: var(--color-bg-elevated);
+  --text: #e0e0e0;
+  --muted: var(--color-text-muted);
+  --border: #2a2a2a;
+  --accent: var(--color-accent);
+  --accent-strong: var(--color-accent-strong);
+  --focus: #e0a040;
+  --shell-width: 72rem;
+  --measure: 68ch;
+  --step-0: clamp(1rem, 0.97rem + 0.18vw, 1.125rem);
+  --step-1: clamp(1.5rem, 1.28rem + 1.1vw, 2.4rem);
+  --step-2: clamp(2.1rem, 1.7rem + 2vw, 3.6rem);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Bracket-link styles ── */
+a {
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a::before {
+  content: "[";
+  color: var(--muted);
+  font-weight: 400;
+}
+
+a::after {
+  content: "]";
+  color: var(--muted);
+  font-weight: 400;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+a:hover::before,
+a:hover::after {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 0.18rem;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--text);
+  color: var(--bg);
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ── Site shell structural CSS ── */
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell {
+  width: min(calc(100% - 2rem), var(--shell-width));
+  margin-inline: auto;
+}
+
+.site-header,
+.site-footer {
+  border-block: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.site-header__inner,
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  min-height: 4.5rem;
+}
+
+.site-title {
+  color: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+}
+
+.site-title::before,
+.site-title::after,
+.skip-link::before,
+.skip-link::after {
+  content: none;
+}
+
+.site-main {
+  flex: 1;
+  padding-block: clamp(2.5rem, 7vw, 5rem);
+}
+
+.site-main > * + * {
+  margin-top: 1.25rem;
+}
+
+.site-main :where(h1, h2, h3) {
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.site-main h1 {
+  font-size: var(--step-2);
+  max-width: 14ch;
+}
+
+.site-main h2 {
+  font-size: var(--step-1);
+  max-width: 18ch;
+}
+
+.site-main :where(p, ul, ol) {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--muted);
+}
+
+.site-main ul,
+.site-main ol {
+  padding-left: 1.25rem;
+}
+
+.site-main li + li {
+  margin-top: 0.55rem;
+}
+
+.site-main code {
+  font-family: var(--font-mono);
+  font-size: 0.94em;
+}
+
+.site-main hr {
+  margin-block: 2rem;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer__inner p {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── Retro pixel cursors ── */
+*, *::before, *::after {
+  cursor: url('/cursors/default.png'), auto;
+}
+
+a, button, [role="button"], input[type="submit"],
+input[type="button"], select, summary,
+label[for], [onclick], [tabindex]:not([tabindex="-1"]) {
+  cursor: url('/cursors/pointer.png') 10 0, pointer;
+}
+
+/* ── Responsive ── */
+@media (max-width: 40rem) {
+  .shell {
+    width: min(calc(100% - 1.5rem), var(--shell-width));
+  }
+
+  .site-header__inner,
+  .site-footer__inner {
+    min-height: 4rem;
+  }
+
+  .site-main {
+    padding-block: 2rem 3rem;
+  }
+}

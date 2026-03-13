@@ -1,17 +1,19 @@
 import { siteConfig } from "../data/site";
 
 const trimSlashes = (value: string) => value.replace(/^\/+|\/+$/g, "");
-const basePrefix = siteConfig.basePath === "/" ? "" : siteConfig.basePath;
 const absoluteUrlPattern = /^https?:\/\//;
+
+// basePath is always "/" on Vercel — basePrefix is always empty string
+const basePrefix = "";
 
 export const routePath = (...segments: string[]) => {
   const path = segments.map(trimSlashes).filter(Boolean).join("/");
 
   if (!path) {
-    return basePrefix ? `${basePrefix}/` : "/";
+    return "/";
   }
 
-  return basePrefix ? `${basePrefix}/${path}/` : `/${path}/`;
+  return `/${path}/`;
 };
 
 export const homePath = routePath();
@@ -33,16 +35,12 @@ export const assetPath = (asset: string) => {
     return homePath;
   }
 
-  return basePrefix ? `${basePrefix}/${normalizedAsset}` : `/${normalizedAsset}`;
+  return `/${normalizedAsset}`;
 };
 
 const normalizeCanonicalPath = (path: string) => {
   if (!path || path === "/") {
     return homePath;
-  }
-
-  if (basePrefix && (path === basePrefix || path.startsWith(`${basePrefix}/`))) {
-    return path.endsWith("/") ? path : `${path}/`;
   }
 
   return routePath(path);
@@ -55,3 +53,6 @@ export const canonicalUrl = (path = "/") => {
 
   return new URL(normalizeCanonicalPath(path), siteConfig.siteUrl).toString();
 };
+
+// Keep basePrefix export for any consumer that references it
+export { basePrefix };

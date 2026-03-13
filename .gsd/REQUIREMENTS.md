@@ -219,6 +219,17 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: validated
 - Notes: M003 shader should reinforce this aesthetic, not fight it.
 
+### R301 - Server-side access control for portfolio gate
+- Class: compliance/security
+- Status: validated
+- Description: The `/domains/*` gate uses server-side enforcement (Next.js middleware + HttpOnly cookie) so protected proof content is never sent to the client before authentication.
+- Why it matters: The previous client-side SHA-256 model shipped proof content in the HTML — a determined reader could extract it. Server-side enforcement means the content is simply never in the response until auth.
+- Source: user
+- Primary owning slice: M005/S01
+- Supporting slices: none
+- Validation: validated
+- Notes: Proven by M005/S01 Playwright tests: zero-leakage HTML assertion (test 2) confirms no proof content in unauthenticated responses; auth flow (test 4) confirms HttpOnly cookie + server-rendered proof; cross-route session (test 5) proves session persists without proof leakage. Was out-of-scope in M002 (static GitHub Pages); Vercel deployment via M005 removed that constraint.
+
 ## Deferred
 
 ### R201 - Standalone flagship case-study pages
@@ -266,17 +277,6 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Notes: Migrated from legacy deferred scope.
 
 ## Out of Scope
-
-### R301 - Server-side access control for portfolio gate
-- Class: compliance/security
-- Status: active
-- Description: The `/domains/*` gate uses server-side enforcement (Next.js middleware + HttpOnly cookie) so protected proof content is never sent to the client before authentication.
-- Why it matters: The previous client-side SHA-256 model shipped proof content in the HTML — a determined reader could extract it. Server-side enforcement means the content is simply never in the response until auth.
-- Source: user
-- Primary owning slice: M005/S03
-- Supporting slices: none
-- Validation: pending
-- Notes: Was out-of-scope in M002 because the site was static GitHub Pages. Vercel deployment (M005) removes that constraint.
 
 ### R302 - Making the whole site private
 - Class: anti-feature
@@ -338,14 +338,14 @@ Use it to track what is actively in scope, what has been validated by completed 
 | R202 | differentiator | deferred | none | none | unmapped |
 | R203 | core-capability | deferred | none | none | unmapped |
 | R204 | differentiator | deferred | none | none | unmapped |
-| R301 | compliance/security | active | M005/S03 | none | pending |
+| R301 | compliance/security | validated | M005/S01 | none | validated |
 | R302 | anti-feature | out-of-scope | none | none | n/a |
 | R303 | anti-feature | out-of-scope | none | none | n/a |
 | R304 | anti-feature | out-of-scope | none | none | n/a |
 
 ## Coverage Summary
 
-- Active requirements: 1
-- Mapped to slices: 1
-- Validated: 19
+- Active requirements: 0
+- Mapped to slices: 0
+- Validated: 20
 - Unmapped active requirements: 0
