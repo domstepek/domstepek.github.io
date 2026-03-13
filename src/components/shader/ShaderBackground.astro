@@ -36,10 +36,17 @@
 
       // ── Cursor tracking ───────────────────────────────────────
       document.addEventListener("pointermove", (e: PointerEvent) => {
-        instance.setPointer(
-          e.clientX / window.innerWidth,
-          e.clientY / window.innerHeight,
-        );
+        const nx = e.clientX / window.innerWidth;
+        const ny = e.clientY / window.innerHeight;
+        instance.setPointer(nx, ny);
+        instance.addRipple(nx, ny);
+      });
+
+      // ── Tap/click ripple (mobile + desktop) ───────────────────
+      document.addEventListener("pointerdown", (e: PointerEvent) => {
+        const nx = e.clientX / window.innerWidth;
+        const ny = e.clientY / window.innerHeight;
+        instance.addRipple(nx, ny, true);
       });
 
       // ── Reduced motion: freeze to one static frame ────────────

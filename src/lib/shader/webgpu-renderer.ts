@@ -13,17 +13,18 @@ import type { Renderer, ShaderColors } from './types.js';
 
 const SHADER_SOURCE = /* wgsl */ `
 
+const MAX_RIPPLES = 32u;
+
 struct Uniforms {
   time: f32,
-  _pad0: f32,
+  ripple_count: u32,
   resolution: vec2f,
   pointer: vec2f,
-  color_bg: vec3f,
-  _pad1: f32,
-  color_accent: vec3f,
-  _pad2: f32,
-  color_strong: vec3f,
-  _pad3: f32,
+  color_bg: vec4f,
+  color_accent: vec4f,
+  color_strong: vec4f,
+  // Each ripple: vec4(x, y, birth_time, intensity)
+  ripples: array<vec4f, 32>,
 };
 
 @group(0) @binding(0) var<uniform> u: Uniforms;
@@ -101,6 +102,40 @@ fn gradient_field(uv: vec2f, t: f32) -> f32 {
   return clamp(v, 0.0, 1.0);
 }
 
+// Cursor ripples — expanding rings from recent cursor impacts.
+// Each ripple is a ring that expands outward and fades over time.
+// Returns additive luminance to be mixed with gradient_field BEFORE dithering.
+fn ripple_field(uv: vec2f, t: f32) -> f32 {
+  let aspect = u.resolution.x / u.resolution.y;
+  var total = 0.0;
+
+  let count = min(u.ripple_count, MAX_RIPPLES);
+  for (var i = 0u; i < count; i = i + 1u) {
+    let rip = u.ripples[i];
+    let age = t - rip.z;
+    if (age < 0.0 || age > 2.0) { continue; }
+
+    // Ring expands outward over time.
+    let radius = age * 0.20;
+
+    // Aspect-corrected distance from pixel to impact center.
+    let dx = (uv.x - rip.x) * aspect;
+    let dy = uv.y - rip.y;
+    let dist = sqrt(dx * dx + dy * dy);
+
+    // Narrow ring: Gaussian peak around dist == radius.
+    let ring_dist = dist - radius;
+    let wave = exp(-ring_dist * ring_dist * 180.0);
+
+    // Fade out over time.
+    let fade = exp(-age * 2.5);
+
+    total += wave * fade * rip.w;
+  }
+
+  return clamp(total, 0.0, 1.0);
+}
+
 @fragment
 fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   // Snap to pixel grid (4×4 blocks) for chunky dither dots.
@@ -108,7 +143,10 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   let snapped = floor(frag_coord.xy / pixel_size);
   let uv = (snapped + 0.5) * pixel_size / u.resolution;
 
-  let lum = gradient_field(uv, u.time);
+  // Compose: gradient + ripples BEFORE dither threshold.
+  let base_lum = gradient_field(uv, u.time);
+  let ripple_lum = ripple_field(uv, u.time);
+  let lum = clamp(base_lum + ripple_lum * 0.35, 0.0, 1.0);
 
   // Bayer 8×8 ordered dithering on the snapped grid.
   let bx = u32(snapped.x) % 8u;
@@ -117,11 +155,11 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
 
   if (lum < threshold) {
     // Off-pixels: very subtle lift above pure black.
-    return vec4f(u.color_bg + vec3f(0.008, 0.008, 0.008), 1.0);
+    return vec4f(u.color_bg.xyz + vec3f(0.008, 0.008, 0.008), 1.0);
   }
 
   // Dot color: restrained charcoal gray.
-  let dot_color = u.color_bg + vec3f(0.12, 0.12, 0.12);
+  let dot_color = u.color_bg.xyz + vec3f(0.12, 0.12, 0.12);
   return vec4f(dot_color, 1.0);
 }
 `;
@@ -130,16 +168,18 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
 
 // Layout (std140-aligned):
 //   0: time (f32)
-//   4: _pad (f32)
+//   4: ripple_count (u32)
 //   8: resolution (vec2f)
 //  16: pointer (vec2f)
-//  24: _pad (8 bytes to align next vec3 to 16)
-//  32: color_bg (vec3f) + pad
-//  48: color_accent (vec3f) + pad
-//  64: color_strong (vec3f) + pad
-// Total: 80 bytes
+//  24: (8 bytes implicit pad to align vec4f)
+//  32: color_bg (vec4f) — .xyz used, .w ignored
+//  48: color_accent (vec4f) — .xyz used, .w ignored
+//  64: color_strong (vec4f) — .xyz used, .w ignored
+//  80: ripples[32] (vec4f each = 16 bytes × 32 = 512 bytes)
+// Total: 592 bytes
 
-const UNIFORM_SIZE = 80;
+const MAX_RIPPLES = 32;
+const UNIFORM_SIZE = 592;
 
 // ── WebGPU Renderer ─────────────────────────────────────────────────
 
@@ -305,6 +345,23 @@ export class WebGPURenderer implements Renderer {
     });
 
     this.updateResolution(width, height);
+  }
+
+  updateRipples(ripples: Float32Array, count: number): void {
+    // ripple_count is at byte 4 (float index 1) — stored as u32 bits in f32 slot.
+    const view = new DataView(this.uniformData.buffer);
+    view.setUint32(4, Math.min(count, MAX_RIPPLES), true);
+
+    // Ripple data starts at float index 20 (byte 80).
+    const maxFloats = MAX_RIPPLES * 4;
+    const copyCount = Math.min(count * 4, maxFloats);
+    for (let i = 0; i < copyCount; i++) {
+      this.uniformData[20 + i] = ripples[i];
+    }
+    // Zero out remaining slots.
+    for (let i = copyCount; i < maxFloats; i++) {
+      this.uniformData[20 + i] = 0;
+    }
   }
 
   destroy(): void {

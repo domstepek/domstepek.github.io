@@ -93,10 +93,40 @@ export async function initDitherShader(
   const pointer: [number, number] = [0.5, 0.5];
   const startTime = performance.now();
 
+  // ── Ripple ring buffer ──────────────────────────────────────────
+  const MAX_RIPPLES = 32;
+  const rippleData = new Float32Array(MAX_RIPPLES * 4); // vec4(x, y, birthTime, intensity)
+  let rippleWriteIndex = 0;
+  let rippleCount = 0;
+  let lastRippleX = -1;
+  let lastRippleY = -1;
+
+  function addRippleInternal(x: number, y: number, force = false) {
+    // Throttle: skip if cursor hasn't moved enough (avoids stacking ripples on same spot).
+    if (!force) {
+      const dx = x - lastRippleX;
+      const dy = y - lastRippleY;
+      if (lastRippleX >= 0 && (dx * dx + dy * dy) < 0.0004) return;
+    }
+
+    const elapsed = (performance.now() - startTime) / 1000;
+    const offset = rippleWriteIndex * 4;
+    rippleData[offset] = x;
+    rippleData[offset + 1] = y;
+    rippleData[offset + 2] = elapsed;
+    rippleData[offset + 3] = 1.0; // intensity
+
+    rippleWriteIndex = (rippleWriteIndex + 1) % MAX_RIPPLES;
+    rippleCount = Math.min(rippleCount + 1, MAX_RIPPLES);
+    lastRippleX = x;
+    lastRippleY = y;
+  }
+
   // ── Render loop ─────────────────────────────────────────────────
   function frame() {
     if (paused || destroyed) return;
     const elapsed = (performance.now() - startTime) / 1000;
+    renderer.updateRipples(rippleData, rippleCount);
     renderer.render(elapsed, pointer);
     rafId = requestAnimationFrame(frame);
   }
@@ -145,6 +175,9 @@ export async function initDitherShader(
     setPointer(x: number, y: number) {
       pointer[0] = x;
       pointer[1] = y;
+    },
+    addRipple(x: number, y: number, force?: boolean) {
+      addRippleInternal(x, y, force);
     },
   };
 }

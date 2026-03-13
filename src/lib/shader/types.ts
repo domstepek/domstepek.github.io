@@ -23,6 +23,7 @@ export interface ShaderOptions {
 export interface ShaderInstance {
   destroy(): void;
   setPointer(x: number, y: number): void;
+  addRipple(x: number, y: number, force?: boolean): void;
   pause(): void;
   resume(): void;
 }
@@ -36,6 +37,8 @@ export interface Renderer {
   init(canvas: HTMLCanvasElement, colors: ShaderColors): Promise<boolean>;
   /** Draw one frame. `time` is elapsed seconds; `pointer` is normalized 0–1. */
   render(time: number, pointer: [number, number]): void;
+  /** Update the ripple ring buffer. Called before render each frame. */
+  updateRipples(ripples: Float32Array, count: number): void;
   /** Handle canvas resize. */
   resize(width: number, height: number): void;
   /** Release all GPU resources. */

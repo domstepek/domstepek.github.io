@@ -3,18 +3,19 @@
  *
  * Uses a fullscreen quad (two triangles via a static VAO, no vertex buffer).
  * The GLSL fragment shader is a direct port of the WGSL dither shader in
- * webgpu-renderer.ts — identical Bayer 8×8 matrix, blob field, and palette mapping.
+ * webgpu-renderer.ts — identical Bayer 8×8 matrix, gradient field, ripples, and palette mapping.
  */
 
 import type { Renderer, ShaderColors } from './types.js';
 
+// ── Constants ───────────────────────────────────────────────────────
+
+const MAX_RIPPLES = 32;
+
 // ── GLSL 300 es shader sources ──────────────────────────────────────
 
 const VERT_SOURCE = /* glsl */ `#version 300 es
-// Fullscreen quad via two triangles — positions from vertex_index.
 void main() {
-  // 6 vertices: two triangles covering clip space.
-  // tri 0: (-1,-1), (1,-1), (-1,1)   tri 1: (-1,1), (1,-1), (1,1)
   vec2 verts[6] = vec2[6](
     vec2(-1.0, -1.0), vec2( 1.0, -1.0), vec2(-1.0,  1.0),
     vec2(-1.0,  1.0), vec2( 1.0, -1.0), vec2( 1.0,  1.0)
@@ -26,12 +27,17 @@ void main() {
 const FRAG_SOURCE = /* glsl */ `#version 300 es
 precision highp float;
 
+const int MAX_RIPPLES = 32;
+
 uniform float u_time;
+uniform int   u_ripple_count;
 uniform vec2  u_resolution;
 uniform vec2  u_pointer;
 uniform vec3  u_color_bg;
 uniform vec3  u_color_accent;
 uniform vec3  u_color_strong;
+// Each ripple: vec4(x, y, birth_time, intensity)
+uniform vec4  u_ripples[32];
 
 out vec4 fragColor;
 
@@ -47,22 +53,15 @@ const float bayer8x8[64] = float[64](
   0.992188, 0.492188, 0.867188, 0.367188, 0.960938, 0.460938, 0.835938, 0.335938
 );
 
-// Animated radial gradient — center orbits slowly, wide soft falloff.
 float gradient_field(vec2 uv, float t) {
   float slow = t * 0.03;
   float aspect = u_resolution.x / u_resolution.y;
 
-  vec2 c1 = vec2(
-    0.5 + 0.45 * cos(slow * 0.6),
-    0.5 + 0.45 * sin(slow * 0.4)
-  );
+  vec2 c1 = vec2(0.5 + 0.45 * cos(slow * 0.6), 0.5 + 0.45 * sin(slow * 0.4));
   float d1 = distance(vec2(uv.x * aspect, uv.y), vec2(c1.x * aspect, c1.y));
   float g1 = smoothstep(1.1, 0.0, d1);
 
-  vec2 c2 = vec2(
-    0.5 + 0.35 * cos(slow * 0.35 + 2.5),
-    0.5 + 0.35 * sin(slow * 0.5 + 1.8)
-  );
+  vec2 c2 = vec2(0.5 + 0.35 * cos(slow * 0.35 + 2.5), 0.5 + 0.35 * sin(slow * 0.5 + 1.8));
   float d2 = distance(vec2(uv.x * aspect, uv.y), vec2(c2.x * aspect, c2.y));
   float g2 = smoothstep(0.9, 0.0, d2);
 
@@ -77,28 +76,53 @@ float gradient_field(vec2 uv, float t) {
   }
 
   v = max(v, 0.035);
-
   return clamp(v, 0.0, 1.0);
 }
 
+float ripple_field(vec2 uv, float t) {
+  float aspect = u_resolution.x / u_resolution.y;
+  float total = 0.0;
+
+  int count = min(u_ripple_count, MAX_RIPPLES);
+  for (int i = 0; i < count; i++) {
+    vec4 rip = u_ripples[i];
+    float age = t - rip.z;
+    if (age < 0.0 || age > 2.0) { continue; }
+
+    float radius = age * 0.20;
+    float dx = (uv.x - rip.x) * aspect;
+    float dy = uv.y - rip.y;
+    float dist = sqrt(dx * dx + dy * dy);
+
+    float ring_dist = dist - radius;
+    float wave = exp(-ring_dist * ring_dist * 180.0);
+    float fade = exp(-age * 2.5);
+
+    total += wave * fade * rip.w;
+  }
+
+  return clamp(total, 0.0, 1.0);
+}
+
 void main() {
-  // Snap to pixel grid (4×4 blocks) for chunky dither dots.
   float pixel_size = 4.0;
   vec2 snapped = floor(gl_FragCoord.xy / pixel_size);
   vec2 uv = (snapped + 0.5) * pixel_size / u_resolution;
 
-  float lum = gradient_field(uv, u_time);
+  float base_lum = gradient_field(uv, u_time);
+  float ripple_lum = ripple_field(uv, u_time);
+  float lum = clamp(base_lum + ripple_lum * 0.35, 0.0, 1.0);
 
   int bx = int(snapped.x) % 8;
   int by = int(snapped.y) % 8;
   float threshold = bayer8x8[by * 8 + bx];
 
   if (lum < threshold) {
-    fragColor = vec4(u_color_bg + vec3(0.008, 0.008, 0.008), 1.0);
+    fragColor = vec4(u_color_bg + vec3(0.008), 1.0);
     return;
   }
 
-  vec3 dot_color = u_color_bg + vec3(0.12, 0.12, 0.12);
+  vec3 dot_color = u_color_bg + vec3(0.12);
   fragColor = vec4(dot_color, 1.0);
 }
 `;
@@ -107,11 +131,13 @@ void main() {
 
 interface UniformLocations {
   time: WebGLUniformLocation;
+  rippleCount: WebGLUniformLocation;
   resolution: WebGLUniformLocation;
   pointer: WebGLUniformLocation;
   colorBg: WebGLUniformLocation;
   colorAccent: WebGLUniformLocation;
   colorStrong: WebGLUniformLocation;
+  ripples: WebGLUniformLocation;
 }
 
 // ── WebGL2 Renderer ─────────────────────────────────────────────────
@@ -126,36 +152,23 @@ export class WebGL2Renderer implements Renderer {
 
   async init(canvas: HTMLCanvasElement, colors: ShaderColors): Promise<boolean> {
     const gl = canvas.getContext('webgl2');
-    if (!gl) {
-      return false;
-    }
+    if (!gl) return false;
 
     this.gl = gl;
     this.canvas = canvas;
 
-    // Compile shaders.
     const vert = this.compileShader(gl, gl.VERTEX_SHADER, VERT_SOURCE);
     if (!vert) return false;
 
     const frag = this.compileShader(gl, gl.FRAGMENT_SHADER, FRAG_SOURCE);
-    if (!frag) {
-      gl.deleteShader(vert);
-      return false;
-    }
+    if (!frag) { gl.deleteShader(vert); return false; }
 
-    // Link program.
     const program = gl.createProgram();
-    if (!program) {
-      gl.deleteShader(vert);
-      gl.deleteShader(frag);
-      return false;
-    }
+    if (!program) { gl.deleteShader(vert); gl.deleteShader(frag); return false; }
 
     gl.attachShader(program, vert);
     gl.attachShader(program, frag);
     gl.linkProgram(program);
-
-    // Shaders are attached — safe to delete (they stay alive while program lives).
     gl.deleteShader(vert);
     gl.deleteShader(frag);
 
@@ -167,7 +180,6 @@ export class WebGL2Renderer implements Renderer {
 
     this.program = program;
 
-    // Cache uniform locations.
     const loc = (name: string): WebGLUniformLocation => {
       const l = gl.getUniformLocation(program, name);
       if (!l) throw new Error(`Missing uniform: ${name}`);
@@ -177,11 +189,13 @@ export class WebGL2Renderer implements Renderer {
     try {
       this.uniforms = {
         time: loc('u_time'),
+        rippleCount: loc('u_ripple_count'),
         resolution: loc('u_resolution'),
         pointer: loc('u_pointer'),
         colorBg: loc('u_color_bg'),
         colorAccent: loc('u_color_accent'),
         colorStrong: loc('u_color_strong'),
+        ripples: loc('u_ripples[0]'),
       };
     } catch (e) {
       console.error(`[shader/webgl2] ${(e as Error).message}`);
@@ -190,22 +204,17 @@ export class WebGL2Renderer implements Renderer {
       return false;
     }
 
-    // Create empty VAO for the fullscreen quad (vertices are generated in the shader).
     this.vao = gl.createVertexArray();
 
-    // Set initial state.
     gl.useProgram(program);
     gl.uniform3f(this.uniforms.colorBg, colors.bg[0], colors.bg[1], colors.bg[2]);
     gl.uniform3f(this.uniforms.colorAccent, colors.accent[0], colors.accent[1], colors.accent[2]);
     gl.uniform3f(this.uniforms.colorStrong, colors.strong[0], colors.strong[1], colors.strong[2]);
     gl.uniform2f(this.uniforms.pointer, -1, -1);
     gl.uniform2f(this.uniforms.resolution, canvas.width, canvas.height);
+    gl.uniform1i(this.uniforms.rippleCount, 0);
 
-    // Handle context loss.
-    this.onContextLost = (e: Event) => {
-      e.preventDefault();
-      this.destroy();
-    };
+    this.onContextLost = (e: Event) => { e.preventDefault(); this.destroy(); };
     canvas.addEventListener('webglcontextlost', this.onContextLost);
 
     return true;
@@ -224,10 +233,24 @@ export class WebGL2Renderer implements Renderer {
     gl.bindVertexArray(null);
   }
 
-  resize(width: number, height: number): void {
+  updateRipples(ripples: Float32Array, count: number): void {
     const { gl, program, uniforms } = this;
     if (!gl || !program || !uniforms) return;
 
+    gl.useProgram(program);
+    gl.uniform1i(uniforms.rippleCount, Math.min(count, MAX_RIPPLES));
+    // Upload ripple data as vec4 array.
+    const uploadCount = Math.min(count, MAX_RIPPLES) * 4;
+    const data = new Float32Array(MAX_RIPPLES * 4);
+    for (let i = 0; i < uploadCount; i++) {
+      data[i] = ripples[i];
+    }
+    gl.uniform4fv(uniforms.ripples, data);
+  }
+
+  resize(width: number, height: number): void {
+    const { gl, program, uniforms } = this;
+    if (!gl || !program || !uniforms) return;
     gl.viewport(0, 0, width, height);
     gl.useProgram(program);
     gl.uniform2f(uniforms.resolution, width, height);
@@ -235,52 +258,32 @@ export class WebGL2Renderer implements Renderer {
 
   destroy(): void {
     const { gl, canvas } = this;
-
     if (canvas && this.onContextLost) {
       canvas.removeEventListener('webglcontextlost', this.onContextLost);
       this.onContextLost = null;
     }
-
     if (gl) {
-      if (this.vao) {
-        gl.deleteVertexArray(this.vao);
-        this.vao = null;
-      }
-      if (this.program) {
-        gl.deleteProgram(this.program);
-        this.program = null;
-      }
-
-      // Attempt to lose the context for resource cleanup.
+      if (this.vao) { gl.deleteVertexArray(this.vao); this.vao = null; }
+      if (this.program) { gl.deleteProgram(this.program); this.program = null; }
       const ext = gl.getExtension('WEBGL_lose_context');
       if (ext) ext.loseContext();
     }
-
     this.uniforms = null;
     this.gl = null;
     this.canvas = null;
   }
 
-  // ── Private helpers ─────────────────────────────────────────────
-
-  private compileShader(
-    gl: WebGL2RenderingContext,
-    type: GLenum,
-    source: string,
-  ): WebGLShader | null {
+  private compileShader(gl: WebGL2RenderingContext, type: GLenum, source: string): WebGLShader | null {
     const shader = gl.createShader(type);
     if (!shader) return null;
-
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
-
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       const label = type === gl.VERTEX_SHADER ? 'vertex' : 'fragment';
       console.error(`[shader/webgl2] ${label} compile failed: ${gl.getShaderInfoLog(shader)}`);
       gl.deleteShader(shader);
       return null;
     }
-
     return shader;
   }
 }
