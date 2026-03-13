@@ -10,20 +10,18 @@ Someone should be able to land on the site, quickly understand what kinds of com
 
 ## Current State
 
-M001–M004 complete on the Astro/GitHub Pages stack. M005 (Next.js migration) is underway — S01, S02, and S03 complete; S04 (deployment + CI) remains.
+M001–M004 complete. M005 (Next.js migration) complete — all four slices done, all Astro remnants removed, TypeScript strict, CI gating on build + Playwright, AGENTS.md updated.
 
 The project is a Next.js 16 App Router project (`src/app/`) with Tailwind v4 retro design tokens. The portfolio gate uses real server-side auth: Next.js proxy (`proxy.ts`) observes all `/domains/*` requests; the RSC domain route reads an HttpOnly `portfolio-gate` cookie and conditionally renders either the gate page (zero proof content) or the full proof page. All five public routes (`/`, `/about/`, `/resume/`, `/notes/`, `/notes/[slug]/`) are ported with full site shell, notes markdown pipeline, custom 404, and SEO metadata.
 
-The WebGPU/WebGL2 shader background renders on all pages via a `'use client'` `ShaderBackground` component mounted in the root layout. Screenshot galleries and Mermaid diagrams render on authenticated domain proof pages as client islands. 18 Playwright tests pass (5 gate + 8 public + 3 shader + 2 gallery/mermaid).
+The WebGPU/WebGL2 shader background renders on all pages via a `'use client'` `ShaderBackground` component mounted in the root layout. Screenshot galleries and Mermaid diagrams render on authenticated domain proof pages as client islands. 18 Playwright tests pass against production build (5 gate + 8 public + 3 shader + 2 gallery/mermaid). GitHub Actions CI workflow gates push/PR to main with build + full Playwright suite.
 
-Astro source files remain on disk until S04 cleanup. `typescript.ignoreBuildErrors: true` is set in `next.config.ts` during the coexistence phase.
-
-All 20 requirements are validated; 0 active requirements remain.
+All 20 requirements are validated; 0 active requirements remain. Vercel deployment requires manual env var setup (`GATE_HASH`) and DNS migration from GitHub Pages.
 
 ## Architecture / Key Patterns
 
-- **Active stack:** Next.js 16 App Router + Tailwind v4 + React 19 on Vercel (migration in progress — Astro files remain until S04)
-- **Legacy stack (being replaced):** Astro + TypeScript + plain CSS on GitHub Pages
+- **Active stack:** Next.js 16 App Router + Tailwind v4 + React 19 on Vercel
+- **Previous stack (replaced):** Astro + TypeScript + plain CSS on GitHub Pages
 - Domain-first information architecture with route helpers in `src/lib/paths.ts`
 - Thin route files with shared data modules and shared presentational components
 - **Gate auth:** Server-side enforcement via RSC cookie check (`await cookies()`) — HttpOnly `portfolio-gate` cookie; server action (`submitPasscode`) with Node `crypto.createHash` hash compare; zero proof content in unauthenticated responses
@@ -44,4 +42,4 @@ See `.gsd/REQUIREMENTS.md` for the explicit capability contract, requirement sta
 - [x] M002: Portfolio access gate — Lightweight passcode gate protecting domain portfolio proof with session-scoped unlock, visual blur/reveal, request-access messaging, and 20-test regression coverage.
 - [x] M003: GPU shader background — Custom faded dither shader (WebGPU + WebGL2 fallback) as ambient cursor-reactive background across all pages with per-page opt-out.
 - [x] M004: Sentence case audit — Convert all visitor-facing copy from all-lowercase to sentence case with standard "I" capitalization, preserving casual tone.
-- [ ] M005: Next.js migration — Migrate from Astro/GitHub Pages to Next.js App Router on Vercel, with the portfolio gate upgraded from client-side SHA-256 to middleware + HttpOnly cookie server auth.
+- [x] M005: Next.js migration — Migrated from Astro/GitHub Pages to Next.js App Router on Vercel, with the portfolio gate upgraded from client-side SHA-256 to middleware + HttpOnly cookie server auth. All Astro remnants removed, TypeScript strict, CI gating on build + Playwright.
