@@ -33,7 +33,6 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
       data-route-visibility="protected"
       data-protected-proof-state="revealed"
       data-visual-state="revealed"
-      className="site-main shell"
     >
       {/* Domain header */}
       <header className="flex flex-col gap-2 mb-8">

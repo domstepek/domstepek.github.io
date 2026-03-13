@@ -26,7 +26,6 @@ export function DomainGatePage({ slug, domain }: DomainGatePageProps) {
     <div
       data-route-visibility="protected"
       data-gate-state="locked"
-      className="site-main shell"
     >
       <section
         data-protected-gate=""

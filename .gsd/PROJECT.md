@@ -10,13 +10,13 @@ Someone should be able to land on the site, quickly understand what kinds of com
 
 ## Current State
 
-M001–M004 complete on the Astro/GitHub Pages stack. M005 (Next.js migration) is underway — S01 complete.
+M001–M004 complete on the Astro/GitHub Pages stack. M005 (Next.js migration) is underway — S01 and S02 complete.
 
-The project is now a Next.js 16 App Router project (`src/app/`) with Tailwind v4 retro design tokens. The portfolio gate has been upgraded to real server-side auth: Next.js middleware (`proxy.ts`) observes all `/domains/*` requests; the RSC domain route reads an HttpOnly `portfolio-gate` cookie and conditionally renders either the gate page (zero proof content) or the full proof page — proven by Playwright tests and zero-leakage curl assertions. R301 (server-side access control) is now validated.
+The project is now a Next.js 16 App Router project (`src/app/`) with Tailwind v4 retro design tokens. The portfolio gate has been upgraded to real server-side auth: Next.js middleware (`proxy.ts`) observes all `/domains/*` requests; the RSC domain route reads an HttpOnly `portfolio-gate` cookie and conditionally renders either the gate page (zero proof content) or the full proof page — proven by Playwright tests and zero-leakage curl assertions. R301 (server-side access control) is validated.
+
+All five public routes (`/`, `/about/`, `/resume/`, `/notes/`, `/notes/[slug]/`) are ported to Next.js server components with full site shell (header, footer, CRT overlay), notes markdown pipeline (gray-matter + unified), custom 404, generateMetadata SEO, and 8 Playwright tests — proven alongside the 5 existing gate tests (13 total passing).
 
 Astro source files remain on disk until S04 cleanup. `typescript.ignoreBuildErrors: true` is set in `next.config.ts` during the coexistence phase.
-
-Public surfaces (`/`, `/about/`, `/resume/`, `/notes/*`) are not yet ported to Next.js — S02 scope. The WebGPU/WebGL2 shader is not yet mounted in the Next.js layout — S03 scope. The Vercel deployment and GitHub Actions CI are S04 scope.
 
 All 20 requirements are validated; 0 active requirements remain.
 
