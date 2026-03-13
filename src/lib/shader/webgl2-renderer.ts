@@ -47,7 +47,7 @@ const float bayer8x8[64] = float[64](
   0.992188, 0.492188, 0.867188, 0.367188, 0.960938, 0.460938, 0.835938, 0.335938
 );
 
-// Sweeping directional gradient — a wide beam that slowly rotates like a tail.
+// Sweeping directional gradient — full-canvas, no radial falloff.
 float gradient_field(vec2 uv, float t) {
   float slow = t * 0.05;
 
@@ -57,29 +57,23 @@ float gradient_field(vec2 uv, float t) {
   float angle1 = slow * 0.7;
   vec2 dir1 = vec2(cos(angle1), sin(angle1));
   float proj1 = dot(uv - pivot, dir1);
-  float grad1 = smoothstep(-0.1, 0.6, proj1);
-  float dist = distance(uv, pivot);
-  float falloff1 = 1.0 - smoothstep(0.2, 0.9, dist);
+  float grad1 = smoothstep(-0.3, 0.5, proj1);
 
   // Secondary sweep.
   float angle2 = slow * 0.45 + 2.1;
   vec2 dir2 = vec2(cos(angle2), sin(angle2));
   float proj2 = dot(uv - pivot, dir2);
-  float grad2 = smoothstep(-0.05, 0.5, proj2);
-  float falloff2 = 1.0 - smoothstep(0.15, 0.75, dist);
+  float grad2 = smoothstep(-0.2, 0.45, proj2);
 
-  float v = grad1 * falloff1 * 0.7 + grad2 * falloff2 * 0.3;
-  v *= 0.55;
+  float v = grad1 * 0.65 + grad2 * 0.35;
 
   // Gravitational drift toward cursor.
   if (u_pointer.x >= 0.0) {
-    float cursor_pull = 0.08 * smoothstep(0.7, 0.0, distance(pivot, u_pointer));
-    vec2 pulled_pivot = mix(pivot, u_pointer, cursor_pull);
-    float pulled_dist = distance(uv, pulled_pivot);
-    float pulled_proj = dot(uv - pulled_pivot, dir1);
-    float pulled_grad = smoothstep(-0.1, 0.6, pulled_proj);
-    float pulled_falloff = 1.0 - smoothstep(0.2, 0.9, pulled_dist);
-    v = max(v, pulled_grad * pulled_falloff * 0.55 * 0.5);
+    vec2 cursor_dir = normalize(u_pointer - pivot);
+    float cursor_proj = dot(uv - pivot, cursor_dir);
+    float cursor_grad = smoothstep(-0.2, 0.5, cursor_proj);
+    float influence = 0.08 * smoothstep(0.6, 0.0, distance(pivot, u_pointer));
+    v = mix(v, max(v, cursor_grad), influence);
   }
 
   return clamp(v, 0.0, 1.0);
@@ -99,8 +93,8 @@ void main() {
     return;
   }
 
-  // Dot color: charcoal gray — bg lightened toward neutral gray, no green tint.
-  vec3 dot_color = u_color_bg + vec3(0.08, 0.08, 0.08);
+  // Dot color: charcoal gray — clearly visible.
+  vec3 dot_color = u_color_bg + vec3(0.22, 0.22, 0.22);
   fragColor = vec4(dot_color, 1.0);
 }
 `;

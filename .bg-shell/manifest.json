@@ -1,14 +1,1 @@
-[
-  {
-    "id": "36cf5ac3",
-    "label": "astro-dev",
-    "command": "cd \"/Users/jstepek/Personal Repos/website\" && pnpm dev",
-    "cwd": "/Users/jstepek/Personal Repos/website",
-    "startedAt": 1773346662379,
-    "processType": "server",
-    "group": null,
-    "readyPattern": null,
-    "readyPort": 4321,
-    "pid": 11934
-  }
-]
+[]

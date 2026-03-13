@@ -58,46 +58,40 @@ fn vs(@builtin(vertex_index) vi: u32) -> VertexOutput {
 }
 
 // Sweeping directional gradient — a wide beam that slowly rotates like a tail.
-// Projects UV onto a rotating direction vector to create a diagonal gradient band.
+// No radial falloff — the gradient spans the full canvas like the reference.
 fn gradient_field(uv: vec2f, t: f32) -> f32 {
   let slow = t * 0.05;
 
   // Pivot near center with gentle drift.
   let pivot = vec2f(0.5 + 0.05 * sin(slow * 0.3), 0.5 + 0.05 * cos(slow * 0.4));
 
-  // Primary sweep: slowly rotating angle.
+  // Primary sweep: slowly rotating directional gradient across the full canvas.
   let angle1 = slow * 0.7;
   let dir1 = vec2f(cos(angle1), sin(angle1));
   let proj1 = dot(uv - pivot, dir1);
-  // Gradient: bright on the positive side, fading to dark.
-  let grad1 = smoothstep(-0.1, 0.6, proj1);
+  // Wide gradient: from fully dark on one side to fully bright on the other.
+  // The smoothstep range spans most of the canvas diagonal (~0.7 units).
+  let grad1 = smoothstep(-0.3, 0.5, proj1);
 
-  // Radial falloff from pivot so it doesn't fill the entire canvas.
-  let dist = distance(uv, pivot);
-  let falloff1 = 1.0 - smoothstep(0.2, 0.9, dist);
-
-  // Secondary sweep at different speed/angle for layered complexity.
+  // Secondary sweep for layered complexity — different angle, slower.
   let angle2 = slow * 0.45 + 2.1;
   let dir2 = vec2f(cos(angle2), sin(angle2));
   let proj2 = dot(uv - pivot, dir2);
-  let grad2 = smoothstep(-0.05, 0.5, proj2);
-  let falloff2 = 1.0 - smoothstep(0.15, 0.75, dist);
+  let grad2 = smoothstep(-0.2, 0.45, proj2);
 
-  // Combine: primary dominant, secondary subtle.
-  var v = grad1 * falloff1 * 0.7 + grad2 * falloff2 * 0.3;
+  // Combine: primary dominant, secondary adds variation.
+  var v = grad1 * 0.65 + grad2 * 0.35;
 
-  // Scale to keep overall brightness in the ditherable range.
-  v *= 0.55;
+  // No scaling down — let the gradient use its full range.
+  // The dither threshold naturally handles the bright-to-dark transition.
 
-  // Gravitational drift: pull the bright region toward cursor.
+  // Gravitational drift: gently bias the gradient toward cursor.
   if (u.pointer.x >= 0.0) {
-    let cursor_pull = 0.08 * smoothstep(0.7, 0.0, distance(pivot, u.pointer));
-    let pulled_pivot = mix(pivot, u.pointer, cursor_pull);
-    let pulled_dist = distance(uv, pulled_pivot);
-    let pulled_proj = dot(uv - pulled_pivot, dir1);
-    let pulled_grad = smoothstep(-0.1, 0.6, pulled_proj);
-    let pulled_falloff = 1.0 - smoothstep(0.2, 0.9, pulled_dist);
-    v = max(v, pulled_grad * pulled_falloff * 0.55 * 0.5);
+    let cursor_dir = normalize(u.pointer - pivot);
+    let cursor_proj = dot(uv - pivot, cursor_dir);
+    let cursor_grad = smoothstep(-0.2, 0.5, cursor_proj);
+    let influence = 0.08 * smoothstep(0.6, 0.0, distance(pivot, u.pointer));
+    v = mix(v, max(v, cursor_grad), influence);
   }
 
   return clamp(v, 0.0, 1.0);
@@ -118,8 +112,8 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
     return vec4f(u.color_bg, 1.0);
   }
 
-  // Dot color: charcoal gray — bg lightened toward neutral gray, no green tint.
-  let dot_color = u.color_bg + vec3f(0.08, 0.08, 0.08);
+  // Dot color: charcoal gray — clearly visible against the dark bg.
+  let dot_color = u.color_bg + vec3f(0.22, 0.22, 0.22);
   return vec4f(dot_color, 1.0);
 }
 `;
