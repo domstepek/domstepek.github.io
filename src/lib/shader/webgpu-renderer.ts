@@ -91,7 +91,7 @@ fn blob_field(uv: vec2f, t: f32) -> f32 {
   v *= 0.3 + 0.7 * sweep;
 
   // Scale down: keep max brightness low so dither creates subtle gradient.
-  v *= 0.45;
+  v *= 0.56;
 
   // Pointer influence — gentle radial brightening near cursor.
   if (u.pointer.x >= 0.0) {
@@ -118,7 +118,7 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   }
 
   // Dot color: subtle muted accent, barely above background.
-  let dot_color = mix(u.color_bg, u.color_accent, 0.2);
+  let dot_color = mix(u.color_bg, u.color_accent, 0.28);
   return vec4f(dot_color, 1.0);
 }
 `;

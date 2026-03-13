@@ -81,7 +81,7 @@ float blob_field(vec2 uv, float t) {
   v *= 0.3 + 0.7 * sweep;
 
   // Scale down.
-  v *= 0.45;
+  v *= 0.56;
 
   // Pointer influence.
   if (u_pointer.x >= 0.0) {
@@ -106,7 +106,7 @@ void main() {
     return;
   }
 
-  vec3 dot_color = mix(u_color_bg, u_color_accent, 0.2);
+  vec3 dot_color = mix(u_color_bg, u_color_accent, 0.28);
   fragColor = vec4(dot_color, 1.0);
 }
 `;
