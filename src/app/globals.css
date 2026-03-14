@@ -205,6 +205,34 @@ a:hover::after {
   font-size: 0.95rem;
 }
 
+.site-footer__contact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: auto;
+}
+
+.site-footer__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.site-footer__contact-link::before,
+.site-footer__contact-link::after {
+  content: none !important;
+}
+
+.site-footer__contact-link:hover {
+  color: var(--accent-strong);
+}
+
 /* ── Retro pixel cursors ── */
 *, *::before, *::after {
   cursor: url('/cursors/default.png'), auto;
@@ -1323,11 +1351,13 @@ label[for], [onclick], [tabindex]:not([tabindex="-1"]) {
 }
 
 /* ── Flagship inline code (domain proof pages) ── */
-[data-flagship] code {
-  background: var(--bg-elevated);
+[data-flagship] code,
+[data-supporting-item] code {
+  background: rgba(92, 107, 94, 0.15);
   padding: 0.15em 0.35em;
   border-radius: 0.25rem;
   font-size: 0.9em;
+  color: var(--accent-strong);
 }
 
 /* ── Mermaid diagram ── */
