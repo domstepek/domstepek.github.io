@@ -6,51 +6,53 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
+(No active requirements — all moved to Validated or Deferred.)
+
+## Validated
+
 ### R501 — Global agent skill generates engineering journal entries from conversation context
 - Class: core-capability
-- Status: active
+- Status: validated
 - Description: A SKILL.md file at `~/.agents/skills/engineering-journal/` (symlinked to GSD skills) reviews the current conversation context and generates a markdown journal entry in `src/content/notes/` with expanded frontmatter. The skill prompts the user for supporting evidence (screenshots, diagrams, video links).
 - Why it matters: This is the primary deliverable — an agent skill that turns work sessions into publishable engineering journal articles without manual writing.
 - Source: user
 - Primary owning slice: M007/S02
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Skill must reference this repo's notes directory, frontmatter schema, and tone conventions.
+- Validation: validated
+- Notes: Proven by SKILL.md at `~/.agents/skills/engineering-journal/SKILL.md` with four-phase authoring instructions; GSD symlink verified; validation entry built and rendered successfully through the S01 pipeline.
 
 ### R506 — Local media storage for journal supporting evidence
 - Class: core-capability
-- Status: active
+- Status: validated
 - Description: Supporting evidence (screenshots, diagrams, photos) is stored in `public/notes/<slug>/` and referenced from markdown via standard image syntax. The skill creates the directory and instructs the user where to place files.
 - Why it matters: Evidence makes journal entries credible and useful as reference material.
 - Source: user
 - Primary owning slice: M007/S02
 - Supporting slices: M007/S01
-- Validation: unmapped
-- Notes: Video can be embedded via external links (YouTube, etc.) — not stored locally.
+- Validation: validated
+- Notes: Proven by SKILL.md media convention section specifying `public/notes/<slug>/` directory creation and `<!-- TODO: screenshot of X -->` evidence markers. S01 CSS handles image rendering.
 
 ### R508 — Skill writes markdown file directly into repo
 - Class: core-capability
-- Status: active
+- Status: validated
 - Description: The skill writes the generated journal entry as a `.md` file in `src/content/notes/` and tells the user to review it before committing.
 - Why it matters: Reduces friction — the user reviews and edits, not creates from scratch.
 - Source: user
 - Primary owning slice: M007/S02
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Skill also creates `public/notes/<slug>/` directory for media if evidence is provided.
+- Validation: validated
+- Notes: Proven by skill instructions specifying hardcoded output path to `src/content/notes/` with slug collision check; validation entry written by T02 built successfully.
 
 ### R509 — Casual first-person engineering journal tone
 - Class: quality-attribute
-- Status: active
+- Status: validated
 - Description: Journal entries use a casual first-person voice ("I ran into X, tried Y, here's what worked") consistent with the site's established tone (D031).
 - Why it matters: The journal should feel authentic and match the existing site personality.
 - Source: user
 - Primary owning slice: M007/S02
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Inspired by engineering journal best practices from Stack Overflow Blog, reconfigured.io, and The Pragmatic Programmer.
-
-## Validated
+- Validation: validated
+- Notes: Proven by SKILL.md tone guardrails section referencing D031/D058 conventions with concrete examples and anti-patterns.
 
 ### R502 — Expanded frontmatter schema for notes
 - Class: core-capability
@@ -450,20 +452,20 @@ Use it to track what is actively in scope, what has been validated by completed 
 | R302 | anti-feature | out-of-scope | none | none | n/a |
 | R303 | anti-feature | out-of-scope | none | none | n/a |
 | R304 | anti-feature | out-of-scope | none | none | n/a |
-| R501 | core-capability | active | M007/S02 | none | unmapped |
+| R501 | core-capability | validated | M007/S02 | none | validated |
 | R502 | core-capability | validated | M007/S01 | M007/S02 | validated |
 | R503 | core-capability | validated | M007/S01 | none | validated |
 | R504 | quality-attribute | validated | M007/S01 | none | validated |
 | R505 | quality-attribute | validated | M007/S01 | none | validated |
-| R506 | core-capability | active | M007/S02 | M007/S01 | unmapped |
+| R506 | core-capability | validated | M007/S02 | M007/S01 | validated |
 | R507 | continuity | validated | M007/S01 | none | validated |
-| R508 | core-capability | active | M007/S02 | none | unmapped |
-| R509 | quality-attribute | active | M007/S02 | none | unmapped |
+| R508 | core-capability | validated | M007/S02 | none | validated |
+| R509 | quality-attribute | validated | M007/S02 | none | validated |
 | R510 | continuity | validated | M007/S01 | none | validated |
 
 ## Coverage Summary
 
-- Active requirements: 4
-- Mapped to slices: 4
-- Validated: 27
+- Active requirements: 0
+- Mapped to slices: 0
+- Validated: 31
 - Unmapped active requirements: 0

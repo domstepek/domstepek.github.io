@@ -1,9 +1,9 @@
 # GSD State
 
 **Active Milestone:** M007 — Engineering Journal
-**Active Slice:** S01 complete — ready for S02
-**Active Task:** none
-**Phase:** Planning (next slice)
+**Active Slice:** S02 — Engineering journal agent skill (complete)
+**Active Task:** T02 complete — slice S02 done
+**Phase:** Execution
 
 ## Recent Decisions
 - D059: S01 verification via build + 18 Playwright tests + Shiki class inspection + visual UAT
@@ -15,4 +15,4 @@
 - None
 
 ## Next Action
-Plan and execute S02 (Engineering journal agent skill) or S03 (Domain page markdown enrichment)
+Slice S02 complete — all tasks done, all slice verification checks pass. Ready for next slice.
