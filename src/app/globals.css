@@ -195,8 +195,8 @@ a:hover::after {
   color: var(--muted);
 }
 
-.site-main ul,
-.site-main ol {
+.site-main ul:not([class]),
+.site-main ol:not([class]) {
   padding-left: 1.25rem;
 }
 
