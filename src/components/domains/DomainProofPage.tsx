@@ -61,7 +61,7 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
               <h3 className="text-[var(--text)] text-[var(--step-1)]">{flagship.title}</h3>
 
               {flagship.stack.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-1">
+                <div className="flex flex-wrap gap-2 mt-3 mb-2">
                   {flagship.stack.map((tag) => (
                     <span
                       key={tag}
